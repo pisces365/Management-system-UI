@@ -3,7 +3,7 @@
         <md-tabs class="md-success" md-alignment="fixed" >
 
           <md-tab id="tab-home" md-label="处理预约信息" md-icon="home">
-            <md-card>-->
+            <md-card>
               <md-card-header data-background-color="green">
                 <h4 class="title">处理预约信息</h4>
                 <p class="category">在这进行民宿后台的功能</p>

@@ -22,6 +22,7 @@ import CoursesManage from "@/pages/CoursesManage.vue";
 import CourseDetails from "../pages/Layout/CourseManagePages/CourseDetails";
 import AddCourse from "../pages/Layout/CourseManagePages/AddCourse";
 import ElectionDetailPage from "../pages/ElectionDetailPage";
+import shop from "@/pages/Shop.vue";
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
         path: "deliverys",
         name: "工单界面",
         component: PackageDelivery,
+      },
+      {
+        path: "shop",
+        name: "shop",
+        component: shop,
       },
       {
         path: "courses",
