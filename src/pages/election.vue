@@ -3,7 +3,7 @@
     <md-tabs class="md-success" md-alignment="fixed" >
 
       <md-tab id="tab-home" md-label="选举信息发布" md-icon="home">
-        <md-card>-->
+        <md-card>
           <md-card-header data-background-color="green">
             <h4 class="title">选举信息发布</h4>
             <p class="category"> 在这可以看到发布的被选举人的信息</p>

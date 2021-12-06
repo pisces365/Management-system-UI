@@ -3,7 +3,7 @@
     <md-tabs class="md-info" md-alignment="fixed" >
 
       <md-tab id="tab-home" md-label="报修信息管理" md-icon="home">
-        <md-card>-->
+        <md-card>
           <md-card-header data-background-color="green">
             <h4 class="title">报修信息管理</h4>
             <p class="category"> 在这可以看到保修的详细信息</p>
@@ -32,8 +32,6 @@
 
 <script>
 import { Fix1,Fix2 } from "@/components";
-
-
 
 export default {
   components: {
