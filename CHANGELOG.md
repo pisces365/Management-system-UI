@@ -1,5 +1,9 @@
 # Change Log
 
+## [2.0.0] 2021-12-06
+### Indivisual Update
+- Gitee push&pull test
+
 ## [1.5.0] 2021-10-08
 ### Dependencies Updates
 - Updated all out of date dependencies from `package.json` file
