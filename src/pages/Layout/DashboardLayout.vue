@@ -32,9 +32,13 @@
         <p>民宿后台界面</p>
       </sidebar-link>
 
-      <sidebar-link to="/election">
-        <md-icon>location_on</md-icon>
-        <p>选举后台界面</p>
+      <sidebar-link to="/post-election">
+        <md-icon>how_to_vote</md-icon>
+        <p>选举发布界面</p>
+      </sidebar-link>
+      <sidebar-link to="/election-list">
+        <md-icon>how_to_vote</md-icon>
+        <p>选举信息概览</p>
       </sidebar-link>
 
       <sidebar-link to="/fix">
@@ -62,15 +66,15 @@
         <md-icon>reorder</md-icon>
         <p>商店后台界面</p>
       </sidebar-link>
-      <sidebar-link to="/new_deliverys">
+      <sidebar-link to="/new-deliverys">
         <md-icon>list_alt</md-icon>
         <p>快递新工单界面</p>
       </sidebar-link>
-      <sidebar-link to="/ongoing_deliverys">
+      <sidebar-link to="/ongoing-deliverys">
         <md-icon>playlist_play</md-icon>
         <p>快递进行中工单界面</p>
       </sidebar-link>
-      <sidebar-link to="/finished_deliverys">
+      <sidebar-link to="/finished-deliverys">
         <md-icon>playlist_add_check</md-icon>
         <p>快递已完成工单界面</p>
       </sidebar-link>

@@ -9,7 +9,8 @@ import Maps from "@/pages/Hotel.vue";
 import Notifications from "@/pages/Ask-online.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import test from "@/pages/test.vue";
-import election from "@/pages/election.vue";
+import PostElection from "@/pages/PostElection.vue";
+import ElectionList from "@/pages/ElectionList.vue";
 import fix from "@/pages/fix.vue";
 import Amap from"@/pages/Amap.vue";
 import Order from "@/pages/Order.vue";
@@ -49,17 +50,17 @@ const routes = [
         component: OrderDetailPage,
       },
       {
-        path: "new_deliverys",
+        path: "new-deliverys",
         name: "快递新工单界面",
         component: NewDelivery,
       },
       {
-        path: "ongoing_deliverys",
+        path: "ongoing-deliverys",
         name: "快递进行中工单界面",
         component: OngoingDelivery,
       },
       {
-        path: "finished_deliverys",
+        path: "finished-deliverys",
         name: "快递已完成工单界面",
         component: FinishedDelivery,
       },
@@ -114,9 +115,14 @@ const routes = [
         component: fix,
       },
       {
-        path: "election",
-        name: "选举界面",
-        component: election,
+        path: "post-election",
+        name: "选举发布界面",
+        component: PostElection,
+      },
+      {
+        path: "election-list",
+        name: "选举信息概览",
+        component: ElectionList,
       },
       {
         path: "user",
