@@ -27,7 +27,7 @@
       </md-tab>
 
       <md-tab id="tab-posts" md-label="处理网上问诊" md-icon="pages">
-        <md-card>-->
+        <md-card>
           <md-card-header data-background-color="orange">
             <h4 class="title">处理网上问诊</h4>
             <p class="category">在这对小程序中进行网上问诊的人进行回复</p>

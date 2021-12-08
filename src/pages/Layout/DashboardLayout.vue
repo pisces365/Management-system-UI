@@ -8,58 +8,64 @@
     >
       <mobile-menu slot="content"></mobile-menu>
 
-      <sidebar-link to="/dashboard">
-        <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
-      </sidebar-link>
+<!--      <sidebar-link to="/dashboard">-->
+<!--        <md-icon>dashboard</md-icon>-->
+<!--        <p>Dashboard</p>-->
+<!--      </sidebar-link>-->
 
-      <sidebar-link to="/user">
-        <md-icon>person</md-icon>
-        <p>User Profile</p>
-      </sidebar-link>
+<!--      <sidebar-link to="/user">-->
+<!--        <md-icon>person</md-icon>-->
+<!--        <p>User Profile</p>-->
+<!--      </sidebar-link>-->
       <sidebar-link to="/table">
         <md-icon>content_paste</md-icon>
-        <p>医院后台</p>
+        <p>医院后台界面</p>
       </sidebar-link>
 
       <sidebar-link to="/icons">
         <md-icon>bubble_chart</md-icon>
-        <p>餐馆后台</p>
+        <p>餐馆后台界面</p>
       </sidebar-link>
 
       <sidebar-link to="/maps">
         <md-icon>location_on</md-icon>
-        <p>民宿后台</p>
+        <p>民宿后台界面</p>
       </sidebar-link>
 
       <sidebar-link to="/election">
         <md-icon>location_on</md-icon>
-        <p>选举界面</p>
+        <p>选举后台界面</p>
       </sidebar-link>
 
       <sidebar-link to="/fix">
         <md-icon>location_on</md-icon>
-        <p>报修界面</p>
+        <p>报修后台界面</p>
       </sidebar-link>
       <sidebar-link to="/Amap">
         <md-icon>location_on</md-icon>
-        <p>地图界面</p>
+        <p>公交信息界面</p>
       </sidebar-link>
-      <sidebar-link to="/shopprofile">
-        <md-icon>house</md-icon>
-        <p>商店信息</p>
-      </sidebar-link>
-      <sidebar-link to="/shopdatastatistics">
-        <md-icon>dashboard</md-icon>
-        <p>商店信息统计</p>
-      </sidebar-link>
-      <sidebar-link to="/order">
+<!--      <sidebar-link to="/shopprofile">-->
+<!--        <md-icon>house</md-icon>-->
+<!--        <p>商店信息</p>-->
+<!--      </sidebar-link>-->
+<!--      <sidebar-link to="/shopdatastatistics">-->
+<!--        <md-icon>dashboard</md-icon>-->
+<!--        <p>商店信息统计</p>-->
+<!--      </sidebar-link>-->
+<!--      <sidebar-link to="/order">-->
+<!--        <md-icon>reorder</md-icon>-->
+<!--        <p>订单处理</p>-->
+<!--      </sidebar-link>-->
+
+      <sidebar-link to="/shop">
         <md-icon>reorder</md-icon>
-        <p>订单处理</p>
+        <p>商店后台界面</p>
       </sidebar-link>
+
       <sidebar-link to="/deliverys">
         <md-icon>content_paste</md-icon>
-        <p>工单界面</p>
+        <p>快递工单界面</p>
       </sidebar-link>
       <sidebar-link to="/courses">
         <md-icon>content_paste</md-icon>

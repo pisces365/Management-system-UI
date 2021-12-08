@@ -40,10 +40,6 @@ import CompletedOrdersList from "./OrderList/CompletedOrdersList.vue";
 import ElectionDetails from "../pages/Layout/ElectionPages/ElectionDetails";
 import CandidateDetails from "../pages/Layout/ElectionPages/CandidateDetails";
 
-
-
-
-
 export {
   ChartCard,
   NavTabsCard,
