@@ -152,6 +152,12 @@ const routes = [
         name: "test",
         component: test,
       },
+            {
+        path: "test2",
+        name: "test2",
+        component: test,
+      },
+
     ],
   },
 ];
