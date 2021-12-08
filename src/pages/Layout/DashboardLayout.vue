@@ -62,10 +62,17 @@
         <md-icon>reorder</md-icon>
         <p>商店后台界面</p>
       </sidebar-link>
-
-      <sidebar-link to="/deliverys">
-        <md-icon>content_paste</md-icon>
-        <p>快递工单界面</p>
+      <sidebar-link to="/new_deliverys">
+        <md-icon>list_alt</md-icon>
+        <p>快递新工单界面</p>
+      </sidebar-link>
+      <sidebar-link to="/ongoing_deliverys">
+        <md-icon>playlist_play</md-icon>
+        <p>快递进行中工单界面</p>
+      </sidebar-link>
+      <sidebar-link to="/finished_deliverys">
+        <md-icon>playlist_add_check</md-icon>
+        <p>快递已完成工单界面</p>
       </sidebar-link>
       <sidebar-link to="/courses">
         <md-icon>content_paste</md-icon>

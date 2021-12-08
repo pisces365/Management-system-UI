@@ -17,7 +17,9 @@ import ShopProfile from "@/pages/ShopProfile.vue";
 import ShopDataStatistics from "@/pages/ShopDataStatistics.vue";
 import OrderPreviewPage from "@/pages/OrderPreviewPage.vue";
 import OrderDetailPage from "@/pages/OrderDetailPage.vue";
-import PackageDelivery from "@/pages/PackageDelivery.vue";
+import NewDelivery from "@/pages/NewDelivery.vue";
+import OngoingDelivery from "@/pages/OngoingDelivery.vue";
+import FinishedDelivery from "@/pages/FinishedDelivery.vue";
 import CoursesManage from "@/pages/CoursesManage.vue";
 import CourseDetails from "../pages/Layout/CourseManagePages/CourseDetails";
 import AddCourse from "../pages/Layout/CourseManagePages/AddCourse";
@@ -47,9 +49,19 @@ const routes = [
         component: OrderDetailPage,
       },
       {
-        path: "deliverys",
-        name: "工单界面",
-        component: PackageDelivery,
+        path: "new_deliverys",
+        name: "快递新工单界面",
+        component: NewDelivery,
+      },
+      {
+        path: "ongoing_deliverys",
+        name: "快递进行中工单界面",
+        component: OngoingDelivery,
+      },
+      {
+        path: "finished_deliverys",
+        name: "快递已完成工单界面",
+        component: FinishedDelivery,
       },
       {
         path: "shop",
@@ -98,7 +110,7 @@ const routes = [
       },
       {
         path: "fix",
-        name: "保修界面",
+        name: "报修界面",
         component: fix,
       },
       {
@@ -152,12 +164,6 @@ const routes = [
         name: "test",
         component: test,
       },
-            {
-        path: "test2",
-        name: "test2",
-        component: test,
-      },
-
     ],
   },
 ];
