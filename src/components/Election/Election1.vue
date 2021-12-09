@@ -1,63 +1,230 @@
 <template>
   <div class="content">
     <div class="md-layout">
+
       <div
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
-        <md-card>
-          <div>
-            <div class="row">
-              <div class="tim-typo">
-                <h3>
-                  <span class="tim-note">※</span>
-                  <h4>选举类别：（村长选举，村支书选举，村委换届，村党支部换届）</h4>
-                  <h4>选举主题 :  <textarea rows="1" cols="20"/> </h4>
-                  <h4>发布单位 :  <textarea rows="1" cols="20"/> </h4>
-                  <h4>规则/简介/要求 :  <textarea rows="1" cols="20"/> </h4>
-                  <h4>时间 :  <textarea rows="1" cols="20"/> </h4>
-                  <h4>封面图片：
-                    <md-button class="md-warning">+</md-button>
-                  </h4>
-                </h3>
-
-              </div>
-
-              <h3>&emsp;* 参选人信息：</h3>
-              <h4>&emsp;&emsp;&emsp;参选人1</h4>
-              <h4>&emsp;&emsp;&emsp;&emsp;姓名 :  <textarea style='height:25px;width:200px;'/> </h4>
-              <h4>&emsp;&emsp;&emsp;&emsp;性别 :  <textarea style='height:25px;width:200px;'/> </h4>
-              <h4>&emsp;&emsp;&emsp;&emsp;年龄 :  <textarea style='height:25px;width:200px;'/></h4>
-              <h4>&emsp;&emsp;&emsp;&emsp;政治面貌 :  <textarea style='height:25px;width:200px;'/> </h4>
-              <h4>&emsp;&emsp;&emsp;&emsp;竞选职务 :  <textarea style='height:25px;width:200px;'/> </h4>
-              <h4>&emsp;&emsp;&emsp;&emsp;<span style="vertical-align: top">个人简历：</span>
-                <textarea style='height:100px;width:700px;'></textarea></h4>
-              <h4>&emsp;&emsp;&emsp;&emsp;<span style="vertical-align: top">工作规划：</span>
-                <textarea style='height:100px;width:700px;'></textarea></h4>
-              <h4></h4>
-
-              <h4>&emsp;&emsp;&emsp;参选人2</h4>
-              <h4>&emsp;&emsp;&emsp;&emsp;......</h4>
-
-              &emsp;&emsp;&emsp;&emsp; <md-button class="md-primary"> 添加参选人</md-button>
-              &emsp;&emsp;&emsp;&emsp;
-              &emsp;&emsp;&emsp;&emsp;
-              <h4>&emsp;&emsp;&emsp;&emsp;<md-button class="md-info"> 提交</md-button></h4>
-
+        <md-steppers :md-active-step.sync="active" md-linear>
+          <md-step id="first" md-label="第一步：输入选举信息" md-description="必填" :md-done.sync="first">
+            <div
+                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+            >
+              <md-card>
+                <!--              <md-card-header :data-background-color="dataBackgroundColor">-->
+                <!--                <h4 class="title">请输入选举详细信息</h4>-->
+                <!--              </md-card-header>-->
+                <md-card-content>
+                  <div class="md-layout">
+                    <div class="md-layout-item md-small-size-100 md-size-100">
+                      <md-field>
+                        <label>选举类别</label>
+                        <md-select v-model="election_type" name="选举类别" id="election_type" required>
+                          <md-option v-for="item in mytypes" :key="item.id" :lable="item.name" :value="item.name">
+                            {{ item.name }}
+                          </md-option>
+                        </md-select>
+                      </md-field>
+                    </div>
+                    <div class="md-layout-item md-small-size-100 md-size-100">
+                      <md-field>
+                        <label>选举主题</label>
+                        <md-input v-model="election_theme" required></md-input>
+                      </md-field>
+                    </div>
+                    <div class="md-layout-item md-small-size-100 md-size-100">
+                      <md-field>
+                        <label>发布单位</label>
+                        <md-input v-model="election_units" required></md-input>
+                      </md-field>
+                    </div>
+                    <div class="md-layout-item md-size-100">
+                      <md-field maxlength="5">
+                        <label>规则/简介/要求</label>
+                        <md-textarea v-model="election_rules"></md-textarea>
+                      </md-field>
+                    </div>
+                    <div class="md-layout-item md-small-size-100 md-size-100">
+                      <label>选举时间</label>
+                      <md-datepicker v-model="election_time" required></md-datepicker>
+                    </div>
+                    <div class="md-layout-item md-small-size-100 md-size-20">
+                      <label>封面图片</label>
+                      <md-field>
+                        <md-file v-model="course_cover" accept="image/*"/>
+                      </md-field>
+                    </div>
+                  </div>
+                </md-card-content>
+              </md-card>
             </div>
-          </div>
-        </md-card>
+            <md-button class="md-raised md-primary" @click="setDone('first', 'second')">下一步</md-button>
+          </md-step>
+
+          <md-step id="second" md-label="第二步：输入参选人信息" md-description="必填" :md-error="secondStepError"
+                   :md-done.sync="second">
+            <!--      WIP-->
+            <md-button class="md-raised md-primary" @click="addCandidate">添加参选人</md-button>
+            <md-button class="md-raised md-primary" data-background-color="red" @click="remove(ctr)">删除候选人</md-button>
+            <div
+                class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+            >
+              <div v-for="ctr in counter" :key="ctr" id="mycard1">
+                <md-card class="md-layout-item md-medium-size-33 md-xsmall-size-33 md-size-33" :item="ctr">
+                  <md-card-header :data-background-color="pplBackgroundColor">
+                    <h4 class="title">参选人详细信息</h4>
+                  </md-card-header>
+                  <md-card-content>
+                    <div class="md-layout md-size-33">
+                      <div class="md-layout-item md-small-size-100 md-size-33">
+                        <md-field>
+                          <label>姓名</label>
+                          <md-input v-model="ctr.candidate_name" required></md-input>
+                        </md-field>
+                      </div>
+                      <div class="md-layout-item md-small-size-100 md-size-33">
+                        <md-field>
+                          <label>性别</label>
+                          <md-input v-model="ctr.candidate_gender" required></md-input>
+                        </md-field>
+                      </div>
+                      <div class="md-layout-item md-small-size-100 md-size-33">
+                        <md-field>
+                          <label>年龄</label>
+                          <md-input v-model="ctr.candidate_age" required></md-input>
+                        </md-field>
+                      </div>
+                      <div class="md-layout-item md-small-size-100 md-size-50">
+                        <md-field>
+                          <label>政治面貌</label>
+                          <md-input v-model="ctr.candidate_politics" required></md-input>
+                        </md-field>
+                      </div>
+                      <div class="md-layout-item md-small-size-100 md-size-50">
+                        <md-field>
+                          <label>竞选职务</label>
+                          <md-input v-model="ctr.candidate_position" required></md-input>
+                        </md-field>
+                      </div>
+                      <div class="md-layout-item md-size-100">
+                        <md-field maxlength="5">
+                          <label>个人简历</label>
+                          <md-textarea v-model="ctr.candidate_resume" required></md-textarea>
+                        </md-field>
+                      </div>
+                      <div class="md-layout-item md-size-100">
+                        <md-field maxlength="5">
+                          <label>工作规划</label>
+                          <md-textarea v-model="ctr.candidate_plan" required></md-textarea>
+                        </md-field>
+                      </div>
+                    </div>
+                  </md-card-content>
+                </md-card>
+              </div>
+            </div>
+            <md-button class="md-raised md-primary" @click="setDone('second', 'third')">下一步</md-button>
+<!--            <md-button class="md-raised md-primary" data-background-color="red" @click="setError()">出错了，需要联系管理员</md-button>-->
+          </md-step>
+
+          <md-step id="third" md-label="确认添加" :md-done.sync="third">
+            <h3>
+              我确定我输入的信息无误，并愿意承担由于输入错误而导致的所有后续结果的责任。
+            </h3>
+            <md-button class="md-raised md-primary" @click="setDone('third')">添加</md-button>
+          </md-step>
+        </md-steppers>
 
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Election1"
+  name: "Election1",
+  props: {
+    dataBackgroundColor: {
+      type: String,
+      default: "green",
+    },
+    pplBackgroundColor: {
+      type: String,
+      default: "blue",
+    },
+  },
+  data() {
+    return {
+      active: 'first',
+      first: false,
+      second: false,
+      third: false,
+      secondStepError: null,
+      counter:[],
+      election_type: '',
+      mytypes: [
+        {
+          id: 'election1',
+          name: '村长选举',
+        },
+        {
+          id: 'election2',
+          name: '村支书选举',
+        },
+        {
+          id: 'election3',
+          name: '村委换届',
+        },
+        {
+          id: 'election4',
+          name: '村党支部换届',
+        },
+      ],
+      candidates: [
+        {
+          candidate_id: "EC#00001",
+          candidate_name: "王德法",
+          candidate_gender: "男",
+          candidate_age: "25",
+          candidate_politics: "党员",
+          candidate_position: "村支书",
+          candidate_resume: "今天是个好日子",
+          candidate_plan: "建设最美乡村",
+          candidate_votes: "10",
+        },
+      ],
+    }
+  },
+  methods: {
+    setDone(id, index) {
+      this[id] = true
+
+      this.secondStepError = null
+
+      if (index) {
+        this.active = index
+      }
+    },
+    setError() {
+      this.secondStepError = '出现问题!'
+    },
+    addCandidate(){
+      this.counter.push({});
+    },
+    remove(ctr) {
+      var i = this.counter.indexOf(ctr)
+      this.counter.splice(i, 1)
+    }
+  }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.md-steppers {
 
+}
+#mycard1{
+  display: inline !important;
+}
 </style>

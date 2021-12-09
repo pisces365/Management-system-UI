@@ -8,7 +8,8 @@ import Maps from "@/pages/Hotel.vue";
 import CopeMatter from "@/pages/CopeMatter.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import test from "@/pages/test.vue";
-import election from "@/pages/election.vue";
+import PostElection from "@/pages/PostElection.vue";
+import ElectionList from "@/pages/ElectionList.vue";
 import fix from "@/pages/fix.vue";
 import Amap from"@/pages/Amap.vue";
 import Order from "@/pages/Order.vue";
@@ -16,7 +17,9 @@ import ShopProfile from "@/pages/ShopProfile.vue";
 import ShopDataStatistics from "@/pages/ShopDataStatistics.vue";
 import OrderPreviewPage from "@/pages/OrderPreviewPage.vue";
 import OrderDetailPage from "@/pages/OrderDetailPage.vue";
-import PackageDelivery from "@/pages/PackageDelivery.vue";
+import NewDelivery from "@/pages/NewDelivery.vue";
+import OngoingDelivery from "@/pages/OngoingDelivery.vue";
+import FinishedDelivery from "@/pages/FinishedDelivery.vue";
 import CoursesManage from "@/pages/CoursesManage.vue";
 import CourseDetails from "../pages/Layout/CourseManagePages/CourseDetails";
 import AddCourse from "../pages/Layout/CourseManagePages/AddCourse";
@@ -30,6 +33,7 @@ import CheckInformation from "../components/Hospital/CheckInformation.vue";
 import AskOnlineDetail from "../components/Hospital/AskOnlineDetail.vue";
 import AppointmentDetail from "../components/Hospital/AppointmentDetail.vue";
 import CrowdChart from "../components/Hospital/CrowdChart.vue";
+import ElectionTypeManagement from "../pages/ElectionTypeManagement";
 
 
 const routes = [
@@ -95,9 +99,19 @@ const routes = [
         component: OrderDetailPage,
       },
       {
-        path: "deliverys",
-        name: "工单界面",
-        component: PackageDelivery,
+        path: "new-deliverys",
+        name: "快递新工单界面",
+        component: NewDelivery,
+      },
+      {
+        path: "ongoing-deliverys",
+        name: "快递进行中工单界面",
+        component: OngoingDelivery,
+      },
+      {
+        path: "finished-deliverys",
+        name: "快递已完成工单界面",
+        component: FinishedDelivery,
       },
       {
         path: "shop",
@@ -125,6 +139,11 @@ const routes = [
         component: ElectionDetailPage,
       },
       {
+        path: "manage-election-type",
+        name: "选举类别管理",
+        component: ElectionTypeManagement,
+      },
+      {
         path: "order",
         name: "订单列表",
         component: Order,
@@ -146,13 +165,18 @@ const routes = [
       },
       {
         path: "fix",
-        name: "保修界面",
+        name: "报修界面",
         component: fix,
       },
       {
-        path: "election",
-        name: "选举界面",
-        component: election,
+        path: "post-election",
+        name: "选举发布界面",
+        component: PostElection,
+      },
+      {
+        path: "election-list",
+        name: "选举信息概览",
+        component: ElectionList,
       },
       {
         path: "user",

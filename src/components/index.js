@@ -28,6 +28,8 @@ import Hospital3 from "./Hospital/Hospital3.vue";
 //election
 import Election1 from "./Election/Election1.vue";
 import Election2 from "./Election/Election2.vue";
+import AddElectionType from "./Election/AddElectionType.vue";
+import EditElectionType from "./Election/EditElectionType.vue";
 
 //fix
 import Fix1 from "./Fix/Fix1.vue";
@@ -40,12 +42,12 @@ import ElectionDetails from "../pages/Layout/ElectionPages/ElectionDetails";
 import CandidateDetails from "../pages/Layout/ElectionPages/CandidateDetails";
 
 export {
-  ChartCard,
-  NavTabsCard,
-  StatsCard,
-  NavTabsTable,
-  OrderedTable,
-  SimpleTable,
+    ChartCard,
+    NavTabsCard,
+    StatsCard,
+    NavTabsTable,
+    OrderedTable,
+    SimpleTable,
     Hotel1,
     Hotel4,
     Hotel2,
@@ -59,13 +61,13 @@ export {
     Hospital3,
     Election2,
     Election1,
+    AddElectionType,
+    EditElectionType,
     Fix1,
     Fix2,
-  NewOrdersList,
-  OngoingOrdersList,
-  CompletedOrdersList,
-  ElectionDetails,
-  CandidateDetails,
-
-
+    NewOrdersList,
+    OngoingOrdersList,
+    CompletedOrdersList,
+    ElectionDetails,
+    CandidateDetails,
 };
