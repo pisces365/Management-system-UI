@@ -3,11 +3,11 @@
     <md-table v-model="searched" md-sort="name" md-sort-order="asc" md-card md-fixed-header>
       <md-table-toolbar>
         <div class="md-toolbar-section-start">
-          <h1 class="md-title">编号/科室/预约人数</h1>
+          <h1 class="md-title"></h1>
         </div>
 
         <md-field md-clearable class="md-toolbar-section-end">
-          <md-input placeholder="按科室进行查找" v-model="search" @input="searchOnTable" />
+          <md-input placeholder="按地名进行查找" v-model="search" @input="searchOnTable" />
         </md-field>
       </md-table-toolbar>
 
@@ -18,12 +18,18 @@
       </md-table-empty-state>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ID" md-sort-by="id" md-numeric>{{ item.id }}</md-table-cell>
-        <md-table-cell md-label="Name" md-sort-by="name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Wait number">{{ item.number }}</md-table-cell>
+        <md-table-cell md-label="ID" md-sort-by="id" >{{ item.id }}</md-table-cell>
+        <md-table-cell md-label="Name（地名）" md-sort-by="name">{{ item.name }}</md-table-cell>
+        <md-table-cell md-label="Wait number（等待人数）">{{ item.number }}</md-table-cell>
+        <md-table-cell md-label="CrowdedSituation（拥挤情况）">{{ item.situation }}</md-table-cell>
       </md-table-row>
     </md-table>
+    <div class="md-layout-item md-size-100 text-right">
+      <md-button class="md-raised md-success" @click="addAddress">新增地名</md-button>
+      <md-button class="md-raised md-success" @click="Crowd">查看拥挤程度图</md-button>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -47,36 +53,65 @@ export default {
     users: [
       {
         id: 1,
-        name: "内科",
-        number: "50",
+        name: "一楼内科诊室",
+        number: "20",
+        situation:"正常",
       },
       {
         id: 2,
-        name: "外科",
-        number: "00",
+        name: "二楼外科诊室",
+        number: "05",
+        situation:"空闲",
       },
       {
         id: 3,
-        name: "皮肤科",
-        number: "8",
+        name: "二楼皮肤科诊室",
+        number: "08",
+        situation:"空闲",
       },
       {
         id: 4,
-        name: "肛肠科",
+        name: "三楼肛肠科诊室",
         number: "10",
+        situation:"良好",
       },
       {
         id :5,
-        name: "儿科",
-        number: "56",
+        name: "四楼儿科诊室",
+        number: "36",
+        situation:"拥挤",
       },
       {
         id :6,
-        name: "妇科",
+        name: "五楼妇科诊室",
         number: "23",
-      }
-
-    ]
+        situation:"良好",
+      },
+      {
+        id :7,
+        name: "一楼大厅",
+        number: "55",
+        situation:"拥挤",
+      },
+      {
+        id :8,
+        name: "一楼点滴室",
+        number: "44",
+        situation:"良好",
+      },
+      {
+        id :9,
+        name: "七楼住院部走廊",
+        number: "23",
+        situation:"良好",
+      },
+      {
+        id :10,
+        name: "一楼取药房",
+        number: "17",
+        situation:"良好",
+      },
+    ],
   }),
   methods: {
     newUser () {
@@ -84,8 +119,15 @@ export default {
     },
     searchOnTable () {
       this.searched = searchByName(this.users, this.search)
-    }
-  },
+    },
+      addAddress () {
+        this.$router.push('add-address')
+      },
+      Crowd(){
+      this.$router.push('CrowdChart')
+      },
+    },
+
   created () {
     this.searched = this.users
   }
@@ -96,4 +138,5 @@ export default {
 .md-field {
   max-width: 300px;
 }
+
 </style>

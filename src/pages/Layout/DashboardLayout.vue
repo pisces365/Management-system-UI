@@ -8,19 +8,34 @@
     >
       <mobile-menu slot="content"></mobile-menu>
 
-<!--      <sidebar-link to="/dashboard">-->
-<!--        <md-icon>dashboard</md-icon>-->
-<!--        <p>Dashboard</p>-->
-<!--      </sidebar-link>-->
+      <sidebar-link to="/dashboard">
+        <md-icon>dashboard</md-icon>
+        <p>Dashboard</p>
+      </sidebar-link>
 
 <!--      <sidebar-link to="/user">-->
 <!--        <md-icon>person</md-icon>-->
 <!--        <p>User Profile</p>-->
 <!--      </sidebar-link>-->
-      <sidebar-link to="/table">
+<!--      <sidebar-link to="/table">-->
+<!--        <md-icon>content_paste</md-icon>-->
+<!--        <p>医院后台界面</p>-->
+<!--      </sidebar-link>-->
+
+      <sidebar-link to="/HospitalCrowdedSituation">
         <md-icon>content_paste</md-icon>
-        <p>医院后台界面</p>
+        <p>医院拥挤情况</p>
       </sidebar-link>
+
+      <sidebar-link to="/HospitalCrowdedSituation2">
+        <md-icon>content_paste</md-icon>
+        <p>医院拥挤情况（管理人员）</p>
+      </sidebar-link>
+      <sidebar-link to="/CopeMatter">
+        <md-icon>content_paste</md-icon>
+        <p>医生业务处理</p>
+      </sidebar-link>
+
 
       <sidebar-link to="/icons">
         <md-icon>bubble_chart</md-icon>

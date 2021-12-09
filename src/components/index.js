@@ -24,7 +24,6 @@ import Restaurant4 from "./Restaurant/Restaurant4.vue";
 import Hospital1 from "./Hospital/Hospital1.vue";
 import Hospital2 from "./Hospital/Hospital2.vue";
 import Hospital3 from "./Hospital/Hospital3.vue";
-import Hospital4 from "./Hospital/Hospital4.vue";
 
 //election
 import Election1 from "./Election/Election1.vue";
@@ -57,7 +56,6 @@ export {
     Restaurant4,
     Hospital1,
     Hospital2,
-    Hospital4,
     Hospital3,
     Election2,
     Election1,
