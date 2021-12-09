@@ -32,6 +32,10 @@
         <p>民宿后台界面</p>
       </sidebar-link>
 
+      <sidebar-link to="/manage-election-type">
+        <md-icon>how_to_vote</md-icon>
+        <p>选举类别管理</p>
+      </sidebar-link>
       <sidebar-link to="/post-election">
         <md-icon>how_to_vote</md-icon>
         <p>选举发布界面</p>

@@ -26,6 +26,7 @@ import CourseDetails from "../pages/Layout/CourseManagePages/CourseDetails";
 import AddCourse from "../pages/Layout/CourseManagePages/AddCourse";
 import ElectionDetailPage from "../pages/ElectionDetailPage";
 import shop from "@/pages/Shop.vue";
+import ElectionTypeManagement from "../pages/ElectionTypeManagement";
 
 const routes = [
   {
@@ -88,6 +89,11 @@ const routes = [
         path: "election-details-page",
         name: "选举详情",
         component: ElectionDetailPage,
+      },
+      {
+        path: "manage-election-type",
+        name: "选举类别管理",
+        component: ElectionTypeManagement,
       },
       {
         path: "order",

@@ -65,7 +65,7 @@
                    :md-done.sync="second">
             <!--      WIP-->
             <md-button class="md-raised md-primary" @click="addCandidate">添加参选人</md-button>
-            <md-button class="md-raised md-primary" @click="remove(ctr)">删除候选人</md-button>
+            <md-button class="md-raised md-primary" data-background-color="red" @click="remove(ctr)">删除候选人</md-button>
             <div
                 class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
             >
@@ -124,7 +124,7 @@
               </div>
             </div>
             <md-button class="md-raised md-primary" @click="setDone('second', 'third')">下一步</md-button>
-            <md-button class="md-raised md-primary" @click="setError()">出错了，需要联系管理员</md-button>
+<!--            <md-button class="md-raised md-primary" data-background-color="red" @click="setError()">出错了，需要联系管理员</md-button>-->
           </md-step>
 
           <md-step id="third" md-label="确认添加" :md-done.sync="third">
