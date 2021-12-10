@@ -40,7 +40,7 @@
                 </md-table-cell>
               </md-table-row>
             </md-table>
-            <add-election-type v-show="showModal1" v-on:closeme="closemeAdd"></add-election-type>
+            <add-election-type v-show="showModal1" v-on:closeme="closemeAdd" class="mypopup"></add-election-type>
             <edit-election-type v-show="showModal2" v-on:closeme="closemeEdit"></edit-election-type>
           </md-card-content>
         </md-card>
@@ -140,5 +140,8 @@ export default {
 }
 .md-table + .md-table {
   margin-top: 16px;
+}
+.mypopup {
+  z-index: 1000;
 }
 </style>

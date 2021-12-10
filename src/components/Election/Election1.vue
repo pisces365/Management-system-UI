@@ -44,15 +44,30 @@
                         <md-textarea v-model="election_rules"></md-textarea>
                       </md-field>
                     </div>
-                    <div class="md-layout-item md-small-size-100 md-size-100">
-                      <label>选举时间</label>
-                      <md-datepicker v-model="election_time" required></md-datepicker>
+<!--                    <div class="md-layout-item md-small-size-100 md-size-50">-->
+<!--                      <label>选举开始时间</label>-->
+<!--                      <el-date-picker-->
+<!--                          v-model="election_start_time"-->
+<!--                          type="datetimerange"-->
+<!--                          range-separator="至"-->
+<!--                          start-placeholder="开始日期"-->
+<!--                          end-placeholder="结束日期" required>-->
+<!--                      </el-date-picker>-->
+<!--                    </div>-->
+                    <div class="md-layout-item md-small-size-100 md-size-50">
+                      <label>选举开始时间</label>
+                      <md-datepicker v-model="election_start_time" required></md-datepicker>
+                    </div>
+                    <div class="md-layout-item md-small-size-100 md-size-50">
+                      <label>选举结束时间</label>
+                      <md-datepicker v-model="election_end_time" required></md-datepicker>
                     </div>
                     <div class="md-layout-item md-small-size-100 md-size-20">
                       <label>封面图片</label>
                       <md-field>
-                        <md-file v-model="course_cover" accept="image/*"/>
+                        <md-file v-model="course_cover" accept="image/*" @change="tirggerFile($event)"/>
                       </md-field>
+                      <img style="width:100px;height:100px;" id="img1" src="@/assets/img/faces/faker1.jpg" alt/>
                     </div>
                   </div>
                 </md-card-content>
@@ -215,7 +230,15 @@ export default {
     remove(ctr) {
       var i = this.counter.indexOf(ctr)
       this.counter.splice(i, 1)
-    }
+    },
+    tirggerFile(event) {
+      var file = event.target.files;
+      var reader = new FileReader();//读取文件
+      reader.readAsDataURL(file[0]);
+      reader.onload = function() {
+        document.getElementById("img1").src = reader.result;
+      };
+    },
   }
 }
 </script>

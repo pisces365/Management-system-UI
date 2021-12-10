@@ -17,6 +17,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import App from "./App";
+import ElementUI from 'element-ui';
 
 // router setup
 import routes from "./routes/routes";
@@ -49,6 +50,7 @@ Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 Vue.use(myprojectmytheme);
+// Vue.use(ElementUI);
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

@@ -8,7 +8,6 @@ import Icons from "@/pages/Restaurant.vue";
 import Maps from "@/pages/Hotel.vue";
 import Notifications from "@/pages/Ask-online.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
-import test from "@/pages/test.vue";
 import PostElection from "@/pages/PostElection.vue";
 import ElectionList from "@/pages/ElectionList.vue";
 import fix from "@/pages/fix.vue";
@@ -170,11 +169,6 @@ const routes = [
         path: "upgrade",
         name: "Upgrade to PRO",
         component: UpgradeToPRO,
-      },
-      {
-        path: "test",
-        name: "test",
-        component: test,
       },
     ],
   },
