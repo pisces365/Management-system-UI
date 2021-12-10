@@ -3,7 +3,7 @@
     <md-table v-model="searched" md-sort="name" md-sort-order="asc" md-card md-fixed-header>
       <md-table-toolbar>
         <div class="md-toolbar-section-start">
-          <h1 class="md-title">编号/地名/拥挤程度</h1>
+          <h1 class="md-title"></h1>
         </div>
 
         <md-field md-clearable class="md-toolbar-section-end">
@@ -18,9 +18,10 @@
       </md-table-empty-state>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ID">{{ item.id }}</md-table-cell>
-        <md-table-cell md-label="Name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Crowded Situation">{{ item.situation }}</md-table-cell>
+        <md-table-cell md-label="ID" md-sort-by="id" >{{ item.id }}</md-table-cell>
+        <md-table-cell md-label="Name（地名）" md-sort-by="name">{{ item.name }}</md-table-cell>
+        <md-table-cell md-label="Wait number（等待人数）">{{ item.number }}</md-table-cell>
+        <md-table-cell md-label="CrowdedSituation（拥挤情况）">{{ item.situation }}</md-table-cell>
       </md-table-row>
     </md-table>
   </div>
@@ -47,29 +48,65 @@ export default {
     users: [
       {
         id: 1,
-        name:"一楼大厅",
-        situation:"良好"
+        name: "一楼内科诊室",
+        number: "20",
+        situation:"正常",
       },
       {
         id: 2,
-        name:"一楼药房",
-        situation:"拥挤"
+        name: "二楼外科诊室",
+        number: "05",
+        situation:"空闲",
       },
       {
         id: 3,
-        name:"二楼皮肤科科室",
-        situation:"空闲"
+        name: "二楼皮肤科诊室",
+        number: "08",
+        situation:"空闲",
       },
       {
         id: 4,
-        name:"三楼肛肠科科室",
-        situation:"良好"
+        name: "三楼肛肠科诊室",
+        number: "10",
+        situation:"良好",
       },
       {
-        id: 5,
-        name:"四楼住院部走廊",
-        situation:"空闲"
+        id :5,
+        name: "四楼儿科诊室",
+        number: "36",
+        situation:"拥挤",
       },
+      {
+        id :6,
+        name: "五楼妇科诊室",
+        number: "23",
+        situation:"良好",
+      },
+      {
+        id :7,
+        name: "一楼大厅",
+        number: "55",
+        situation:"拥挤",
+      },
+      {
+        id :8,
+        name: "一楼点滴室",
+        number: "44",
+        situation:"良好",
+      },
+      {
+        id :9,
+        name: "七楼住院部走廊",
+        number: "23",
+        situation:"良好",
+      },
+      {
+        id :10,
+        name: "一楼取药房",
+        number: "17",
+        situation:"良好",
+      },
+
 
     ]
   }),

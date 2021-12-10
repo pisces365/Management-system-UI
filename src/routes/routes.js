@@ -3,10 +3,9 @@ import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
 import TableList from "@/pages/Hospital.vue";
-import Typography from "@/pages/Appointment.vue";
 import Icons from "@/pages/Restaurant.vue";
 import Maps from "@/pages/Hotel.vue";
-import Notifications from "@/pages/Ask-online.vue";
+import CopeMatter from "@/pages/CopeMatter.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import PostElection from "@/pages/PostElection.vue";
 import ElectionList from "@/pages/ElectionList.vue";
@@ -25,7 +24,16 @@ import CourseDetails from "../pages/Layout/CourseManagePages/CourseDetails";
 import AddCourse from "../pages/Layout/CourseManagePages/AddCourse";
 import ElectionDetailPage from "../pages/ElectionDetailPage";
 import shop from "@/pages/Shop.vue";
+import HospitalCrowdedSituation from "../pages/HospitalCrowdedSituation.vue";
+import HospitalCrowdedSituation2 from "../pages/HospitalCrowdedSituation2.vue";
+import addAddress from "../components/Hospital/addAddress.vue";
+import checkInf from "../components/Hospital/checkInf.vue";
+import CheckInformation from "../components/Hospital/CheckInformation.vue";
+import AskOnlineDetail from "../components/Hospital/AskOnlineDetail.vue";
+import AppointmentDetail from "../components/Hospital/AppointmentDetail.vue";
+import CrowdChart from "../components/Hospital/CrowdChart.vue";
 import ElectionTypeManagement from "../pages/ElectionTypeManagement";
+
 
 const routes = [
   {
@@ -40,9 +48,49 @@ const routes = [
         component: Dashboard,
       },
       {
+        path: "AskOnlineDetail",
+        name: "AskOnlineDetail",
+        component: AskOnlineDetail,
+      },
+      {
+        path: "CrowdChart",
+        name: "CrowdChart",
+        component: CrowdChart,
+      },
+      {
+        path: "AppointmentDetail",
+        name: "AppointmentDetail",
+        component: AppointmentDetail,
+      },
+      {
+        path: "checkInf",
+        name: "checkInf",
+        component: checkInf,
+      },
+      {
+        path: "CheckInformation",
+        name: "CheckInformation",
+        component: CheckInformation,
+      },
+      {
         path: "order-preview",
         name: "订单预览",
         component: OrderPreviewPage,
+      },
+      {
+        path: "HospitalCrowdedSituation",
+        name: "医院拥挤情况",
+        component: HospitalCrowdedSituation,
+      },
+      {
+        path: "HospitalCrowdedSituation2",
+        name: "医院拥挤情况管理人员",
+        component: HospitalCrowdedSituation2,
+      },
+      {
+        path: "add-address",
+        name: "增加地名",
+        component: addAddress,
       },
       {
         path: "order-detail",
@@ -142,11 +190,6 @@ const routes = [
       },
 
       {
-        path: "typography",
-        name: "处理预约信息",
-        component: Typography,
-      },
-      {
         path: "icons",
         name: "餐馆后台" ,
         component: Icons,
@@ -160,9 +203,9 @@ const routes = [
         component: Maps,
       },
       {
-        path: "notifications",
+        path: "CopeMatter",
         name: "处理网上问诊",
-        component: Notifications,
+        component: CopeMatter,
       },
 
       {
