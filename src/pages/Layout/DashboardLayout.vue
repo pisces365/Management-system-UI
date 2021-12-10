@@ -61,7 +61,7 @@
       </sidebar-link>
 
       <sidebar-link to="/fix">
-        <md-icon>location_on</md-icon>
+        <md-icon>handyman</md-icon>
         <p>报修后台界面</p>
       </sidebar-link>
       <sidebar-link to="/Amap">
