@@ -5,7 +5,7 @@
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
-          <md-card-header data-background-color="blue">
+          <md-card-header data-background-color="green">
             <h4 class="title">选举信息</h4>
           </md-card-header>
           <md-card-content>
@@ -21,63 +21,61 @@
             <h4 class="title">参选人信息</h4>
           </md-card-header>
           <md-card-content>
-            <div v-for="candidate in candidates" :key="candidate.candidate_id" id="mycard1">
-              <md-card class="md-layout-item md-medium-size-33 md-xsmall-size-33 md-size-33" >
-                <md-card-header :data-background-color="dataBackgroundColor">
-                  <h4 class="title">参选人{{ candidate.candidate_id }}详细信息</h4>
-                  <h2 class="category">当前得票: {{ candidate.candidate_votes }}</h2>
-                </md-card-header>
-
-                <md-card-content>
-                  <div class="md-layout md-size-33">
-                    <div class="md-layout-item md-small-size-100 md-size-33">
-                      <md-field>
-                        <label>姓名</label>
-                        <md-input v-model="candidate.candidate_name" readonly></md-input>
-                      </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-33">
-                      <md-field>
-                        <label>性别</label>
-                        <md-input v-model="candidate.candidate_gender" readonly></md-input>
-                      </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-33">
-                      <md-field>
-                        <label>年龄</label>
-                        <md-input v-model="candidate.candidate_age" readonly></md-input>
-                      </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-50">
-                      <md-field>
-                        <label>政治面貌</label>
-                        <md-input v-model="candidate.candidate_politics" readonly></md-input>
-                      </md-field>
-                    </div>
-                    <div class="md-layout-item md-small-size-100 md-size-50">
-                      <md-field>
-                        <label>竞选职务</label>
-                        <md-input v-model="candidate.candidate_position" readonly></md-input>
-                      </md-field>
-                    </div>
-                    <div class="md-layout-item md-size-100">
-                      <md-field maxlength="5">
-                        <label>个人简历</label>
-                        <md-textarea v-model="candidate.candidate_resume" readonly></md-textarea>
-                      </md-field>
-                    </div>
-                    <div class="md-layout-item md-size-100">
-                      <md-field maxlength="5">
-                        <label>工作规划</label>
-                        <md-textarea v-model="candidate.candidate_plan" readonly></md-textarea>
-                      </md-field>
-                    </div>
+            <md-card class="md-layout-item md-medium-size-33 md-xsmall-size-33 md-size-33" v-for="cdd in candidates" :key="cdd.id">
+              <md-card-header data-background-color="blue">
+                <h4 class="title">参选人{{ cdd.candidate_id }}详细信息</h4>
+                <h3>当前得票： {{cdd.candidate_votes}}票</h3>
+              </md-card-header>
+              <md-card-content>
+                <div class="md-layout md-size-33">
+                  <div class="md-layout-item md-small-size-100 md-size-50">
+                    <img style="width:150px;height:150px;object-fit: cover" v-bind:src=cdd.candidate_cover alt/>
                   </div>
-                </md-card-content>
-              </md-card>
-
-            </div>
-<!--            <candidate-details table-header-color="blue" class="mycandidate"></candidate-details>-->
+                  <div class="md-layout-item md-small-size-100 md-size-50">
+                    <md-field>
+                      <label>姓名</label>
+                      <md-input v-model="cdd.candidate_name" readonly></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-small-size-100 md-size-50">
+                    <md-field>
+                      <label>性别</label>
+                      <md-input v-model="cdd.candidate_gender" readonly></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-small-size-100 md-size-50">
+                    <md-field>
+                      <label>年龄</label>
+                      <md-input v-model="cdd.candidate_age" readonly></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-small-size-100 md-size-50">
+                    <md-field>
+                      <label>政治面貌</label>
+                      <md-input v-model="cdd.candidate_politics" readonly></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-small-size-100 md-size-50">
+                    <md-field>
+                      <label>竞选职务</label>
+                      <md-input v-model="cdd.candidate_position" readonly></md-input>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-size-100">
+                    <md-field maxlength="5">
+                      <label>个人简历</label>
+                      <md-textarea v-model="cdd.candidate_resume" readonly></md-textarea>
+                    </md-field>
+                  </div>
+                  <div class="md-layout-item md-size-100">
+                    <md-field maxlength="5">
+                      <label>工作规划</label>
+                      <md-textarea v-model="cdd.candidate_plan" readonly></md-textarea>
+                    </md-field>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
           </md-card-content>
         </md-card>
       </div>
@@ -116,7 +114,7 @@
 </template>
 
 <script>
-import { ElectionDetails,CandidateDetails,ChartCard } from "@/components";
+import { ElectionDetails,ChartCard } from "@/components";
 
 export default {
   props: {
@@ -143,6 +141,7 @@ export default {
           candidate_resume: "今天是个好日子",
           candidate_plan: "建设最美乡村",
           candidate_votes:"10",
+          candidate_cover:"http://112.124.35.32:8081/xiangliban/api/file/jp944vtd05qh.png",
         },
         {
           candidate_id:"EC#00002",
@@ -154,6 +153,7 @@ export default {
           candidate_resume: "刚大学毕业",
           candidate_plan: "建设最好乡村",
           candidate_votes:"20",
+          candidate_cover:"http://112.124.35.32:8081/xiangliban/api/file/jp944vtd05qh.png",
         },
         {
           candidate_id:"EC#00003",
@@ -165,6 +165,7 @@ export default {
           candidate_resume: "曾获诺贝尔和平奖",
           candidate_plan: "保证选举公平",
           candidate_votes:"30",
+          candidate_cover:"http://112.124.35.32:8081/xiangliban/api/file/jp944vtd05qh.png",
         },
         {
           candidate_id:"EC#00004",
@@ -176,6 +177,7 @@ export default {
           candidate_resume: "昨天是个好日子",
           candidate_plan: "建设最美乡村",
           candidate_votes:"4",
+          candidate_cover:"http://112.124.35.32:8081/xiangliban/api/file/jp944vtd05qh.png",
         },
         {
           candidate_id:"EC#00005",
@@ -187,6 +189,7 @@ export default {
           candidate_resume: "明天是个好日子",
           candidate_plan: "建设最美人文",
           candidate_votes:"5",
+          candidate_cover:"http://112.124.35.32:8081/xiangliban/api/file/jp944vtd05qh.png",
         },
       ],
       emailsSubscriptionChart: {
@@ -197,7 +200,6 @@ export default {
             "候选人3",
             "候选人4",
             "候选人5",
-
           ],
           series: [
             [10, 30, 20, 4, 5],

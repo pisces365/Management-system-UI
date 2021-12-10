@@ -34,14 +34,13 @@
           </div>
           <div class="md-layout-item md-small-size-100 md-size-100">
             <md-field>
-              <label>选举时间</label>
+              <label>选举起止时间</label>
               <md-input v-model="election_time" readonly></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-20">
-            <md-field>
-              <label>封面图片</label>
-            </md-field>
+            <label>封面图片</label>
+            <br><br>
             <img src="./electiondemo.jpg" alt="cover"/>
           </div>
         </div>
@@ -64,7 +63,7 @@ export default {
       election_theme: "村干部竞选",
       election_units: "村党支部",
       election_rules: "禁止舞弊",
-      election_time: "2022-11-05",
+      election_time: "2022-11-05 12:00:00 - 2022-12-05 12:00:00",
     };
   },
   methods:{

@@ -37,6 +37,7 @@ import axios from 'axios';
 Vue.prototype.$axios = axios;
 import myprojectmytheme from "./myprojectmytheme.scss";
 
+
 // configure router
 const router = new VueRouter({
   routes, // short for routes: routes
