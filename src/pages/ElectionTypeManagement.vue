@@ -61,7 +61,7 @@
         </el-form>
         <div slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible2 = false">取 消</el-button>
-          <el-button type="primary" @click="dialogFormVisible2 = false">添 加</el-button>
+          <el-button type="primary" @click="dialogFormVisible2 = false">修 改</el-button>
         </div>
       </el-dialog>
     </div>

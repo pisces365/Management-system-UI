@@ -10,7 +10,7 @@
 
       <sidebar-link to="/dashboard">
         <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
+        <p>主页面</p>
       </sidebar-link>
 
 <!--      <sidebar-link to="/user">-->
@@ -23,27 +23,27 @@
 <!--      </sidebar-link>-->
 
       <sidebar-link to="/HospitalCrowdedSituation">
-        <md-icon>content_paste</md-icon>
+        <md-icon>medication</md-icon>
         <p>医院拥挤情况</p>
       </sidebar-link>
 
       <sidebar-link to="/HospitalCrowdedSituation2">
-        <md-icon>content_paste</md-icon>
+        <md-icon>medication</md-icon>
         <p>医院拥挤情况（管理人员）</p>
       </sidebar-link>
       <sidebar-link to="/CopeMatter">
-        <md-icon>content_paste</md-icon>
+        <md-icon>medication</md-icon>
         <p>医生业务处理</p>
       </sidebar-link>
 
 
       <sidebar-link to="/icons">
-        <md-icon>bubble_chart</md-icon>
+        <md-icon>restaurant</md-icon>
         <p>餐馆后台界面</p>
       </sidebar-link>
 
       <sidebar-link to="/maps">
-        <md-icon>location_on</md-icon>
+        <md-icon>hotel</md-icon>
         <p>民宿后台界面</p>
       </sidebar-link>
 
@@ -59,13 +59,16 @@
         <md-icon>how_to_vote</md-icon>
         <p>选举信息概览</p>
       </sidebar-link>
-
-      <sidebar-link to="/fix">
+      <sidebar-link to="/fix-new-order">
         <md-icon>handyman</md-icon>
-        <p>报修后台界面</p>
+        <p>报修新工单管理</p>
+      </sidebar-link>
+      <sidebar-link to="/fix-all-order">
+        <md-icon>handyman</md-icon>
+        <p>报修所有工单界面</p>
       </sidebar-link>
       <sidebar-link to="/Amap">
-        <md-icon>location_on</md-icon>
+        <md-icon>directions_bus</md-icon>
         <p>公交信息界面</p>
       </sidebar-link>
 <!--      <sidebar-link to="/shopprofile">-->
@@ -82,23 +85,23 @@
 <!--      </sidebar-link>-->
 
       <sidebar-link to="/shop">
-        <md-icon>reorder</md-icon>
+        <md-icon>storefront</md-icon>
         <p>商店后台界面</p>
       </sidebar-link>
       <sidebar-link to="/new-deliverys">
-        <md-icon>list_alt</md-icon>
+        <md-icon>delivery_dining</md-icon>
         <p>快递新工单界面</p>
       </sidebar-link>
       <sidebar-link to="/ongoing-deliverys">
-        <md-icon>playlist_play</md-icon>
+        <md-icon>delivery_dining</md-icon>
         <p>快递进行中工单界面</p>
       </sidebar-link>
       <sidebar-link to="/finished-deliverys">
-        <md-icon>playlist_add_check</md-icon>
+        <md-icon>delivery_dining</md-icon>
         <p>快递已完成工单界面</p>
       </sidebar-link>
       <sidebar-link to="/courses">
-        <md-icon>content_paste</md-icon>
+        <md-icon>school</md-icon>
         <p>课程管理界面</p>
       </sidebar-link>
 

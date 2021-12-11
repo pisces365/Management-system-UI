@@ -30,7 +30,7 @@ import Election1 from "./Election/Election1.vue";
 import Election2 from "./Election/Election2.vue";
 
 //fix
-import Fix1 from "./Fix/Fix1.vue";
+// import Fix1 from "./Fix/Fix1.vue";
 import Fix2 from "./Fix/Fix2.vue";
 
 import NewOrdersList from "./OrderList/NewOrdersList.vue";
@@ -59,7 +59,7 @@ export {
     Hospital3,
     Election2,
     Election1,
-    Fix1,
+    // Fix1,
     Fix2,
     NewOrdersList,
     OngoingOrdersList,

@@ -9,7 +9,8 @@ import CopeMatter from "@/pages/CopeMatter.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import PostElection from "@/pages/PostElection.vue";
 import ElectionList from "@/pages/ElectionList.vue";
-import fix from "@/pages/fix.vue";
+import FixingNewPage from "@/pages/FixingNewPage.vue";
+import FixingOrderList from "@/pages/FixingOrderList.vue";
 import Amap from"@/pages/Amap.vue";
 import Order from "@/pages/Order.vue";
 import ShopProfile from "@/pages/ShopProfile.vue";
@@ -163,9 +164,14 @@ const routes = [
         component: Amap,
       },
       {
-        path: "fix",
-        name: "报修界面",
-        component: fix,
+        path: "fix-new-order",
+        name: "报修新工单界面",
+        component: FixingNewPage,
+      },
+      {
+        path: "fix-all-order",
+        name: "报修所有工单",
+        component: FixingOrderList,
       },
       {
         path: "post-election",
@@ -188,7 +194,6 @@ const routes = [
         component: TableList,
 
       },
-
       {
         path: "icons",
         name: "餐馆后台" ,
