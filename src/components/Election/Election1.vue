@@ -77,7 +77,8 @@
             <div
                 class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
             >
-              <md-card class="md-layout-item md-medium-size-33 md-xsmall-size-33 md-size-33" v-for="(cdd,index) in candidates" :key="cdd.id">
+              <md-card class="md-layout-item md-medium-size-33 md-xsmall-size-33 md-size-33"
+                       v-for="(cdd,index) in candidates" :key="cdd.id">
                 <md-card-header :data-background-color="pplBackgroundColor">
                   <h4 class="title">参选人{{ index + 1 }}详细信息</h4>
                 </md-card-header>
@@ -135,7 +136,8 @@
                         <md-textarea v-model="cdd.candidate_plan" required></md-textarea>
                       </md-field>
                     </div>
-                    <md-button class="md-raised md-primary" data-background-color="red" @click="remove(cdd)">删除候选人</md-button>
+                    <md-button class="md-raised md-primary" data-background-color="red" @click="remove(cdd)">删除候选人
+                    </md-button>
                   </div>
                 </md-card-content>
               </md-card>
@@ -148,7 +150,7 @@
             <h3>
               我确定我输入的信息无误，并愿意承担由于输入错误而导致的所有后续结果的责任。
             </h3>
-            <md-button class="md-raised md-primary" @click="setDone('third')">添加</md-button>
+            <md-button class="md-raised md-primary" @click="setDone('third'); uploadPhoto()">添加</md-button>
           </md-step>
         </md-steppers>
       </div>
@@ -220,7 +222,7 @@ export default {
         // candidate_resume: this.candidate_resume,
         // candidate_plan: this.candidate_plan,
         candidate_votes: 0,
-        candidate_cover:"",
+        candidate_cover: "",
       });
       // console.log("输入的选举人个数: " + this.candidates.length);
       // console.log("当前增加的选举人的index: " + this.candidates.indexOf(cdd));
@@ -240,6 +242,7 @@ export default {
     remove(cdd) {
       var i = this.candidates.indexOf(cdd);
       this.candidates.splice(i, 1);
+      this.img_submit.splice(i, 1);
       this.new_id--;
     },
     tirggerFile(event) {
@@ -250,7 +253,7 @@ export default {
         document.getElementById("election_default_cover").src = reader.result;
       };
     },
-    tirggerFile2(event,cdd) {
+    tirggerFile2(event, cdd) {
       var file = event.target.files;
       var reader = new FileReader();//读取文件
       reader.readAsDataURL(file[0]);
@@ -260,7 +263,20 @@ export default {
         document.getElementById(cdd.id).src = reader.result;
       };
     },
-  }
+    uploadPhoto() {
+      for (var i = 0; i < this.img_submit.length;++i ) {
+        var formData = new FormData();
+        formData.append('file',this.img_submit[i]);
+        this.$axios
+            .post('/api/imgUpload', formData)
+            .then(successResponse => {
+              console.log(successResponse.data);
+            }).catch(failResponse => {
+          console.log("上传失败");
+        })
+      }
+    }
+  },
 }
 </script>
 

@@ -2,8 +2,8 @@
   <div class="content">
     <md-card>
       <md-card-header data-background-color="green">
-        <h4 class="title">报修信息管理</h4>
-        <p class="category">在这可以看到报修的详细信息</p>
+        <h4 class="title">报修信息管理（我接单的）</h4>
+        <p class="category">在这可以看到我的报修工单的详细信息</p>
       </md-card-header>
       <md-card-content>
         <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="order_id" md-sort-order="asc" md-fixed-header>
@@ -100,7 +100,6 @@ export default {
   },
   data()  {
     return {
-      tabPosition: 'top',
       search: null,
       searched: [],
       dialogTableVisible: false,
@@ -147,30 +146,6 @@ export default {
         },
         {
           order_id: "#00031",
-          order_type: "机械类",
-          order_create_time: "2021-09-01",
-          order_address: "浙江省杭州市",
-          order_requester_name: "施志豪",
-          order_fixer_name: "打工人",
-          order_phone: "18257871786",
-          order_issue: "怎么又停天然气了啊，真的活不下去了啊，领导们！",
-          order_eta:"2077-01-01",
-          order_status:"已派单",
-        },
-        {
-          order_id: "#00041",
-          order_type: "土木类",
-          order_create_time: "2021-06-01",
-          order_address: "金华市永康市",
-          order_requester_name: "施志豪",
-          order_fixer_name: "打工人",
-          order_phone: "18257871786",
-          order_issue: "家里屋顶漏水",
-          order_eta:"2077-01-01",
-          order_status:"进行中",
-        },
-        {
-          order_id: "#00051",
           order_type: "电子类",
           order_create_time: "2021-10-10",
           order_address: "浙江省杭州市",
@@ -178,11 +153,11 @@ export default {
           order_fixer_name: "打工人",
           order_phone: "19283736542",
           order_issue: "电脑显卡烧了，活不下去了啊，领导们！",
-          order_eta:"\\",
-          order_status:"未处理",
+          order_eta:"2077-01-01",
+          order_status:"进行中",
         },
         {
-          order_id: "#00052",
+          order_id: "#00041",
           order_type: "电子类",
           order_create_time: "2021-10-19",
           order_address: "浙江省杭州市",
@@ -190,8 +165,8 @@ export default {
           order_fixer_name: "打工人",
           order_phone: "19283736542",
           order_issue: "电脑主板烧了，活不下去了啊，领导们！",
-          order_eta:"\\",
-          order_status:"未处理",
+          order_eta:"2077-01-01",
+          order_status:"已完成",
         },
       ],
     };

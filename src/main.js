@@ -34,6 +34,10 @@ import MaterialDashboard from "./material-dashboard";
 import Chartist from "chartist";
 
 import axios from 'axios';
+
+//interface requisite
+axios.defaults.baseURL = 'http://112.124.35.32:8081/xiangliban';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 Vue.prototype.$axios = axios;
 import myprojectmytheme from "./myprojectmytheme.scss";
 

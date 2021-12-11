@@ -11,6 +11,7 @@ import PostElection from "@/pages/PostElection.vue";
 import ElectionList from "@/pages/ElectionList.vue";
 import FixingNewPage from "@/pages/FixingNewPage.vue";
 import FixingOrderList from "@/pages/FixingOrderList.vue";
+import FixingMyOrderList from "@/pages/FixingMyOrderList.vue";
 import Amap from"@/pages/Amap.vue";
 import Order from "@/pages/Order.vue";
 import ShopProfile from "@/pages/ShopProfile.vue";
@@ -172,6 +173,11 @@ const routes = [
         path: "fix-all-order",
         name: "报修所有工单",
         component: FixingOrderList,
+      },
+      {
+        path: "fix-my-order",
+        name: "报修我的工单",
+        component: FixingMyOrderList,
       },
       {
         path: "post-election",

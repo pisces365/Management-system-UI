@@ -67,6 +67,10 @@
         <md-icon>handyman</md-icon>
         <p>报修所有工单界面</p>
       </sidebar-link>
+      <sidebar-link to="/fix-my-order">
+        <md-icon>handyman</md-icon>
+        <p>报修我的工单界面</p>
+      </sidebar-link>
       <sidebar-link to="/Amap">
         <md-icon>directions_bus</md-icon>
         <p>公交信息界面</p>
