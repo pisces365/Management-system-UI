@@ -1,9 +1,8 @@
 <template>
   <div class="content">
     <md-card>
-      <md-card-header data-background-color="blue">
-        <h4 class="title">工单管理</h4>
-        <p class="category"> 在这可以看到用户的新工单</p>
+      <md-card-header data-background-color="green">
+        <h4 class="title">新工单列表</h4>
       </md-card-header>
       <md-card-content>
         <Fix2></Fix2>

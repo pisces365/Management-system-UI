@@ -19,7 +19,7 @@ import VueRouter from "vue-router";
 import App from "./App";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
+import { Message } from "element-ui";
 // router setup
 import routes from "./routes/routes";
 
@@ -36,7 +36,9 @@ import Chartist from "chartist";
 import axios from 'axios';
 
 //interface requisite
-axios.defaults.baseURL = 'http://112.124.35.32:8081/xiangliban';
+axios.defaults.baseURL = 'http://localhost:8081/xiangliban';
+// server url
+// axios.defaults.baseURL = 'http://112.124.35.32:8081/xiangliban';
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 Vue.prototype.$axios = axios;
 import myprojectmytheme from "./myprojectmytheme.scss";
@@ -56,7 +58,9 @@ Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
 Vue.use(Notifications);
 Vue.use(myprojectmytheme);
-
+Vue.prototype.$message = Message;
+// Vue.use(Message);
+// Vue.prototype.$message = Message;
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

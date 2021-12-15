@@ -1,7 +1,30 @@
 <template>
-  <router-view></router-view>
+<!--  <router-view></router-view>-->
+  <div id="app">
+    <router-view v-if="isReload"/>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'App',
+  provide() {
+    return {
+      reload: this.reload
+    }
+  },
+  data() {
+    return {
+      isReload: true
+    }
+  },
+  methods: {
+    reload() {
+      this.isReload = false
+      this.$nextTick(() => {
+        this.isReload = true
+      })
+    }
+  }
+};
 </script>

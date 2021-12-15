@@ -264,9 +264,9 @@ export default {
       };
     },
     uploadPhoto() {
-      for (var i = 0; i < this.img_submit.length;++i ) {
+      for (var i = 0; i < this.img_submit.length; ++i) {
         var formData = new FormData();
-        formData.append('file',this.img_submit[i]);
+        formData.append('file', this.img_submit[i]);
         this.$axios
             .post('/api/imgUpload', formData)
             .then(successResponse => {
