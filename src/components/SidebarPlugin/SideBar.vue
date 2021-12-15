@@ -47,7 +47,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue MD",
+      default: "乡里办管理系统",
     },
     sidebarBackgroundImage: {
       type: String,

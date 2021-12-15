@@ -4,16 +4,19 @@
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100">
         <md-card>
           <md-card-content>
+            <!-- 页面加载/运算出错的提示 -->
             <section v-if="errored">
               <h4>很抱歉，出了点问题</h4>
             </section>
+            <!-- 页面获取数据为空的提示 -->
             <section v-if="list_empty">
               <h4>没有未处理的工单！</h4>
             </section>
+            <!-- 页面正在加载的提示 -->
             <section v-if="loading">
-              <!--<h4>加载中……</h4>-->
-              <el-skeleton :rows="6" animated />
+              <el-skeleton :rows="6" animated/>
             </section>
+            <!-- 显示所有未处理的工单 -->
             <div v-for="order in fix_list" :key="order.fixId" id="myCard">
               <md-card class="md-layout-item md-medium-size-33 md-xsmall-size-33 md-size-33">
                 <md-card-header :data-background-color="dataBackgroundColor">
@@ -70,24 +73,28 @@
 </template>
 
 <script>
+// 导入全局变量, 用于获取当前工作人员id
 import globalVariable from "../../globalVariable";
 
 export default {
+  // 调入用于刷新界面的方法
   inject: ['reload'],
+  // 设定表格列名的文字颜色
   props: {
-    dataBackgroundColor: {
+    tableHeaderColor: {
       type: String,
-      default: "green",
+      default: "black",
     },
   },
   data() {
     return {
-      errored: false,
-      loading: true,
-      list_empty: false,
-      fix_list: [],
+      errored: false, // 从后台获取数据是否出错
+      loading: true, // 是否正在从后台获取数据
+      list_empty: false, // 从后台获取的工单列表是否为空
+      fix_list: [], // 从后台获取的全部没有人接单的工单
     };
   },
+  // 初始化页面完成后,从后台获取全部没有人接单的工单
   mounted() {
     this.$axios
         .get('/fix/allUnprocessedOrder')
@@ -102,6 +109,7 @@ export default {
         .finally(() => this.loading = false)
   },
   methods: {
+    // 点击接单后, 二次确认
     open(fixOrderId) {
       var params = new URLSearchParams();
       params.append("fixOrderId", fixOrderId);
@@ -111,6 +119,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        // 工作人员确定接单后, 获取当前工单信息并写入后台
         this.$axios
             .post('/fix/takeOrderByOrderIdAndWorkerId', params)
             .then(successResponse => {
