@@ -79,11 +79,11 @@ import globalVariable from "../../globalVariable";
 export default {
   // 调入用于刷新界面的方法
   inject: ['reload'],
-  // 设定表格列名的文字颜色
+  // 设定卡片头部的背景色
   props: {
-    tableHeaderColor: {
+    dataBackgroundColor: {
       type: String,
-      default: "black",
+      default: "green",
     },
   },
   data() {
