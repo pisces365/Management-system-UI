@@ -34,7 +34,7 @@
             <!-- 页内模糊查询工单编号 -->
             <md-field md-clearable class="md-toolbar-section-end">
               <md-input placeholder="查询工单编号" v-model="search" @input="searchOnTable"/>
-            </md-field>
+            </md-field>-
           </md-table-toolbar>
           <!-- 空状态/查询结果为空 -->
           <md-table-empty-state v-show="searched_empty" md-label="无结果"
@@ -298,10 +298,6 @@ export default {
   },
   // 页面模板渲染成html前,将查到的全部工单都显示出来
   created() {
-    this.searched = this.my_fix_orders;
-  },
-  // 初始化页面完成后,从后台获取当前工作人员全部的工单
-  mounted() {
     this.$axios
         .get('/fix/allFixDetailsByWorkerId', {
           params: {
@@ -318,6 +314,10 @@ export default {
           this.errored = true // 在前端提示用户出错
         })
         .finally(() => this.loading = false) // 将加载中动画设为不可见
+    this.searched = this.my_fix_orders;
+  },
+  // 初始化页面完成后,从后台获取当前工作人员全部的工单
+  mounted() {
   },
   methods: {
     // 页内搜索结果为空时点击按钮联系管理员

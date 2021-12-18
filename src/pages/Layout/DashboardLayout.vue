@@ -108,6 +108,10 @@
         <md-icon>school</md-icon>
         <p>课程管理界面</p>
       </sidebar-link>
+      <sidebar-link to="/courses-type">
+        <md-icon>school</md-icon>
+        <p>课程类别管理界面</p>
+      </sidebar-link>
 
 <!--      <sidebar-link to="/upgrade" class="active-pro">-->
 <!--        <md-icon>unarchive</md-icon>-->

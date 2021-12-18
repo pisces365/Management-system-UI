@@ -22,8 +22,7 @@ import NewDelivery from "@/pages/NewDelivery.vue";
 import OngoingDelivery from "@/pages/OngoingDelivery.vue";
 import FinishedDelivery from "@/pages/FinishedDelivery.vue";
 import CoursesManage from "@/pages/CoursesManage.vue";
-import CourseDetails from "../pages/Layout/CourseManagePages/CourseDetails";
-import AddCourse from "../pages/Layout/CourseManagePages/AddCourse";
+import CourseTypeManage from "@/pages/CourseTypeManage.vue";
 import ElectionDetailPage from "../pages/ElectionDetailPage";
 import shop from "@/pages/Shop.vue";
 import HospitalCrowdedSituation from "../pages/HospitalCrowdedSituation.vue";
@@ -35,7 +34,6 @@ import AskOnlineDetail from "../components/Hospital/AskOnlineDetail.vue";
 import AppointmentDetail from "../components/Hospital/AppointmentDetail.vue";
 import CrowdChart from "../components/Hospital/CrowdChart.vue";
 import ElectionTypeManagement from "../pages/ElectionTypeManagement";
-
 
 const routes = [
   {
@@ -125,14 +123,9 @@ const routes = [
         component: CoursesManage,
       },
       {
-        path: "course-details",
-        name: "课程详情",
-        component: CourseDetails,
-      },
-      {
-        path: "add-course",
-        name: "增加课程",
-        component: AddCourse,
+        path: "courses-type",
+        name: "课程类别管理",
+        component: CourseTypeManage,
       },
       {
         path: "election-details-page",

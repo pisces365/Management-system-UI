@@ -35,7 +35,8 @@ import Chartist from "chartist";
 
 import axios from 'axios';
 
-//interface requisite
+// interface baseURL
+// local url
 axios.defaults.baseURL = 'http://localhost:8081/xiangliban';
 // server url
 // axios.defaults.baseURL = 'http://112.124.35.32:8081/xiangliban';
