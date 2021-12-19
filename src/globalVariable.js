@@ -1,4 +1,5 @@
-var currentUserId = "User#2";
+var currentUserId = "User#4";
+// var currentUserId = "User#2";    // 报修工作人员测试
 var currentUserAuthorization = "77";
 var currentUserStatus = "";
 

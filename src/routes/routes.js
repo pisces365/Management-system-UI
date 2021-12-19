@@ -16,14 +16,11 @@ import Amap from"@/pages/Amap.vue";
 import Order from "@/pages/Order.vue";
 import ShopProfile from "@/pages/ShopProfile.vue";
 import ShopDataStatistics from "@/pages/ShopDataStatistics.vue";
-import OrderPreviewPage from "@/pages/OrderPreviewPage.vue";
-import OrderDetailPage from "@/pages/OrderDetailPage.vue";
 import NewDelivery from "@/pages/NewDelivery.vue";
 import OngoingDelivery from "@/pages/OngoingDelivery.vue";
 import FinishedDelivery from "@/pages/FinishedDelivery.vue";
 import CoursesManage from "@/pages/CoursesManage.vue";
 import CourseTypeManage from "@/pages/CourseTypeManage.vue";
-import ElectionDetailPage from "../pages/ElectionDetailPage";
 import shop from "@/pages/Shop.vue";
 import HospitalCrowdedSituation from "../pages/HospitalCrowdedSituation.vue";
 import HospitalCrowdedSituation2 from "../pages/HospitalCrowdedSituation2.vue";
@@ -73,11 +70,6 @@ const routes = [
         component: CheckInformation,
       },
       {
-        path: "order-preview",
-        name: "订单预览",
-        component: OrderPreviewPage,
-      },
-      {
         path: "HospitalCrowdedSituation",
         name: "医院拥挤情况",
         component: HospitalCrowdedSituation,
@@ -91,11 +83,6 @@ const routes = [
         path: "add-address",
         name: "增加地名",
         component: addAddress,
-      },
-      {
-        path: "order-detail",
-        name: "订单详情",
-        component: OrderDetailPage,
       },
       {
         path: "new-deliverys",
@@ -126,11 +113,6 @@ const routes = [
         path: "courses-type",
         name: "课程类别管理",
         component: CourseTypeManage,
-      },
-      {
-        path: "election-details-page",
-        name: "选举详情",
-        component: ElectionDetailPage,
       },
       {
         path: "manage-election-type",

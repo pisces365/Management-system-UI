@@ -25,19 +25,8 @@ import Hospital1 from "./Hospital/Hospital1.vue";
 import Hospital2 from "./Hospital/Hospital2.vue";
 import Hospital3 from "./Hospital/Hospital3.vue";
 
-//election
-import Election1 from "./Election/Election1.vue";
-import Election2 from "./Election/Election2.vue";
-
 //fix
-// import Fix1 from "./Fix/Fix1.vue";
 import Fix2 from "./Fix/Fix2.vue";
-
-import NewOrdersList from "./OrderList/NewOrdersList.vue";
-import OngoingOrdersList from "./OrderList/OngoingOrdersList.vue";
-import CompletedOrdersList from "./OrderList/CompletedOrdersList.vue";
-import ElectionDetails from "../pages/Layout/ElectionPages/ElectionDetails";
-import CandidateDetails from "../pages/Layout/ElectionPages/CandidateDetails";
 
 export {
     ChartCard,
@@ -57,13 +46,5 @@ export {
     Hospital1,
     Hospital2,
     Hospital3,
-    Election2,
-    Election1,
-    // Fix1,
     Fix2,
-    NewOrdersList,
-    OngoingOrdersList,
-    CompletedOrdersList,
-    ElectionDetails,
-    CandidateDetails,
 };

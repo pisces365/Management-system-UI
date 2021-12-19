@@ -10,23 +10,294 @@
             <p class="category"> 在这可以看到选举信息的概览</p>
           </md-card-header>
           <md-card-content>
-            <Election2></Election2>
+            <!-- 页面加载/运算出错的提示 -->
+            <section v-if="errored">
+              <h4>很抱歉，出了点问题</h4>
+            </section>
+            <!-- 页面获取数据为空的提示 -->
+            <section v-if="list_empty">
+              <h4>课程类别列表为空</h4>
+            </section>
+            <!-- 页面正在加载的提示 -->
+            <section v-if="loading">
+              <el-skeleton :rows="6" animated/>
+            </section>
+            <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="electionType"
+                      md-sort-order="asc" md-fixed-header>
+              <md-table-toolbar>
+                <div class="md-toolbar-section-start">
+                  <h1 class="md-title">选举列表</h1>
+                  <div class="md-layout-item">
+                    <md-field>
+                      <label>筛选选举类别</label>
+                      <md-select v-model="filter1">
+                        <md-option key="null">全部</md-option>
+                        <md-option v-for="item in type_list" :key="item.id" :lable="item.name" :value="item.id">
+                          {{ item.name }}
+                        </md-option>
+                      </md-select>
+                    </md-field>
+                  </div>
+                </div>
+                <md-button class="md-icon-button md-dense md-raised md-primary"
+                           style="margin-right: 25px;margin-left: 5px" @click="searchOnTable2">
+                  <md-icon>cached</md-icon>
+                </md-button>
+                <md-field md-clearable class="md-toolbar-section-end">
+                  <md-input placeholder="查询选举时间" v-model="search" @input="searchOnTable"/>
+                </md-field>
+              </md-table-toolbar>
+              <md-table-empty-state
+                  v-if="searched_empty"
+                  md-label="无结果"
+                  :md-description="`搜素结果为空. 请尝试重新输入`">
+              </md-table-empty-state>
+              <md-table-row slot="md-table-row" slot-scope="{ item }">
+                <md-table-cell md-label="选举编号" md-sort-by="id">{{ item.id }}</md-table-cell>
+                <md-table-cell md-label="选举主题">{{ item.name }}</md-table-cell>
+                <md-table-cell md-label="发布单位">{{ item.department }}</md-table-cell>
+                <md-table-cell md-label="规则/简介/要求">{{ item.intro }}</md-table-cell>
+                <md-table-cell md-label="选举开始时间" md-sort-by="start">{{ item.start }}</md-table-cell>
+                <md-table-cell md-label="选举结束时间" md-sort-by="start">{{ item.start }}</md-table-cell>
+                <md-table-cell md-label="可选操作">
+                  <el-button type="primary" icon="el-icon-info" @click="getSelectedDetails(item)"/>
+                  <el-button type="danger" icon="el-icon-delete" @click="deleteCurrentElection(item)"/>
+                </md-table-cell>
+              </md-table-row>
+            </md-table>
           </md-card-content>
         </md-card>
+        <div>
+          <!-- 课程详情对话, 根据变量dialogTableVisible的值展示/关闭 -->
+          <el-dialog title="选举详情" :visible.sync="dialogTableVisible">
+            <!-- 课程详情 -->
+            <el-card class="box-card">
+              <div slot="header">
+                <span style="font-weight: bold">选举详细信息</span>
+              </div>
+              <!-- 从selected_election取数据 -->
+              <el-table :data="selected_election" border style="width: 100%">
+                <el-table-column property="id" label="选举编号"></el-table-column>
+                <el-table-column property="name" label="选举名称"></el-table-column>
+                <el-table-column property="type" label="选举类别"></el-table-column>
+                <el-table-column property="department" label="选举发布部门"></el-table-column>
+              </el-table>
+              <el-table :data="selected_election" border style="width: 100%">
+                <el-table-column property="intro" label="选举简介"></el-table-column>
+                <el-table-column property="start" label="选举开始时间"></el-table-column>
+                <el-table-column property="end" label="选举结束时间"></el-table-column>
+                <el-table-column property="state" label="选举状态">
+                  <template slot-scope="scope">
+                    <el-tag :type="getLableColor(scope.row.state)">
+                      {{ (scope.row.state == 0) ? "未开始" : ((scope.row.state == 1) ? "进行中" : "已结束") }}
+                    </el-tag>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-card>
+            <!-- 选举封面 -->
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span style="font-weight: bold">选举封面</span>
+              </div>
+              <div class="block">
+                <!-- 从selected_images逐张取照片 -->
+                <el-image :src="selected_election_cover" style="width: 50%;height: 50%;"/>
+              </div>
+            </el-card>
+            <!-- 选举人信息 -->
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span style="font-weight: bold">选举人信息</span>
+              </div>
+              <el-table :data="selected_candidate" border style="width: 100%">
+                <el-table-column property="voteid" label="参选人编号"></el-table-column>
+                <el-table-column property="name" label="参选人名称"></el-table-column>
+                <el-table-column property="age" label="参选人年龄"></el-table-column>
+                <el-table-column property="sex" label="参选人性别"></el-table-column>
+                <el-table-column property="uid" label="参选人个人id"></el-table-column>
+                <el-table-column property="political_face" label="政治面貌"></el-table-column>
+                <el-table-column property="duty" label="参选职位"></el-table-column>
+                <el-table-column property="brief_intro" label="简介"></el-table-column>
+                <el-table-column property="outlook" label="展望"></el-table-column>
+                <el-table-column property="votes" label="获得投票数"></el-table-column>
+                <el-table-column property="img" label="参选人照片">
+                  <template slot-scope="scope">
+                    <el-image :src="scope.row.img" :preview-src-list="selected_candidate_images"/>
+<!--                    <el-image :src="selected_election_cover" style="width: 50%;height: 50%;"/>-->
+                  </template>
+                </el-table-column>
+              </el-table>
+              <div class="block">
+                <!-- 从selected_images逐张取照片 -->
+<!--                &lt;!&ndash; 从selected_images逐张取照片 &ndash;&gt;-->
+<!--                <el-image v-for="(image,index) in this.selected_candidate_images."-->
+<!--                          :src="image"-->
+<!--                          :key="index"-->
+<!--                          :preview-src-list="selected_candidate_images">-->
+<!--                </el-image>-->
+              </div>
+            </el-card>
+          </el-dialog>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Election2 } from "@/components";
-
-
+const toLower = text => {
+  return text.toString().toLowerCase()
+}
+const searchById = (items, term) => {
+  if (term) {
+    return items.filter(item => toLower(item.electionTime).includes(toLower(term)))
+  }
+  return items
+}
+// WIP
+const searchById2 = (items, term) => {
+  if (term) {
+    return items.filter(item => toLower(item.type).includes(toLower(term)))
+  }
+  return items
+}
 export default {
-  components: {
-    Election2,
+  // 调入用于刷新界面的方法
+  inject: ['reload'],
+  props: {
+    tableHeaderColor: {
+      type: String,
+      default: "blue",
+    },
   },
-};
+  data() {
+    return {
+      errored: false, // 数据加载是否错误
+      loading: false, // 是否正在加载数据
+      list_empty: false,  // 初始获取到的数据是否为空
+      searched_empty: false,  // 搜素结果是否为空
+      search: null,
+      filter1: null,
+      searched: [],
+      filterType: "",
+      type_list: [],  // 获取到的全部类别信息
+      elections: [],  // 获取到的全部选举信息
+      selected_election: [],  // 选定的选举信息
+      selected_election_cover: null,  // 选中的选举封面
+      selected_candidate: [], // 选中的参选人信息
+      selected_candidate_images: [],  // 选中的参选人图片
+      dialogTableVisible: false,  // 选举详情是否可见
+    };
+  },
+  created() {
+    this.$axios
+        .get('/vote/allVoteType')
+        .then(successResponse => {
+          this.type_list = successResponse.data; // 将获取的数据保存
+        })
+        .catch(error => {
+          console.log(error) // 记录出错信息
+          this.errored = true // 在前端提示用户出错
+        })
+    this.$axios
+        .get('/vote/selectAllVoteDetail')
+        .then(successResponse => {
+          this.elections = successResponse.data; // 将获取的数据保存
+          this.list_empty = (this.elections.isEmpty) ? true : false; // 将获取数据是否为空保存
+          this.searched = this.elections; // 再次初始化显示的内容
+        })
+        .catch(error => {
+          console.log(error) // 记录出错信息
+          this.errored = true // 在前端提示用户出错
+        })
+        .finally(() => this.loading = false) // 将加载中动画设为不可见
+  },
+  methods: {
+    searchOnTable() {
+      this.searched = searchById(this.elections, this.search)
+      this.searched_empty = (this.searched.isEmpty) ? false : true
+    },
+    searchOnTable2() {
+      this.searched = searchById2(this.elections, this.filter1)
+      this.searched_empty = (this.searched.isEmpty) ? false : true
+    },
+    getLableColor(state) {
+      if(state === 0){
+        return ""
+      }
+      else if(state === 1){
+        return "success"
+      }
+      else{
+        return "danger"
+      }
+    },
+    async getSelectedDetails(item) {
+      this.selected_election.pop();
+      await this.$axios
+          .get('/vote/voteDetailById', {
+            params: {
+              id: item.id
+            }
+          })
+          .then(successResponse => {
+            this.selected_election.push(successResponse.data); // 将获取的数据保存
+            this.selected_election_cover = successResponse.data.img;
+          })
+          .catch(error => {
+            console.log(error) // 记录出错信息
+            this.errored = true // 在前端提示用户出错
+          })
+      await this.$axios
+          .get('/vote/votePersonDetailsByVoteInfoId', {
+            params: {
+              voteinfoid: item.id
+            }
+          })
+          .then(successResponse => {
+            this.selected_candidate = successResponse.data; // 将获取的数据保存
+            this.selected_candidate_images.pop(); // 弹出之前加载的头像集
+            for(var i=0;i<this.selected_candidate.length;++i){
+              this.selected_candidate_images.push(this.selected_candidate[i].img);  // 加载新的头像集合
+            }
+          })
+          .catch(error => {
+            console.log(error) // 记录出错信息
+            this.errored = true // 在前端提示用户出错
+          })
+      this.dialogTableVisible = true;
+    },
+    deleteCurrentElection(item) {
+      this.$confirm('您确认删除这个选举?', '确认删除', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        var params = new URLSearchParams();
+        params.append("id", item.id);
+        this.$axios
+            .post('/vote/deleteVoteInfo', params)
+            .then(successResponse => {
+              this.$message({
+                type: 'success',
+                message: '选举已经删除'
+              });
+              this.reload();
+            }).catch(failResponse => {
+          this.$message.error('出错了, 删除失败!');
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
+    },
+  },
+}
+
+
 </script>
 <style>
 .md-tabs.md-theme-default.md-success .md-tabs-navigation {
