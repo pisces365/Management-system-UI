@@ -1,9 +1,9 @@
 <!--
  * @FileDescription: 管理员-全部维修工单界面
  * @Author: 刘元驰
- * @Date: 2021
+ * @Date: 12/15/2021
  * @LastEditors: 刘元驰
- * @LastEditTime: 12/15/2021
+ * @LastEditTime: 12/21/2021
  -->
 <template>
   <div class="content">
@@ -18,7 +18,7 @@
         </section>
         <!-- 页面获取数据为空的提示 -->
         <section v-if="list_empty">
-          <h4>没有未处理的工单！</h4>
+          <h4>没有工单！</h4>
         </section>
         <!-- 页面正在加载的提示 -->
         <section v-if="loading">
@@ -26,7 +26,7 @@
         </section>
         <!-- 系统内全部报修工单的表格 -->
         <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="fixOrderId" md-sort-order="asc"
-                  md-fixed-header v-if="errored == false && loading == false">
+                  md-fixed-header v-if="errored === false && loading === false && list_empty === false">
           <md-table-toolbar>
             <div class="md-toolbar-section-start">
               <h1 class="md-title">工单列表</h1>
@@ -51,7 +51,7 @@
               <!-- 自定义的标签,用于更直观的展示工单状态 -->
               <el-tag :type="getLableColor(item.fixStatus)">
                 {{
-                  (item.fixStatus == 1) ? "未处理" : ((item.fixStatus == 2) ? "已派单" : ((item.fixStatus == 3) ? "进行中" : "已完成"))
+                  (item.fixStatus === 1) ? "未处理" : ((item.fixStatus === 2) ? "已派单" : ((item.fixStatus === 3) ? "进行中" : "已完成"))
                 }}
               </el-tag>
             </md-table-cell>
@@ -63,9 +63,9 @@
             <!-- 根据当前工单状态不同展示不同的可用操作: 强制派单或无操作 -->
             <md-table-cell md-label="可选操作">
               <el-button @click="getAllDepartments(); forceAssignOrder(item); getSelectedTimeline(item)"
-                         v-if="item.fixStatus == 1" type="primary">
+                         v-if="item.fixStatus === 1" type="primary">
                 {{
-                  (item.fixStatus == 1) ? "强制派单" : ""
+                  (item.fixStatus === 1) ? "强制派单" : ""
                 }}
               </el-button>
             </md-table-cell>
@@ -101,7 +101,7 @@
                   <template slot-scope="scope">
                     <el-tag :type="getLableColor(scope.row.fixStatus)">
                       {{
-                        (scope.row.fixStatus == 1) ? "未处理" : ((scope.row.fixStatus == 2) ? "已派单" : ((scope.row.fixStatus == 3) ? "进行中" : "已完成"))
+                        (scope.row.fixStatus === 1) ? "未处理" : ((scope.row.fixStatus === 2) ? "已派单" : ((scope.row.fixStatus === 3) ? "进行中" : "已完成"))
                       }}
                     </el-tag>
                   </template>
@@ -226,13 +226,13 @@
           <h4>您没有选择工作人员!</h4>
         </el-card>
         <!-- 按钮: 在第一步的时候给出的按钮, 点击下一步执行三个方法: 进入下一页,从后台获取选定的部门的全部员工,获取选定的部门名称并显示在第二步中 -->
-        <div slot="footer" class="dialog-footer" v-if="stepperCurrent == 0">
+        <div slot="footer" class="dialog-footer" v-if="stepperCurrent === 0">
           <el-button @click="forceAssignVisible = false">取 消</el-button>
           <el-button type="primary" @click="stepperNext(); getAllWorkersByDepart(); getSelectedDepartmentName()">下一步
           </el-button>
         </div>
         <!-- 按钮: 在第二步的时候给出的按钮, 点击下一步执行两个方法: 进入下一页,获取有没有选择工作人员 -->
-        <div slot="footer" class="dialog-footer" v-if="stepperCurrent == 1">
+        <div slot="footer" class="dialog-footer" v-if="stepperCurrent === 1">
           <el-button @click="stepperPrev">上一步</el-button>
           <el-button type="primary" @click="stepperNext();getNumberUserSelected()" v-if="numberOfWorker">下一步</el-button>
         </div>
@@ -301,10 +301,10 @@ export default {
   // 初始化页面完成后,从后台获取全部的工单
   mounted() {
     this.$axios
-        .get('/fix/allFixDetails')
+        .get('http://112.124.35.32:8083/xiangliban/fix/allFixDetails')
         .then(successResponse => {
           this.all_fix_orders = successResponse.data; // 将获取的数据保存
-          this.list_empty = (this.all_fix_orders.isEmpty) ? true : false; // 将获取数据是否为空保存
+          this.list_empty = (this.all_fix_orders.length === 0); // 将获取数据是否为空保存
           this.searched = this.all_fix_orders; // 再次初始化显示的内容
         })
         .catch(error => {
@@ -321,13 +321,13 @@ export default {
     },
     // 自动计算工单状态标签的颜色并返回
     getLableColor(item) {
-      if (item == 1) {
+      if (item === 1) {
         return "danger";
-      } else if (item == 2) {
+      } else if (item === 2) {
         return "";
-      } else if (item == 4) {
+      } else if (item === 4) {
         return "success";
-      } else if (item == 3) {
+      } else if (item === 3) {
         return "warning";
       }
     },
@@ -346,7 +346,7 @@ export default {
     // 点击查看工单详情后, 获取当前工单时间线并保存
     getSelectedTimeline(item) {
       this.$axios
-          .get('/fix/analysisTimeline', {
+          .get('http://112.124.35.32:8083/xiangliban/fix/analysisTimeline', {
             params: {
               fixOrderId: item.fixOrderId
             }
@@ -364,7 +364,7 @@ export default {
     forceAssignOrder(item) {
       this.selected.pop();
       this.selected.push(item);
-      if (item.fixStatus == 1) {
+      if (item.fixStatus === 1) {
         this.forceAssignVisible = true;
       } else {
         this.errored = true;
@@ -382,7 +382,7 @@ export default {
     // 获取全部部门信息并保存
     getAllDepartments() {
       this.$axios
-          .get('/fix/selectAllDepartments')
+          .get('http://112.124.35.32:8083/xiangliban/fix/selectAllDepartments')
           .then(successResponse => {
             this.departments = successResponse.data;
           })
@@ -394,7 +394,7 @@ export default {
     // 根据给出的部门id获取部门下全部工作人员信息
     getAllWorkersByDepart() {
       this.$axios
-          .get('/fix/selectAllWorkersByDepartment', {
+          .get('http://112.124.35.32:8083/xiangliban/fix/selectAllWorkersByDepartment', {
             params: {
               fixDepartmentId: this.selected_department
             }
@@ -424,7 +424,7 @@ export default {
     },
     // 获取用户是否选定了用户, 若没有则将变量设为false
     getNumberUserSelected() {
-      if (this.selected_worker.length == 0) {
+      if (this.selected_worker.length === 0) {
         this.workerSelected = false;
       } else {
         this.workerSelected = true;
@@ -436,7 +436,7 @@ export default {
       params.append("fixOrderId", selected[0].fixOrderId);
       params.append("fixWorkerId", this.selected_worker);
       this.$axios
-          .post('/fix/forceAssignOrder', params)
+          .post('http://112.124.35.32:8083/xiangliban/fix/forceAssignOrder', params)
           .then(successResponse => {
             console.log(successResponse.data);
             this.$message({

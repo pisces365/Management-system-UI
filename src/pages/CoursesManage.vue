@@ -1,3 +1,10 @@
+<!--
+ * @FileDescription: 工作人员-课程管理页面
+ * @Author: 刘元驰
+ * @Date: 2021
+ * @LastEditors: 刘元驰
+ * @LastEditTime: 12/21/2021
+ -->
 <template>
   <div class="content">
     <div class="md-layout">
@@ -22,7 +29,8 @@
             <section v-if="loading">
               <el-skeleton :rows="6" animated/>
             </section>
-            <md-table v-model="searched" md-sort="course_id" md-sort-order="asc" md-fixed-header>
+            <md-table v-model="searched" md-sort="course_id" md-sort-order="asc" md-fixed-header
+                      v-if="errored === false && loading === false && list_empty === false">
               <md-table-toolbar>
                 <div class="md-toolbar-section-start">
                   <h1 class="md-title">课程列表</h1>
@@ -40,8 +48,14 @@
               <md-table-row slot="md-table-row" slot-scope="{ item }">
                 <md-table-cell md-label="课程编号" md-sort-by="courseId">{{ item.courseId }}</md-table-cell>
                 <md-table-cell md-label="课程名称" md-sort-by="courseName">{{ item.courseName }}</md-table-cell>
-                <md-table-cell md-label="课程类别" md-sort-by="courseCategoryName">{{ item.courseCategoryName }}</md-table-cell>
-                <md-table-cell md-label="课程教师名称" md-sort-by="courseTeacherName">{{ item.courseTeacherName }}</md-table-cell>
+                <md-table-cell md-label="课程类别" md-sort-by="courseCategoryName">{{
+                    item.courseCategoryName
+                  }}
+                </md-table-cell>
+                <md-table-cell md-label="课程教师名称" md-sort-by="courseTeacherName">{{
+                    item.courseTeacherName
+                  }}
+                </md-table-cell>
                 <md-table-cell md-label="课程状态" md-sort-by="courseStatus">
                   <el-tag :type="getLableColor(item.courseStatus)">{{ item.courseStatus }}</el-tag>
                 </md-table-cell>
@@ -49,14 +63,16 @@
                   <!-- 点击此按钮展示当前条目完整信息 -->
                   <el-button type="primary" @click="getSelectedDetails(item)" icon="el-icon-info"/>
                   <!-- 点击此按钮打开修改信息页 -->
-                  <el-button type="warning" @click="alterSelectedDetails(item); getAllCourseCategory()" icon="el-icon-edit"/>
+                  <el-button type="warning" @click="alterSelectedDetails(item); getAllCourseCategory()"
+                             icon="el-icon-edit"/>
                   <!-- 点击此按钮二次确认是否删除 -->
                   <el-button type="danger" @click="open(item)" icon="el-icon-delete"/>
                 </md-table-cell>
               </md-table-row>
             </md-table>
             <br>
-            <div class="md-layout-item md-size-100 text-right">
+            <div class="md-layout-item md-size-100 text-right"
+                 v-if="errored === false && loading === false && list_empty === false">
               <!-- 点击此按钮打开新增课程页 -->
               <el-button type="success" @click="addCourse();getAllCourseCategory()">新增课程</el-button>
             </div>
@@ -171,14 +187,14 @@
                 </el-form-item>
                 <el-form-item label="课程封面" :label-width="formLabelWidth">
                   <el-upload
-                      action="https://jsonplaceholder.typicode.com/posts/"
+                      action="#"
                       list-type="picture-card"
                       ref="upload"
                       accept=".jpg, .jpeg, .png"
                       :on-preview="handlePictureCardPreview"
                       :on-remove="handleRemove"
                       :limit="1"
-                      :auto-upload="false"
+                      :auto-upload="true"
                       :file-list="fileList"
                       :http-request="manualUpload">
                     <i class="el-icon-plus"></i>
@@ -254,14 +270,14 @@
                 </el-form-item>
                 <el-form-item label="课程封面" :label-width="formLabelWidth">
                   <el-upload
-                      action="https://jsonplaceholder.typicode.com/posts/"
+                      action="#"
                       list-type="picture-card"
                       ref="upload"
                       accept=".jpg, .jpeg, .png"
                       :on-preview="handlePictureCardPreview"
                       :on-remove="handleRemove"
                       :limit="1"
-                      :auto-upload="false"
+                      :auto-upload="true"
                       :file-list="fileList"
                       :http-request="manualUpload">
                     <i class="el-icon-plus"></i>
@@ -321,10 +337,10 @@ export default {
   },
   created() {
     this.$axios
-        .get('/education/selectAllCourses')
+        .get('http://112.124.35.32:8083/xiangliban/education/selectAllCourses')
         .then(successResponse => {
           this.course_list = successResponse.data; // 将获取的数据保存
-          this.list_empty = (this.course_list.isEmpty) ? true : false; // 将获取数据是否为空保存
+          this.list_empty = (this.course_list.length === 0); // 将获取数据是否为空保存
           this.searched = this.course_list; // 再次初始化显示的内容
         })
         .catch(error => {
@@ -340,7 +356,7 @@ export default {
     },
     searchOnTable() {
       this.searched = searchById(this.course_list, this.search)
-      this.searched_empty = (this.searched.isEmpty) ? false : true
+      this.searched_empty = (!this.searched.isEmpty)
     },
     // 自动设置标签颜色
     getLableColor(item) {
@@ -370,7 +386,7 @@ export default {
     // 点击修改/新增课程后, 获取全部课程类别并放入变量中
     getAllCourseCategory() {
       this.$axios
-          .get('/education/selectAllCourseCategory')
+          .get('http://112.124.35.32:8083/xiangliban/education/selectAllCourseCategory')
           .then(successResponse => {
             this.courseCategory = successResponse.data; // 将获取的数据保存
           })
@@ -387,24 +403,22 @@ export default {
       this.dialogImageUrl = file.url;
       this.picPreviewVisible = true;
     },
-    // 手动上传
-    manualUpload(file) {
+    // 自动上传
+    async manualUpload(file) {
       const formData = new FormData()
       formData.append('file', file.file);
-        this.$axios
-            .post('/api/imgUpload', formData)
-            .then(successResponse => {
-              // 上传后的url放入变量中保存
-              this.img_url = successResponse.data;
-              console.log(successResponse.data);
-            }).catch(failResponse => {
-          console.log("图片上传失败");
-        })
+      await this.$axios
+          .post('http://112.124.35.32:8081/xiangliban/api/imgUpload', formData)
+          .then(successResponse => {
+            // 上传后的url放入变量中保存
+            this.img_url = successResponse.data;
+            console.log(successResponse.data);
+          }).catch(failResponse => {
+            console.log("图片上传失败");
+          })
     },
     // 执行修改/新增课程
-    executeUpdate(item) {
-      // 执行图片上传
-      this.$refs.upload.submit();
+    async executeUpdate(item) {
       if (item === "update") {
         // 初始化各个字段
         var params = new URLSearchParams();
@@ -421,8 +435,9 @@ export default {
         params.append("courseStartTime", this.alterCourseData.courseStartTime);
         params.append("courseStatus", this.alterCourseData.courseStatus);
         params.append("courseTeacherName", this.alterCourseData.courseTeacherName);
-        this.$axios
-            .post('/education/alterCourseById', params)
+        this.img_url = "";
+        await this.$axios
+            .post('http://112.124.35.32:8083/xiangliban/education/alterCourseById', params)
             .then(successResponse => {
               console.log(successResponse.data);
               this.$message({
@@ -431,8 +446,8 @@ export default {
               });
               this.reload();
             }).catch(failResponse => {
-          this.$message.error('出错了, 课程信息更新失败!');
-        })
+              this.$message.error('出错了, 课程信息更新失败!');
+            })
       } else if (item === "new") {
         // 初始化各个字段
         var params = new URLSearchParams();
@@ -449,8 +464,9 @@ export default {
         params.append("courseStartTime", this.addCourseData.courseStartTime);
         params.append("courseStatus", this.addCourseData.courseStatus);
         params.append("courseTeacherName", this.addCourseData.courseTeacherName);
-        this.$axios
-            .post('/education/addNewCourse', params)
+        this.img_url = "";
+        await this.$axios
+            .post('http://112.124.35.32:8083/xiangliban/education/addNewCourse', params)
             .then(successResponse => {
               console.log(successResponse.data);
               this.$message({
@@ -459,8 +475,8 @@ export default {
               });
               this.reload();
             }).catch(failResponse => {
-          this.$message.error('出错了, 课程信息新增失败!');
-        })
+              this.$message.error('出错了, 课程信息新增失败!');
+            })
       }
     },
     // 删除时二次确认
@@ -473,7 +489,7 @@ export default {
         var params = new URLSearchParams();
         params.append("courseId", item.courseId);
         this.$axios
-            .post('/education/deleteCourseById', params)
+            .post('http://112.124.35.32:8083/xiangliban/education/deleteCourseById', params)
             .then(successResponse => {
               console.log(successResponse.data);
               this.$message({

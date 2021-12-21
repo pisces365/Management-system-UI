@@ -1,3 +1,10 @@
+<!--
+ * @FileDescription: 管理员-课程类别管理页面
+ * @Author: 刘元驰
+ * @Date: 2021
+ * @LastEditors: 刘元驰
+ * @LastEditTime: 12/21/2021
+ -->
 <template>
   <div class="content">
     <div class="md-layout">
@@ -22,7 +29,8 @@
             <section v-if="loading">
               <el-skeleton :rows="6" animated/>
             </section>
-            <md-table v-model="searched" md-sort="courseCategory_id" md-sort-order="asc" md-fixed-header>
+            <md-table v-model="searched" md-sort="courseCategory_id" md-sort-order="asc" md-fixed-header
+                      v-if="errored === false && loading === false && list_empty === false">
               <md-table-toolbar>
                 <div class="md-toolbar-section-start">
                   <h1 class="md-title">课程类别列表</h1>
@@ -53,7 +61,7 @@
               </md-table-row>
             </md-table>
             <br>
-            <div class="md-layout-item md-size-100 text-right">
+            <div class="md-layout-item md-size-100 text-right" v-if="errored === false && loading === false && list_empty === false">
               <el-button type="success" @click="addCourseCategory()">新增课程类别</el-button>
             </div>
           </md-card-content>
@@ -121,18 +129,20 @@ export default {
   // 初始拿到数据
   created() {
     this.$axios
-        .get('/education/selectAllCourses')
+        .get('http://112.124.35.32:8083/xiangliban/education/selectAllCourses')
         .then(successResponse => {
           this.course_list = successResponse.data; // 将获取的数据保存
+          this.list_empty = (this.course_list.length === 0);
         })
         .catch(error => {
           console.log(error) // 记录出错信息
           this.errored = true // 在前端提示用户出错
         })
     this.$axios
-        .get('/education/selectAllCourseCategory')
+        .get('http://112.124.35.32:8083/xiangliban/education/selectAllCourseCategory')
         .then(successResponse => {
           this.courseCategory = successResponse.data; // 将获取的数据保存
+          this.list_empty = (this.courseCategory.length === 0);
           this.searched = successResponse.data;
         })
         .catch(error => {
@@ -145,7 +155,7 @@ export default {
     // 模糊搜索
     searchOnTable() {
       this.searched = searchById(this.courseCategory, this.search)
-      this.searched_empty = (this.searched.isEmpty) ? false : true
+      this.searched_empty = (!this.searched.isEmpty)
     },
     // 点击修改后调用此方法记录选择的条目
     alterSelectedDetails(item) {
@@ -166,7 +176,7 @@ export default {
         params.append("courseCategoryId", this.alterCourseTypeData[0].courseCategoryId);
         params.append("courseCategoryName", this.afterAlterName);
         this.$axios
-            .post('/education/alterCourseCategoryNameById', params)
+            .post('http://112.124.35.32:8083/xiangliban/education/alterCourseCategoryNameById', params)
             .then(successResponse => {
               console.log(successResponse.data);
               this.$message({
@@ -184,7 +194,7 @@ export default {
         var params = new URLSearchParams();
         params.append("courseCategoryName", this.addNewName);
         this.$axios
-            .post('/education/addCourseCategory', params)
+            .post('http://112.124.35.32:8083/xiangliban/education/addCourseCategory', params)
             .then(successResponse => {
               console.log(successResponse.data);
               this.$message({
@@ -208,8 +218,8 @@ export default {
         }
       }
       var alertMessage = "此操作将永久删除该课程类别, 是否继续?";
-      if (count != 0) {
-        alertMessage = "有"+count+"个课程都属于此课程类别, 此操作将永久删除该课程类别, 是否继续?";
+      if (count !== 0) {
+        alertMessage = "有" + count + "个课程都属于此课程类别, 此操作将永久删除该课程类别, 是否继续?";
       }
       this.alterCourseTypeData.push(item);
       this.$confirm(alertMessage, '确认删除', {
@@ -220,7 +230,7 @@ export default {
         var params = new URLSearchParams();
         params.append("courseCategoryId", item.courseCategoryId);
         this.$axios
-            .post('/education/deleteCourseCategory', params)
+            .post('http://112.124.35.32:8083/xiangliban/education/deleteCourseCategory', params)
             .then(successResponse => {
               console.log(successResponse.data);
               this.$message({

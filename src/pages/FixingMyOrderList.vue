@@ -1,9 +1,9 @@
 <!--
  * @FileDescription: 工作人员-本人的维修工单界面
  * @Author: 刘元驰
- * @Date: 2021
+ * @Date: 12/15/2021
  * @LastEditors: 刘元驰
- * @LastEditTime: 12/15/2021
+ * @LastEditTime: 12/21/2021
  -->
 <template>
   <div class="content">
@@ -18,7 +18,7 @@
         </section>
         <!-- 页面获取数据为空的提示 -->
         <section v-if="list_empty">
-          <h4>没有未处理的工单！</h4>
+          <h4>没有工单！</h4>
         </section>
         <!-- 页面正在加载的提示 -->
         <section v-if="loading">
@@ -26,7 +26,7 @@
         </section>
         <!-- 工作人员本人的全部报修工单的表格 -->
         <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="fixOrderId" md-sort-order="asc"
-                  md-fixed-header v-if="errored == false && loading == false">
+                  md-fixed-header v-if="errored === false && loading === false && list_empty === false">
           <md-table-toolbar>
             <div class="md-toolbar-section-start">
               <h1 class="md-title">工单列表</h1>
@@ -51,7 +51,7 @@
             <md-table-cell md-label="状态" md-sort-by="fixStatus">
               <el-tag :type="getLableColor(item.fixStatus)">
                 {{
-                  (item.fixStatus == 1) ? "未处理" : ((item.fixStatus == 2) ? "已派单" : ((item.fixStatus == 3) ? "进行中" : "已完成"))
+                  (item.fixStatus === 1) ? "未处理" : ((item.fixStatus === 2) ? "已派单" : ((item.fixStatus === 3) ? "进行中" : "已完成"))
                 }}
               </el-tag>
             </md-table-cell>
@@ -62,10 +62,10 @@
             </md-table-cell>
             <!-- 根据当前工单状态不同展示不同的可用操作: 出发修理或完成工单 -->
             <md-table-cell md-label="可选操作">
-              <el-button @click="getAvailableDialog(item); getSelectedTimeline(item)" v-if="item.fixStatus != 4"
+              <el-button @click="getAvailableDialog(item); getSelectedTimeline(item)" v-if="item.fixStatus !== 4"
                          type="primary">
                 {{
-                  (item.fixStatus == 1) ? "错误" : ((item.fixStatus == 2) ? "出发修理" : "完成修理")
+                  (item.fixStatus === 1) ? "错误" : ((item.fixStatus === 2) ? "出发修理" : "完成修理")
                 }}
               </el-button>
             </md-table-cell>
@@ -229,12 +229,12 @@
           <h4>我确认我已经完成修理工作, 并愿意承担由于维修失误等产生的后果。</h4>
         </el-card>
         <!-- 步骤1的按钮 -->
-        <div slot="footer" class="dialog-footer" v-if="stepperCurrent == 0">
+        <div slot="footer" class="dialog-footer" v-if="stepperCurrent === 0">
           <el-button @click="endDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="stepperNext">下一步</el-button>
         </div>
         <!-- 步骤2的按钮 -->
-        <div slot="footer" class="dialog-footer" v-if="stepperCurrent == 1">
+        <div slot="footer" class="dialog-footer" v-if="stepperCurrent === 1">
           <el-button @click="stepperPrev">上一步</el-button>
           <el-button type="primary" @click="stepperNext">下一步</el-button>
         </div>
@@ -299,14 +299,14 @@ export default {
   // 页面模板渲染成html前,将查到的全部工单都显示出来
   created() {
     this.$axios
-        .get('/fix/allFixDetailsByWorkerId', {
+        .get('http://112.124.35.32:8083/xiangliban/fix/allFixDetailsByWorkerId', {
           params: {
             fixWorkerId: globalVariable.currentUserId()
           }
         })
         .then(successResponse => {
           this.my_fix_orders = successResponse.data; // 将获取的数据保存
-          this.list_empty = (this.my_fix_orders.isEmpty) ? true : false; // 将获取数据是否为空保存
+          this.list_empty = (this.my_fix_orders.length === 0); // 将获取数据是否为空保存
           this.searched = this.my_fix_orders; // 再次初始化显示的内容
         })
         .catch(error => {
@@ -331,13 +331,13 @@ export default {
     },
     // 自动计算工单状态标签的颜色并返回
     getLableColor(item) {
-      if (item == 1) {
+      if (item === 1) {
         return "danger";
-      } else if (item == 2) {
+      } else if (item === 2) {
         return "";
-      } else if (item == 4) {
+      } else if (item === 4) {
         return "success";
-      } else if (item == 3) {
+      } else if (item === 3) {
         return "warning";
       }
     },
@@ -356,7 +356,7 @@ export default {
     // 点击查看工单详情后, 获取当前工单时间线并保存
     getSelectedTimeline(item) {
       this.$axios
-          .get('/fix/analysisTimeline', {
+          .get('http://112.124.35.32:8083/xiangliban/fix/analysisTimeline', {
             params: {
               fixOrderId: item.fixOrderId
             }
@@ -374,9 +374,9 @@ export default {
     getAvailableDialog(item) {
       this.selected.pop();
       this.selected.push(item);
-      if (item.fixStatus == 2) {
+      if (item.fixStatus === 2) {
         this.startDialogVisible = true;
-      } else if (item.fixStatus == 3) {
+      } else if (item.fixStatus === 3) {
         this.endDialogVisible = true;
       } else {
         this.errored = true;
@@ -395,7 +395,7 @@ export default {
       var params = new URLSearchParams();
       params.append("fixOrderId", selected[0].fixOrderId);
       this.$axios
-          .post('/fix/ongoingOrderByOrderId', params)
+          .post('http://112.124.35.32:8083/xiangliban/fix/ongoingOrderByOrderId', params)
           .then(successResponse => {
             console.log(successResponse.data);
             this.$message({
@@ -414,7 +414,7 @@ export default {
       params.append("fixMaterialCost", this.endingSubmitData.fixMaterialCost);
       params.append("fixOrderId", selected[0].fixOrderId);
       this.$axios
-          .post('/fix/endOrderByOrderIdAndInfo', params)
+          .post('http://112.124.35.32:8083/xiangliban/fix/endOrderByOrderIdAndInfo', params)
           .then(successResponse => {
             console.log(successResponse.data);
             this.$message({

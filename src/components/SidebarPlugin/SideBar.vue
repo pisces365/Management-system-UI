@@ -13,7 +13,7 @@
       </a>
 
       <a
-        href="https://www.creative-tim.com/product/vue-material-dashboard"
+        href="https://gitee.com/yang-jiening/management-system-ui"
         target="_blank"
         class="simple-text logo-normal"
       >

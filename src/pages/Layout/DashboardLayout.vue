@@ -12,16 +12,6 @@
         <md-icon>dashboard</md-icon>
         <p>主页面</p>
       </sidebar-link>
-
-<!--      <sidebar-link to="/user">-->
-<!--        <md-icon>person</md-icon>-->
-<!--        <p>User Profile</p>-->
-<!--      </sidebar-link>-->
-<!--      <sidebar-link to="/table">-->
-<!--        <md-icon>content_paste</md-icon>-->
-<!--        <p>医院后台界面</p>-->
-<!--      </sidebar-link>-->
-
       <sidebar-link to="/HospitalCrowdedSituation">
         <md-icon>medication</md-icon>
         <p>医院拥挤情况</p>
@@ -75,19 +65,6 @@
         <md-icon>directions_bus</md-icon>
         <p>公交信息界面</p>
       </sidebar-link>
-<!--      <sidebar-link to="/shopprofile">-->
-<!--        <md-icon>house</md-icon>-->
-<!--        <p>商店信息</p>-->
-<!--      </sidebar-link>-->
-<!--      <sidebar-link to="/shopdatastatistics">-->
-<!--        <md-icon>dashboard</md-icon>-->
-<!--        <p>商店信息统计</p>-->
-<!--      </sidebar-link>-->
-<!--      <sidebar-link to="/order">-->
-<!--        <md-icon>reorder</md-icon>-->
-<!--        <p>订单处理</p>-->
-<!--      </sidebar-link>-->
-
       <sidebar-link to="/shop">
         <md-icon>storefront</md-icon>
         <p>商店后台界面</p>
@@ -112,11 +89,6 @@
         <md-icon>school</md-icon>
         <p>课程类别管理界面</p>
       </sidebar-link>
-
-<!--      <sidebar-link to="/upgrade" class="active-pro">-->
-<!--        <md-icon>unarchive</md-icon>-->
-<!--        <p>Upgrade to PRO</p>-->
-<!--      </sidebar-link>-->
     </side-bar>
 
     <div class="main-panel">

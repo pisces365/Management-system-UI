@@ -24,7 +24,6 @@
 
           </md-card-content>
         </md-card>
-        <Hospital4></Hospital4>
       </md-tab>
     </md-tabs>
 
@@ -32,14 +31,13 @@
 </template>
 
 <script>
-import { Hospital3,Hospital4 } from "@/components";
+import { Hospital3 } from "@/components";
 
 export default {
   components: {
 
 
     Hospital3,
-    Hospital4
 
   },
 };

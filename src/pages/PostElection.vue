@@ -1,3 +1,10 @@
+<!--
+ * @FileDescription: 工作人员-发布选举界面
+ * @Author: 刘元驰
+ * @Date: 12/15/2021
+ * @LastEditors: 刘元驰
+ * @LastEditTime: 12/21/2021
+ -->
 <template>
   <div class="content">
     <div class="md-layout">
@@ -12,7 +19,6 @@
           <md-card-content>
             <div class="content">
               <div class="md-layout">
-
                 <div
                     class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
                 >
@@ -73,14 +79,15 @@
                                   <md-file v-model="election_cover" accept="image/*" placeholder="上传图片"
                                            @change="tirggerFile($event)"/>
                                 </md-field>
-                                <img style="max-width:300px;max-height:100px;" id="election_default_cover"
+                                <img style="max-width:300px;max-height:150px;" id="election_default_cover"
                                      src="http://112.124.35.32:8081/xiangliban/api/file/2mwh4g5lu4jo.jpg" alt/>
                               </div>
                             </div>
                           </md-card-content>
                         </md-card>
                       </div>
-                      <md-button class="md-raised md-primary" @click="uploadCover(); setDone('first', 'second')">下一步</md-button>
+                      <md-button class="md-raised md-primary" @click="uploadCover(); setDone('first', 'second')">下一步
+                      </md-button>
                     </md-step>
                     <md-step id="second" md-label="第二步：输入参选人信息" md-description="必填" :md-error="secondStepError"
                              :md-done.sync="second">
@@ -99,11 +106,18 @@
                                 <img style="width:150px;height:150px;object-fit: cover" :id=cdd.id
                                      src="http://112.124.35.32:8081/xiangliban/api/file/jp944vtd05qh.png" alt/>
                               </div>
+
+                              <!--WIP-->
                               <div class="md-layout-item md-small-size-100 md-size-50">
-                                <md-field>
-                                  <label>选举人UID</label>
-                                  <md-input v-model="cdd.uid" required></md-input>
-                                </md-field>
+                                <h4>参选人姓名</h4>
+                                <el-select v-model="cdd.uid" placeholder="请选择参选人">
+                                  <el-option
+                                      v-for="item in candidate_list"
+                                      :key="item.uid"
+                                      :label="item.name"
+                                      :value="item.uid">
+                                  </el-option>
+                                </el-select>
                               </div>
                               <div class="md-layout-item md-small-size-100 md-size-50">
                                 <md-field>
@@ -111,24 +125,6 @@
                                            @change="tirggerFile2($event,cdd)"/>
                                 </md-field>
                               </div>
-                              <!--                              <div class="md-layout-item md-small-size-100 md-size-25">-->
-                              <!--                                <md-field>-->
-                              <!--                                  <label>性别</label>-->
-                              <!--                                  <md-input v-model="cdd.candidate_gender" required></md-input>-->
-                              <!--                                </md-field>-->
-                              <!--                              </div>-->
-                              <!--                              <div class="md-layout-item md-small-size-100 md-size-25">-->
-                              <!--                                <md-field>-->
-                              <!--                                  <label>年龄</label>-->
-                              <!--                                  <md-input v-model="cdd.candidate_age" required></md-input>-->
-                              <!--                                </md-field>-->
-                              <!--                              </div>-->
-                              <!--                              <div class="md-layout-item md-small-size-100 md-size-50">-->
-                              <!--                                <md-field>-->
-                              <!--                                  <label>政治面貌</label>-->
-                              <!--                                  <md-input v-model="cdd.candidate_politics" required></md-input>-->
-                              <!--                                </md-field>-->
-                              <!--                              </div>-->
                               <div class="md-layout-item md-small-size-100 md-size-50">
                                 <md-field>
                                   <label>竞选职务</label>
@@ -189,9 +185,18 @@ export default {
   },
   created() {
     this.$axios
-        .get('/vote/allVoteType')
+        .get('http://112.124.35.32:8081/xiangliban/vote/allVoteType')
         .then(successResponse => {
           this.type_list = successResponse.data; // 将获取的数据保存
+        })
+        .catch(error => {
+          console.log(error) // 记录出错信息
+          this.errored = true // 在前端提示用户出错
+        })
+    this.$axios
+        .get('http://112.124.35.32:8083/xiangliban/user/selectAllVillagers')
+        .then(successResponse => {
+          this.candidate_list = successResponse.data; // 将获取的数据保存
         })
         .catch(error => {
           console.log(error) // 记录出错信息
@@ -214,8 +219,9 @@ export default {
       department: null, // 新增选举部门
       election_time: null,  // 新增选举其实时间
       intro: null,  // 新增选举描述
-      img: null,  // 新增选举封面
+      img: "http://112.124.35.32:8081/xiangliban/api/file/2mwh4g5lu4jo.jpg",  // 新增选举封面
       //-----------------------------------------
+      candidate_list: [], // 可选的选举人村民列表
       img_submit: [], // 待上传选举人图片列表
       type_list: [],  // 获取的所有选举类别
       new_id: 0,
@@ -256,17 +262,17 @@ export default {
     },
     // 在第一步点击下一步后, 上传封面图片
     uploadCover() {
-      var checkdate = this.election_time;
       var formData = new FormData();
       formData.append('file', this.img_submit[0]);
       this.$axios
-          .post('/api/imgUpload', formData)
+          .post('http://112.124.35.32:8081/xiangliban/api/imgUpload', formData)
           .then(successResponse => {
             this.img = successResponse.data;
             console.log(this.img);
           }).catch(failResponse => {
         console.log("上传失败");
       })
+      this.img_submit.pop();
     },
     tirggerFile2(event, cdd) {
       var file = event.target.files;
@@ -293,7 +299,7 @@ export default {
         "type": _this.election_type
       }
       await this.$axios
-          .post('/vote/addVoteInfo', jsonData)
+          .post('http://112.124.35.32:8081/xiangliban/vote/addVoteInfo', jsonData)
           .then(successResponse => {
             this_return = successResponse.data;
             console.log("basic election added");
@@ -308,7 +314,7 @@ export default {
         var formData = new FormData();
         formData.append('file', this.img_submit[i]);
         await this.$axios
-            .post('/api/imgUpload', formData)
+            .post('http://112.124.35.32:8081/xiangliban/api/imgUpload', formData)
             .then(successResponse => {
               this.candidates[i].img = successResponse.data;
               console.log("upload single done");
@@ -339,7 +345,7 @@ export default {
         this.candidate_submit.push(jsonData);
       }
       await this.$axios
-          .post('/vote/addVotePersons', this.candidate_submit)
+          .post('http://112.124.35.32:8081/xiangliban/vote/addVotePersons', this.candidate_submit)
           .then(successResponse => {
             console.log(successResponse.data);
             this.$message({
@@ -354,10 +360,4 @@ export default {
   },
 }
 
-
 </script>
-<style>
-.md-tabs.md-theme-default.md-success .md-tabs-navigation {
-  background-color: #0d47a1;
-}
-</style>

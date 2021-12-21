@@ -1,3 +1,10 @@
+<!--
+ * @FileDescription: 工作人员-已完成工单界面
+ * @Author: 刘元驰
+ * @Date: 12/15/2021
+ * @LastEditors: 刘元驰
+ * @LastEditTime: 12/21/2021
+ -->
 <template>
   <div class="content">
     <div class="md-layout">
@@ -16,14 +23,14 @@
             </section>
             <!-- 页面获取数据为空的提示 -->
             <section v-if="list_empty">
-              <h4>课程列表为空</h4>
+              <h4>工单列表为空</h4>
             </section>
             <!-- 页面正在加载的提示 -->
             <section v-if="loading">
               <el-skeleton :rows="6" animated/>
             </section>
             <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="delivery_id"
-                      md-sort-order="asc" md-fixed-header>
+                      md-sort-order="asc" md-fixed-header v-if="errored === false && loading === false && list_empty === false">
               <md-table-toolbar>
                 <div class="md-toolbar-section-start">
                   <h1 class="md-title">工单列表</h1>
@@ -194,7 +201,7 @@ export default {
   },
   created() {
     this.$axios
-        .get('/express/selectMyFinishedOrders', {
+        .get('http://112.124.35.32:8081/xiangliban/express/selectMyFinishedOrders', {
           params: {
             uid: globalVariable.currentUserId()
           }
@@ -205,7 +212,7 @@ export default {
             var formedDate = this.delivery_list[index].deliveryEta.substring(0, 10) + " " + this.delivery_list[index].deliveryEta.substring(11, 19);
             this.delivery_list[index].deliveryEta = formedDate;
           }
-          this.list_empty = (this.delivery_list.isEmpty) ? true : false; // 将获取数据是否为空保存
+          this.list_empty = (this.delivery_list.length === 0); // 将获取数据是否为空保存
           this.searched = this.delivery_list; // 再次初始化显示的内容
         })
         .catch(error => {
@@ -217,7 +224,7 @@ export default {
   methods: {
     searchOnTable() {
       this.searched = searchById(this.delivery_list, this.search);
-      this.searched_empty = (this.searched.isEmpty) ? false : true
+      this.searched_empty = (!this.searched.isEmpty)
     },
     getSelectedDetails(item) {
       this.selected_order.pop();

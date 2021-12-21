@@ -1,3 +1,10 @@
+<!--
+ * @FileDescription: 管理员-选举类别管理界面
+ * @Author: 刘元驰
+ * @Date: 12/15/2021
+ * @LastEditors: 刘元驰
+ * @LastEditTime: 12/21/2021
+ -->
 <template>
   <div class="content">
     <div class="md-layout">
@@ -15,7 +22,7 @@
             </section>
             <!-- 页面获取数据为空的提示 -->
             <section v-if="list_empty">
-              <h4>课程列表为空</h4>
+              <h4>选举类别列表为空</h4>
             </section>
             <!-- 页面正在加载的提示 -->
             <section v-if="loading">
@@ -122,7 +129,7 @@ export default {
   },
   created() {
     this.$axios
-        .get('/vote/allVoteType')
+        .get('http://112.124.35.32:8081/xiangliban/vote/allVoteType')
         .then(successResponse => {
           this.type_list = successResponse.data; // 将获取的数据保存
           this.list_empty = (this.type_list.isEmpty) ? true : false; // 将获取数据是否为空保存
@@ -150,7 +157,7 @@ export default {
       params.append("id", this.selected_type_id);
       params.append("name", this.selected_type_name);
       this.$axios
-          .post('/vote/updateVoteType', params)
+          .post('http://112.124.35.32:8081/xiangliban/vote/updateVoteType', params)
           .then(successResponse => {
             console.log(successResponse.data);
             this.$message({
@@ -168,7 +175,7 @@ export default {
       var params = new URLSearchParams();
       params.append("name", this.add_new_name);
       this.$axios
-          .post('/vote/addVoteType', params)
+          .post('http://112.124.35.32:8081/xiangliban/vote/addVoteType', params)
           .then(successResponse => {
             console.log(successResponse.data);
             this.$message({
@@ -190,7 +197,7 @@ export default {
         var params = new URLSearchParams();
         params.append("id", item.id);
         this.$axios
-            .post('/vote/deleteVoteType', params)
+            .post('http://112.124.35.32:8081/xiangliban/vote/deleteVoteType', params)
             .then(successResponse => {
               console.log(successResponse.data);
               this.$message({

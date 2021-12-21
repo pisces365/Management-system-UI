@@ -40,8 +40,8 @@ import qs from 'qs';
 // local url
 // axios.defaults.baseURL = 'http://localhost:8081/xiangliban';
 // server url
-// axios.defaults.baseURL = 'http://112.124.35.32:8083/xiangliban';
-axios.defaults.baseURL = 'http://112.124.35.32:8081/xiangliban';
+// axios.defaults.baseURL = 'http://112.124.35.32:8081/xiangliban';
+axios.defaults.baseURL = 'http://112.124.35.32:8083/xiangliban';
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 Vue.prototype.$axios = axios;
 Vue.prototype.$qs = qs;

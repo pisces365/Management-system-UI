@@ -25,8 +25,6 @@ import Hospital1 from "./Hospital/Hospital1.vue";
 import Hospital2 from "./Hospital/Hospital2.vue";
 import Hospital3 from "./Hospital/Hospital3.vue";
 
-//fix
-import Fix2 from "./Fix/Fix2.vue";
 
 export {
     ChartCard,
@@ -46,5 +44,4 @@ export {
     Hospital1,
     Hospital2,
     Hospital3,
-    Fix2,
 };
