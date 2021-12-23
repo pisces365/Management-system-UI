@@ -16,10 +16,10 @@
         </md-button>
 
         <div class="md-collapse">
+
           <md-list>
-            <md-list-item href="#/">
+            <md-list-item href="#/login">
               <i class="material-icons">logout</i>
-<!--              <p class="hidden-lg hidden-md">Dashboard</p>-->
             </md-list-item>
             <md-list-item href="#/user">
               <i class="material-icons">person</i>

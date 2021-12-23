@@ -1,5 +1,5 @@
 <template>
-<!--  <router-view></router-view>-->
+  <!--  <router-view></router-view>-->
   <div id="app">
     <router-view v-if="isReload"/>
   </div>
@@ -28,3 +28,8 @@ export default {
   }
 };
 </script>
+<!--<style>-->
+<!--.md-table {-->
+<!--  display: table-cell !important;-->
+<!--}-->
+<!--</style>-->

@@ -8,6 +8,10 @@ import NavTabsTable from "./Tables/NavTabsTable.vue";
 import OrderedTable from "./Tables/OrderedTable.vue";
 import SimpleTable from "./Tables/SimpleTable.vue";
 
+//Hospital
+import Hospital1 from "./Hospital/Hospital1.vue";
+import Hospital2 from "./Hospital/Hospital2.vue";
+import Hospital3 from "./Hospital/Hospital3.vue";
 export {
     ChartCard,
     NavTabsCard,
@@ -15,4 +19,7 @@ export {
     NavTabsTable,
     OrderedTable,
     SimpleTable,
+    Hospital1,
+    Hospital2,
+    Hospital3,
 };

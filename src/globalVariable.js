@@ -14,4 +14,10 @@ export default {
     currentUserStatus: function (){
         return currentUserStatus;
     },
+    setId(item){
+        currentUserId = item;
+    },
+    setAuthorization(item){
+        currentUserAuthorization = item;
+    },
 };
