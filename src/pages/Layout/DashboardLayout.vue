@@ -8,83 +8,62 @@
     >
       <mobile-menu slot="content"></mobile-menu>
 
-      <sidebar-link to="/dashboard">
-        <md-icon>dashboard</md-icon>
-        <p>Dashboard</p>
-      </sidebar-link>
-
-<!--      <sidebar-link to="/user">-->
-<!--        <md-icon>person</md-icon>-->
-<!--        <p>User Profile</p>-->
-<!--      </sidebar-link>-->
-<!--      <sidebar-link to="/table">-->
-<!--        <md-icon>content_paste</md-icon>-->
-<!--        <p>医院后台界面</p>-->
+<!--      <sidebar-link to="/dashboard" v-if="quanxian === 0">-->
+<!--        <md-icon>dashboard</md-icon>-->
+<!--        <p>Dashboard</p>-->
 <!--      </sidebar-link>-->
 
-      <sidebar-link to="/HospitalCrowdedSituation">
+      <sidebar-link to="/HospitalCrowdedSituation" v-if="quanxian === 0">
         <md-icon>content_paste</md-icon>
         <p>医院拥挤情况</p>
       </sidebar-link>
-
-      <sidebar-link to="/HospitalCrowdedSituation2">
-        <md-icon>content_paste</md-icon>
-        <p>医院拥挤情况（管理人员）</p>
-      </sidebar-link>
-      <sidebar-link to="/CopeMatter">
-        <md-icon>content_paste</md-icon>
-        <p>医生业务处理</p>
-      </sidebar-link>
-
-
-      <sidebar-link to="/icons">
-        <md-icon>bubble_chart</md-icon>
-        <p>餐馆后台界面</p>
-      </sidebar-link>
-
-      <sidebar-link to="/maps">
-        <md-icon>location_on</md-icon>
-        <p>民宿后台界面</p>
-      </sidebar-link>
-
-      <sidebar-link to="/election">
-        <md-icon>location_on</md-icon>
-        <p>选举后台界面</p>
-      </sidebar-link>
-
-      <sidebar-link to="/fix">
-        <md-icon>location_on</md-icon>
-        <p>报修后台界面</p>
-      </sidebar-link>
-      <sidebar-link to="/Amap">
+      <sidebar-link to="/buslinelist">
         <md-icon>location_on</md-icon>
         <p>公交信息界面</p>
       </sidebar-link>
-<!--      <sidebar-link to="/shopprofile">-->
-<!--        <md-icon>house</md-icon>-->
-<!--        <p>商店信息</p>-->
-<!--      </sidebar-link>-->
-<!--      <sidebar-link to="/shopdatastatistics">-->
-<!--        <md-icon>dashboard</md-icon>-->
-<!--        <p>商店信息统计</p>-->
-<!--      </sidebar-link>-->
-<!--      <sidebar-link to="/order">-->
-<!--        <md-icon>reorder</md-icon>-->
-<!--        <p>订单处理</p>-->
-<!--      </sidebar-link>-->
 
-      <sidebar-link to="/shop">
-        <md-icon>reorder</md-icon>
-        <p>商店后台界面</p>
+      <sidebar-link to="/allstoplist">
+        <md-icon>location_on</md-icon>
+        <p>公交车站信息界面</p>
+      </sidebar-link>
+      <sidebar-link to="/HospitalCrowdedSituation2" v-if="quanxian === 0">
+        <md-icon>content_paste</md-icon>
+        <p>医院拥挤情况（管理人员）</p>
+      </sidebar-link>
+      <sidebar-link to="/CopeMatter" v-if="quanxian === 0">
+        <md-icon>content_paste</md-icon>
+        <p>医生业务处理</p>
+      </sidebar-link>
+      <sidebar-link to="/RentHouseInformation" v-if=" quanxian ===0">
+        <md-icon>content_paste</md-icon>
+        <p>租房信息界面</p>
       </sidebar-link>
 
-      <sidebar-link to="/deliverys">
+      <sidebar-link to="/HotelAppointment" v-if="quanxian === 1|| quanxian ===0">
         <md-icon>content_paste</md-icon>
-        <p>快递工单界面</p>
+        <p>民宿预约处理</p>
       </sidebar-link>
-      <sidebar-link to="/courses">
+      <sidebar-link to="/HotelRoomManage" v-if="quanxian === 1|| quanxian ===0">
         <md-icon>content_paste</md-icon>
-        <p>课程管理界面</p>
+        <p>民宿房源管理</p>
+      </sidebar-link>
+      <sidebar-link to="/HotelCope"  v-if="quanxian === 1|| quanxian ===0">
+        <md-icon>content_paste</md-icon>
+        <p>民宿订单处理</p>
+      </sidebar-link>
+
+      <sidebar-link to="/RestAppointment" v-if="quanxian === 2|| quanxian ===0">
+        <md-icon>bubble_chart</md-icon>
+        <p>餐馆预约界面</p>
+      </sidebar-link>
+
+      <sidebar-link to="/RestDue" v-if="quanxian === 2|| quanxian ===0">
+        <md-icon>bubble_chart</md-icon>
+        <p>餐馆结账</p>
+      </sidebar-link>
+      <sidebar-link to="/RestBusiness" v-if="quanxian === 2|| quanxian ===0">
+        <md-icon>bubble_chart</md-icon>
+        <p>餐馆营业额</p>
       </sidebar-link>
 
 <!--      <sidebar-link to="/upgrade" class="active-pro">-->
@@ -115,6 +94,7 @@ import ContentFooter from "./ContentFooter.vue";
 import DashboardContent from "./Content.vue";
 import MobileMenu from "@/pages/Layout/MobileMenu.vue";
 import FixedPlugin from "./Extra/FixedPlugin.vue";
+import globalVariable from "../../globalVariable.js";
 
 export default {
   components: {
@@ -128,7 +108,14 @@ export default {
     return {
       sidebarBackground: "green",
       sidebarBackgroundImage: require("@/assets/img/sidebar-2.jpg"),
+      quanxian: '',
     };
   },
+  methods:{
+
+  },
+  created() {
+    this.quanxian = globalVariable.currentUserAuthorization()
+  }
 };
 </script>

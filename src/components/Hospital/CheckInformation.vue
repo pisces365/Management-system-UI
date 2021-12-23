@@ -10,27 +10,27 @@
         <form>
           <md-field>
             <label>姓名</label>
-            <md-input v-model="Name" md-counter="30"></md-input>
+            <md-input v-model="villagers_name" md-counter="30" disabled></md-input>
           </md-field>
 
           <md-field>
             <label>身份证号码</label>
-            <md-input v-model="IDnum" maxlength="30"></md-input>
+            <md-input v-model="villagers_id" maxlength="18" disabled></md-input>
           </md-field>
 
           <md-field :md-counter="false">
             <label>联系方式</label>
-            <md-input v-model="Telephone" maxlength="10"></md-input>
+            <md-input v-model="villagers_phone" maxlength="11" disabled></md-input>
           </md-field>
 
           <md-field>
             <label>具体住址</label>
-            <md-textarea v-model="Address" md-autogrow md-counter="200"></md-textarea>
+            <md-textarea v-model="villagers_location" md-autogrow md-counter="50" disabled></md-textarea>
           </md-field>
 
           <md-field>
             <label>病情描述：</label>
-            <md-textarea v-model="textarea" md-counter="80"></md-textarea>
+            <md-textarea v-model="villagers_disease" md-counter="200" disabled></md-textarea>
           </md-field>
 
         </form>
@@ -51,21 +51,63 @@ export default {
       default: "green",
     },
   },
+  beforeCreate() {
+    this.$axios
+            .get('http://112.124.35.32:8085/xiangliban/doctorSelectOneOut',{params:{"hospital_out_id":this.$route.params.hospital_out_id}})
+            .then(successResponse => {
+              console.log(successResponse.data);
+              this.villagers_name = successResponse.data.villagers_name;
+              this.villagers_id = successResponse.data.villagers_id;
+              this.villagers_phone = successResponse.data.villagers_phone;
+              this.villagers_location = successResponse.data.villagers_location;
+              this.villagers_disease = successResponse.data.villagers_disease;
+            })
+            .catch(error => {
+              console.log(error) // 记录出错信息
+            })
+    this.$axios
+            .get('http://112.124.35.32:8085/xiangliban/selectDoctorIdByName',{params:{"doctorname":this.$route.params.doctorname}})
+            .then(successResponse => {
+              console.log(successResponse.data);
+              this.doctorid = successResponse.data;
+
+            })
+            .catch(error => {
+              console.log(error) // 记录出错信息
+            })
+  },
   data() {
     return {
-      Name: "施志豪",
-      IDnum: "110",
-      Telephone: "99911",
-      Address: "浙江工业大学屏峰校区西十三",
-      textarea: "连打了一千个小时的代码而晕倒过去了"
+      doctorid: '',
+      villagers_name: '',
+      villagers_id: '',
+      villagers_phone: '',
+      villagers_location: '',
+      villagers_disease: '',
+      hospital_out_id: this.$route.params.hospital_out_id,
+      doctorname: this.$route.params.doctorname,
+      department: this.$route.params.department
     };
   },
   methods:{
     accept(){
-      window.alert('新增已提交')
+      var param = new URLSearchParams();
+      param.append("doctorid",this.doctorid);
+      param.append("hospital_out_id",this.hospital_out_id);
+      console.log(this.doctorid)
+      console.log(this.hospital_out_id)
+      this.$axios
+              .post("http://112.124.35.32:8085/xiangliban/updateOutSituation",param)
+              .then(successResponse => {
+                window.alert('已成功受诊')
+                console.log(successResponse.data)
+              })
+              .catch(error => {
+                console.log(error) // 记录出错信息
+              })
     },
     goBack(){
-      this.$router.go(-1);
+      this.$router.push({name:"AppointmentDetail",params:{doctorname:this.doctorname,department:this.department}});
     },
   },
 };

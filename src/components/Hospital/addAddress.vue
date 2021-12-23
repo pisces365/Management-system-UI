@@ -10,27 +10,14 @@
         <div class="md-layout">
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
-              <label>编号</label>
-              <md-input v-model="course_id"></md-input>
+              <label>科室</label>
+              <md-input v-model="hospital_department"></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-small-size-100 md-size-33">
             <md-field>
               <label>地名</label>
-              <md-input v-model="course_name" maxlength="10" required></md-input>
-            </md-field>
-          </div>
-
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>等待人数</label>
-              <md-input v-model="course_waitnum"></md-input>
-            </md-field>
-          </div>
-          <div class="md-layout-item md-small-size-100 md-size-33">
-            <md-field>
-              <label>拥挤情况</label>
-              <md-input v-model="course_crowd"></md-input>
+              <md-input v-model="hospital_location_name" maxlength="10" required></md-input>
             </md-field>
           </div>
           <div class="md-layout-item md-size-100 text-right">
@@ -54,18 +41,24 @@ export default {
   },
   data() {
     return {
-      course_id: "55",
-      course_name: "四楼儿科诊室",
-      course_waitnum:"10",
-      course_crowd:"良好"
+      hospital_department:'',
+      hospital_location_name:''
     };
   },
   methods:{
-    addAddress(){
+    addAddress() {
+      var param = new URLSearchParams();
+      param.append("hospital_department",this.hospital_department);
+      param.append("hospital_location_name",this.hospital_location_name);
+      this.$axios
+              .post('http://112.124.35.32:8085/xiangliban/insertNewLocation',param)
+              .catch(error => {
+                console.log(error) // 记录出错信息
+              })
       window.alert('新增已提交')
     },
     goBack(){
-      this.$router.go(-1);
+      this.$router.push("HospitalCrowdedSituation2");
     },
   },
 };

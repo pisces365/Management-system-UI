@@ -13,15 +13,17 @@
 
       <md-table-empty-state
           md-label="No users found"
-          :md-description="`No user found for this '${search}' query. Try a different search term or create a new user.`">
+          :md-description="`No user found for this '${search}' query. Try a different search term or create a new user.`"
+          v-show="user_empty"
+      >
         <md-button class="md-primary md-raised" @click="newUser">Create New User</md-button>
       </md-table-empty-state>
 
       <md-table-row slot="md-table-row" slot-scope="{ item }">
-        <md-table-cell md-label="ID" md-sort-by="id" >{{ item.id }}</md-table-cell>
-        <md-table-cell md-label="Name（地名）" md-sort-by="name">{{ item.name }}</md-table-cell>
-        <md-table-cell md-label="Wait number（等待人数）">{{ item.number }}</md-table-cell>
-        <md-table-cell md-label="CrowdedSituation（拥挤情况）">{{ item.situation }}</md-table-cell>
+        <md-table-cell md-label="ID" md-sort-by="id" >{{ item.hospital_location_id }}</md-table-cell>
+        <md-table-cell md-label="Name（地名）" md-sort-by="name">{{ item.hospital_location_name }}</md-table-cell>
+        <md-table-cell md-label="Wait number（等待人数）">{{ item.wait_number }}</md-table-cell>
+        <md-table-cell md-label="CrowdedSituation（拥挤情况）">{{ item.crowded_situation }}</md-table-cell>
       </md-table-row>
     </md-table>
     <div class="md-layout-item md-size-100 text-right">
@@ -39,7 +41,7 @@ const toLower = text => {
 
 const searchByName = (items, term) => {
   if (term) {
-    return items.filter(item => toLower(item.name).includes(toLower(term)))
+    return items.filter(item => toLower(item.hospital_location_name).includes(toLower(term)))
   }
 
   return items
@@ -50,75 +52,28 @@ export default {
   data: () => ({
     search: null,
     searched: [],
-    users: [
-      {
-        id: 1,
-        name: "一楼内科诊室",
-        number: "20",
-        situation:"正常",
-      },
-      {
-        id: 2,
-        name: "二楼外科诊室",
-        number: "05",
-        situation:"空闲",
-      },
-      {
-        id: 3,
-        name: "二楼皮肤科诊室",
-        number: "08",
-        situation:"空闲",
-      },
-      {
-        id: 4,
-        name: "三楼肛肠科诊室",
-        number: "10",
-        situation:"良好",
-      },
-      {
-        id :5,
-        name: "四楼儿科诊室",
-        number: "36",
-        situation:"拥挤",
-      },
-      {
-        id :6,
-        name: "五楼妇科诊室",
-        number: "23",
-        situation:"良好",
-      },
-      {
-        id :7,
-        name: "一楼大厅",
-        number: "55",
-        situation:"拥挤",
-      },
-      {
-        id :8,
-        name: "一楼点滴室",
-        number: "44",
-        situation:"良好",
-      },
-      {
-        id :9,
-        name: "七楼住院部走廊",
-        number: "23",
-        situation:"良好",
-      },
-      {
-        id :10,
-        name: "一楼取药房",
-        number: "17",
-        situation:"良好",
-      },
-    ],
+    user_empty: false,
+   users: []
   }),
+  beforeCreate() {
+    this.$axios
+            .get('http://112.124.35.32:8085/xiangliban/selectHospitalLocationPersons')
+            .then(successResponse => {
+              console.log(successResponse.data);
+              this.users = successResponse.data; // 将获取的数据保存
+              this.searched = successResponse.data;
+            })
+            .catch(error => {
+              console.log(error) // 记录出错信息
+            })
+  },
   methods: {
     newUser () {
       window.alert('Noop')
     },
     searchOnTable () {
-      this.searched = searchByName(this.users, this.search)
+      this.searched = searchByName(this.users, this.search);
+      this.user_empty = (this.searched.length == 0) ? false : true;
     },
       addAddress () {
         this.$router.push('add-address')

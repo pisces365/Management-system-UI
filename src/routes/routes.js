@@ -1,48 +1,85 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
-
-import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
-import TableList from "@/pages/Hospital.vue";
-import Icons from "@/pages/Restaurant.vue";
-import Maps from "@/pages/Hotel.vue";
 import CopeMatter from "@/pages/CopeMatter.vue";
 import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
-import test from "@/pages/test.vue";
-import election from "@/pages/election.vue";
-import fix from "@/pages/fix.vue";
-import Amap from"@/pages/Amap.vue";
-import Order from "@/pages/Order.vue";
-import ShopProfile from "@/pages/ShopProfile.vue";
-import ShopDataStatistics from "@/pages/ShopDataStatistics.vue";
-import OrderPreviewPage from "@/pages/OrderPreviewPage.vue";
-import OrderDetailPage from "@/pages/OrderDetailPage.vue";
-import PackageDelivery from "@/pages/PackageDelivery.vue";
-import CoursesManage from "@/pages/CoursesManage.vue";
-import CourseDetails from "../pages/Layout/CourseManagePages/CourseDetails";
-import AddCourse from "../pages/Layout/CourseManagePages/AddCourse";
-import ElectionDetailPage from "../pages/ElectionDetailPage";
-import shop from "@/pages/Shop.vue";
-import HospitalCrowdedSituation from "../pages/HospitalCrowdedSituation.vue";
-import HospitalCrowdedSituation2 from "../pages/HospitalCrowdedSituation2.vue";
+import HospitalCrowdedSituation from "../pages/HospitalPage/HospitalCrowdedSituation";
+import HospitalCrowdedSituation2 from "../pages/HospitalPage/HospitalCrowdedSituation2.vue";
 import addAddress from "../components/Hospital/addAddress.vue";
 import checkInf from "../components/Hospital/checkInf.vue";
 import CheckInformation from "../components/Hospital/CheckInformation.vue";
 import AskOnlineDetail from "../components/Hospital/AskOnlineDetail.vue";
 import AppointmentDetail from "../components/Hospital/AppointmentDetail.vue";
 import CrowdChart from "../components/Hospital/CrowdChart.vue";
+import HotelAppointment from "../pages/HotelPage/HotelAppointment.vue";
+import HotelRoomManage from "../pages/HotelPage/HotelRoomManage.vue";
+import HotelCope from "../pages/HotelPage/HotelCope.vue";
+import RestAppointment from "../pages/RestaurantPage/RestAppointment.vue";
+import RestDue from "../pages/RestaurantPage/RestDue.vue";
+import RestBusiness from "../pages/RestaurantPage/RestBusiness.vue";
+import Login from "../pages/Login.vue";
+import RentHouseInformation from "../pages/HouseRental/RentHouseInformation.vue";
+import Dashboard from "../pages/Dashboard.vue";
+import BusStopList from "../pages/BusStopList.vue";
+import BusLineList from "../pages/BusLineList.vue";
+import BusLineMapC from "../pages/BusLineMapC.vue";
+import AllBusStopList from "../pages/AllBusStopList.vue";
 
 
 const routes = [
   {
+    path: "/login",
+    name: "login",
+    component: Login,
+  },
+  {
+    // 打开项目时的默认界面
     path: "/",
-    component: DashboardLayout,
-    redirect: "/dashboard",
-
+    redirect: 'login',
+    component: DashboardLayout ,
+    meta:{
+      requireAuth: true
+    },
     children: [
       {
         path: "dashboard",
         name: "Dashboard",
-        component: Dashboard,
+        component:Dashboard,
+      },
+      {
+        path: "RentHouseInformation",
+        name: "RentHouseInformation",
+        component:RentHouseInformation,
+      },
+      {
+        path: "RestAppointment",
+        name: "RestAppointment",
+        component:RestAppointment,
+      },
+      {
+        path: "RestDue",
+        name: "RestDue",
+        component:RestDue,
+      },
+
+      {
+        path: "RestBusiness",
+        name: "RestBusiness",
+        component:RestBusiness,
+      },
+      {
+        path: "HotelAppointment",
+        name: "HotelAppointment",
+        component: HotelAppointment,
+      },
+      {
+        path: "HotelRoomManage",
+        name: "HotelRoomManage",
+        component: HotelRoomManage,
+      },
+      {
+        path: "HotelCope",
+        name: "HotelCope",
+        component: HotelCope,
       },
       {
         path: "AskOnlineDetail",
@@ -70,11 +107,6 @@ const routes = [
         component: CheckInformation,
       },
       {
-        path: "order-preview",
-        name: "订单预览",
-        component: OrderPreviewPage,
-      },
-      {
         path: "HospitalCrowdedSituation",
         name: "医院拥挤情况",
         component: HospitalCrowdedSituation,
@@ -90,94 +122,9 @@ const routes = [
         component: addAddress,
       },
       {
-        path: "order-detail",
-        name: "订单详情",
-        component: OrderDetailPage,
-      },
-      {
-        path: "deliverys",
-        name: "工单界面",
-        component: PackageDelivery,
-      },
-      {
-        path: "shop",
-        name: "shop",
-        component: shop,
-      },
-      {
-        path: "courses",
-        name: "课程管理",
-        component: CoursesManage,
-      },
-      {
-        path: "course-details",
-        name: "课程详情",
-        component: CourseDetails,
-      },
-      {
-        path: "add-course",
-        name: "增加课程",
-        component: AddCourse,
-      },
-      {
-        path: "election-details-page",
-        name: "选举详情",
-        component: ElectionDetailPage,
-      },
-      {
-        path: "order",
-        name: "订单列表",
-        component: Order,
-      },
-      {
-        path: "shopprofile",
-        name: "商店简介",
-        component: ShopProfile,
-      },
-      {
-        path:"shopdatastatistics",
-        name:"商店数据统计",
-        component: ShopDataStatistics,
-      },
-      {
-        path:"Amap",
-        name:"Amap",
-        component: Amap,
-      },
-      {
-        path: "fix",
-        name: "保修界面",
-        component: fix,
-      },
-      {
-        path: "election",
-        name: "选举界面",
-        component: election,
-      },
-      {
         path: "user",
         name: "User Profile",
         component: UserProfile,
-      },
-      {
-        path: "table",
-        name: "医院后台" ,
-        component: TableList,
-
-      },
-
-      {
-        path: "icons",
-        name: "餐馆后台" ,
-        component: Icons,
-      },
-      {
-        path: "maps",
-        name: "民宿后台",
-        meta: {
-          hideFooter: true,
-        },
-        component: Maps,
       },
       {
         path: "CopeMatter",
@@ -191,12 +138,29 @@ const routes = [
         component: UpgradeToPRO,
       },
       {
-        path: "test",
-        name: "test",
-        component: test,
+        path: "buslinemapc",
+        name:"公交地图",
+        component: BusLineMapC,
       },
+      {
+        path: "busstoplist",
+        name:"车站列表",
+        component: BusStopList,
+      },
+      {
+        path: "allstoplist",
+        name:"车站管理",
+        component: AllBusStopList,
+      },
+      {
+        path: "buslinelist",
+        name:"公交路线",
+        component: BusLineList,
+      },
+
     ],
   },
+
 ];
 
 export default routes;

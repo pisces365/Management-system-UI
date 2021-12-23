@@ -10,7 +10,6 @@
         <Hospital3></Hospital3>
       </md-card-content>
     </md-card>
-
   </div>
 </template>
 

@@ -47,7 +47,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue MD",
+      default: "乡里办乡里办乡里办",
     },
     sidebarBackgroundImage: {
       type: String,

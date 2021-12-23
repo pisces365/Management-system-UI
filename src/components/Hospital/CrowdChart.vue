@@ -10,29 +10,29 @@
             <p class="category">在这可以看到上一周每一天有多少人次访问该医院</p>
           </md-card-header>
           <md-card-content>
-        <chart-card
-            :chart-data="dailySalesChart.data"
-            :chart-options="dailySalesChart.options"
-            :chart-type="'Line'"
-            data-background-color="blue"
-        >
-          <template slot="content">
-<!--            <h4 class="title">Daily Sales</h4>-->
-<!--            <p class="category">-->
-<!--              <span class="text-success">-->
-<!--                <i class="fas fa-long-arrow-alt-up"></i> 55%-->
-<!--              </span>-->
-<!--              increase in today sales.-->
-<!--            </p>-->
-          </template>
+            <chart-card
+                :chart-data="dailySalesChart.data"
+                :chart-options="dailySalesChart.options"
+                :chart-type="'Line'"
+                data-background-color="blue"
+            >
+              <template slot="content">
+                <!--            <h4 class="title">Daily Sales</h4>-->
+                <!--            <p class="category">-->
+                <!--              <span class="text-success">-->
+                <!--                <i class="fas fa-long-arrow-alt-up"></i> 55%-->
+                <!--              </span>-->
+                <!--              increase in today sales.-->
+                <!--            </p>-->
+              </template>
 
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              updated 4 minutes ago
-            </div>
-          </template>
-        </chart-card>
+              <template slot="footer">
+                <div class="stats">
+                  <md-icon>access_time</md-icon>
+                  updated 4 minutes ago
+                </div>
+              </template>
+            </chart-card>
           </md-card-content>
         </md-card>
       </div>
@@ -46,25 +46,25 @@
             <p class="category">在这可以看到上一周访问各科室的人数总和</p>
           </md-card-header>
           <md-card-content>
-        <chart-card
-            :chart-data="emailsSubscriptionChart.data"
-            :chart-options="emailsSubscriptionChart.options"
-            :chart-responsive-options="emailsSubscriptionChart.responsiveOptions"
-            :chart-type="'Bar'"
-            data-background-color="red"
-        >
-<!--          <template slot="content">-->
-<!--            <h4 class="title">Email Subscription</h4>-->
-<!--            <p class="category">Last Campaign Performance</p>-->
-<!--          </template>-->
+            <chart-card
+                :chart-data="emailsSubscriptionChart.data"
+                :chart-options="emailsSubscriptionChart.options"
+                :chart-responsive-options="emailsSubscriptionChart.responsiveOptions"
+                :chart-type="'Bar'"
+                data-background-color="red"
+            >
+              <!--          <template slot="content">-->
+              <!--            <h4 class="title">Email Subscription</h4>-->
+              <!--            <p class="category">Last Campaign Performance</p>-->
+              <!--          </template>-->
 
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              updated 10 days ago
-            </div>
-          </template>
-        </chart-card>
+              <template slot="footer">
+                <div class="stats">
+                  <md-icon>access_time</md-icon>
+                  updated 10 days ago
+                </div>
+              </template>
+            </chart-card>
           </md-card-content>
         </md-card>
       </div>
@@ -77,28 +77,28 @@
             <p class="category">在这可以看到上一周医院大厅的人流随时间分布图</p>
           </md-card-header>
           <md-card-content>
-        <chart-card
-            :chart-data="dataCompletedTasksChart.data"
-            :chart-options="dataCompletedTasksChart.options"
-            :chart-type="'Line'"
-            data-background-color="green"
-        >
-<!--          <template slot="content">-->
-<!--            <h4 class="title">Completed Tasks</h4>-->
-<!--            <p class="category">Last Campaign Performance</p>-->
-<!--          </template>-->
+            <chart-card
+                :chart-data="dataCompletedTasksChart.data"
+                :chart-options="dataCompletedTasksChart.options"
+                :chart-type="'Line'"
+                data-background-color="green"
+            >
+              <!--          <template slot="content">-->
+              <!--            <h4 class="title">Completed Tasks</h4>-->
+              <!--            <p class="category">Last Campaign Performance</p>-->
+              <!--          </template>-->
 
-          <template slot="footer">
-            <div class="stats">
-              <md-icon>access_time</md-icon>
-              campaign sent 26 minutes ago
-            </div>
-          </template>
-        </chart-card>
+              <template slot="footer">
+                <div class="stats">
+                  <md-icon>access_time</md-icon>
+                  campaign sent 26 minutes ago
+                </div>
+              </template>
+            </chart-card>
           </md-card-content>
         </md-card>
       </div>
-  </div>
+    </div>
   </div>
 </template>
 

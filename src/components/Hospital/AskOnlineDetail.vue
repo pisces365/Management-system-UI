@@ -2,17 +2,10 @@
   <div class="md-layout-item">
     <div class="md-layout">
       <div class="md-layout-item md-medium-size-100">
-        <h5>医生您好，下面是需要处理的网上问诊</h5>
-        <div class="alert alert-info">
-          <span>1.用户262的提问</span>
-          <md-button class="md-warning" @click="checkInf">查看</md-button>
-        </div>
-        <div class="alert alert-info">
-          <button type="button" aria-hidden="true" class="close">
-
-          </button>
-          <span>2.用户4562的提问</span>
-          <md-button class="md-warning" @click="checkInf">查看</md-button>
+        <h5>{{doctorValue}}医生您好，下面是需要处理的网上问诊</h5>
+        <div class="alert alert-info" v-for="(item,index) in questionList" :key="index">
+          <span>{{index+1}}.{{item.villagers_name}}的提问</span>
+          <md-button class="md-warning" @click="checkInf(item)">查看</md-button>
         </div>
       </div>
 
@@ -25,12 +18,56 @@
 <script>
 export default {
   name: "AskOnlineDetail",
+
+  data(){
+    return{
+      doctorValue: this.$route.params.doctorValue,
+      departmentValue: this.$route.params.departmentValue,
+      questionList: [],
+      inquiry_id: '',
+      villagers_name: '',
+      inquiry_name: '',
+      lastLocation: '',
+      purpose: '',
+      inquiry_question: '',
+    }
+  },
+  beforeCreate() {
+    this.$axios
+            .get('http://112.124.35.32:8085/xiangliban/selectQuestion',{params:{"inquiry_department":this.$route.params.departmentValue,"inquiry_doctorname":this.$route.params.doctorValue}})
+            .then(successResponse => {
+
+              console.log(successResponse.data);
+              this.questionList = successResponse.data; // 将获取的数据保存
+            })
+            .catch(error => {
+              console.log(error) // 记录出错信息
+            })
+  },
   methods: {
-    checkInf() {
-      this.$router.push('checkInf')
+    checkInf(item) {
+      this.inquiry_id = item.inquiryid;
+      this.villagers_name = item.villagers_name;
+      this.inquiry_name = item.inquiry_name;
+      this.lastLocation = item.lastLocation;
+      this.purpose = item.purpose;
+      this.inquiry_question = item.inquiry_question;
+      this.$router.push(
+              { name:'checkInf',
+                params:{
+                  doctorValue: this.doctorValue,
+                  departmentValue: this.departmentValue,
+                  inquiry_id: this.inquiry_id,
+                  villagers_name: this.villagers_name,
+                  inquiry_name: this.inquiry_name,
+                  lastLocation: this.lastLocation,
+                  purpose: this.purpose,
+                  inquiry_question: this.inquiry_question
+              }
+              })
     },
     goBack(){
-      this.$router.go(-1);
+      this.$router.push("CopeMatter");
     },
   }
 }
