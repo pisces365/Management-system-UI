@@ -65,6 +65,8 @@ const routes = [
         path: "new-deliverys",
         name: "快递新工单界面",
         component: NewDelivery,
+      },
+      {
         path: "RentHouseInformation",
         name: "RentHouseInformation",
         component:RentHouseInformation,
@@ -73,6 +75,9 @@ const routes = [
         path: "ongoing-deliverys",
         name: "快递进行中工单界面",
         component: OngoingDelivery,
+          },
+      {
+
         path: "RestAppointment",
         name: "RestAppointment",
         component:RestAppointment,
@@ -81,6 +86,9 @@ const routes = [
         path: "RestDue",
         name: "RestDue",
         component:RestDue,
+              },
+      {
+
         path: "finished-deliverys",
         name: "快递已完成工单界面",
         component: FinishedDelivery,
@@ -95,6 +103,9 @@ const routes = [
         path: "courses-type",
         name: "课程类别管理",
         component: CourseTypeManage,
+              },
+      {
+
         path: "HotelAppointment",
         name: "HotelAppointment",
         component: HotelAppointment,
@@ -103,6 +114,9 @@ const routes = [
         path: "HotelRoomManage",
         name: "HotelRoomManage",
         component: HotelRoomManage,
+              },
+      {
+
         path: "manage-election-type",
         name: "选举类别管理",
         component: ElectionTypeManagement,
@@ -111,6 +125,9 @@ const routes = [
         path: "fix-new-order",
         name: "报修新工单界面",
         component: FixingNewPage,
+              },
+      {
+
         path: "HotelCope",
         name: "HotelCope",
         component: HotelCope,
@@ -119,6 +136,9 @@ const routes = [
         path: "AskOnlineDetail",
         name: "AskOnlineDetail",
         component: AskOnlineDetail,
+              },
+      {
+
         path: "fix-all-order",
         name: "报修所有工单",
         component: FixingOrderList,
@@ -127,6 +147,9 @@ const routes = [
         path: "CrowdChart",
         name: "CrowdChart",
         component: CrowdChart,
+              },
+      {
+
         path: "fix-my-order",
         name: "报修我的工单",
         component: FixingMyOrderList,
@@ -135,6 +158,9 @@ const routes = [
         path: "AppointmentDetail",
         name: "AppointmentDetail",
         component: AppointmentDetail,
+              },
+      {
+
         path: "post-election",
         name: "选举发布界面",
         component: PostElection,
@@ -143,6 +169,9 @@ const routes = [
         path: "checkInf",
         name: "checkInf",
         component: checkInf,
+              },
+      {
+
         path: "election-list",
         name: "选举信息概览",
         component: ElectionList,
