@@ -37,203 +37,203 @@ import AllBusStopList from "../pages/AllBusStopList.vue";
 
 
 const routes = [
-  {
-    path: "/login",
-    name: "login",
-    component: Login,
-  },
-  {
-    // 打开项目时的默认界面
-    path: "/",
-    redirect: 'login',
-    component: DashboardLayout ,
-    meta:{
-      requireAuth: true
+    {
+        path: "/login",
+        name: "login",
+        component: Login,
     },
-    children: [
-      {
-        path: "dashboard",
-        name: "驾驶舱",
-        component: Dashboard,
-      },
-      // {
-      //   path: "cockpit",
-      //   name: "Cockpit",
-      //   component: Cockpit,
-      // },
-      {
-        path: "new-deliverys",
-        name: "快递新工单界面",
-        component: NewDelivery,
-      },
-      {
-        path: "RentHouseInformation",
-        name: "RentHouseInformation",
-        component:RentHouseInformation,
-      },
-      {
-        path: "ongoing-deliverys",
-        name: "快递进行中工单界面",
-        component: OngoingDelivery,
-          },
-      {
+    {
+        // 打开项目时的默认界面
+        path: "/",
+        redirect: 'login',
+        component: DashboardLayout,
+        meta: {
+            requireAuth: true
+        },
+        children: [
+            {
+                path: "dashboard",
+                name: "驾驶舱",
+                component: Dashboard,
+            },
+            // {
+            //   path: "cockpit",
+            //   name: "Cockpit",
+            //   component: Cockpit,
+            // },
+            {
+                path: "new-deliverys",
+                name: "快递新工单界面",
+                component: NewDelivery,
+            },
+            {
+                path: "RentHouseInformation",
+                name: "RentHouseInformation",
+                component: RentHouseInformation,
+            },
+            {
+                path: "ongoing-deliverys",
+                name: "快递进行中工单界面",
+                component: OngoingDelivery,
+            },
+            {
 
-        path: "RestAppointment",
-        name: "RestAppointment",
-        component:RestAppointment,
-      },
-      {
-        path: "RestDue",
-        name: "RestDue",
-        component:RestDue,
-              },
-      {
+                path: "RestAppointment",
+                name: "RestAppointment",
+                component: RestAppointment,
+            },
+            {
+                path: "RestDue",
+                name: "RestDue",
+                component: RestDue,
+            },
+            {
 
-        path: "finished-deliverys",
-        name: "快递已完成工单界面",
-        component: FinishedDelivery,
-      },
+                path: "finished-deliverys",
+                name: "快递已完成工单界面",
+                component: FinishedDelivery,
+            },
 
-      {
-        path: "RestBusiness",
-        name: "RestBusiness",
-        component:RestBusiness,
-      },
-      {
-        path: "courses-type",
-        name: "课程类别管理",
-        component: CourseTypeManage,
-              },
-      {
-        path: "courses",
-        name: "课程管理",
-        component: CoursesManage,
-              },
-      {
+            {
+                path: "RestBusiness",
+                name: "RestBusiness",
+                component: RestBusiness,
+            },
+            {
+                path: "courses-type",
+                name: "课程类别管理",
+                component: CourseTypeManage,
+            },
+            {
+                path: "courses",
+                name: "课程管理",
+                component: CoursesManage,
+            },
+            {
 
-        path: "HotelAppointment",
-        name: "HotelAppointment",
-        component: HotelAppointment,
-      },
-      {
-        path: "HotelRoomManage",
-        name: "HotelRoomManage",
-        component: HotelRoomManage,
-              },
-      {
+                path: "HotelAppointment",
+                name: "HotelAppointment",
+                component: HotelAppointment,
+            },
+            {
+                path: "HotelRoomManage",
+                name: "HotelRoomManage",
+                component: HotelRoomManage,
+            },
+            {
 
-        path: "manage-election-type",
-        name: "选举类别管理",
-        component: ElectionTypeManagement,
-      },
-      {
-        path: "fix-new-order",
-        name: "报修新工单界面",
-        component: FixingNewPage,
-              },
-      {
+                path: "manage-election-type",
+                name: "选举类别管理",
+                component: ElectionTypeManagement,
+            },
+            {
+                path: "fix-new-order",
+                name: "报修新工单界面",
+                component: FixingNewPage,
+            },
+            {
 
-        path: "HotelCope",
-        name: "HotelCope",
-        component: HotelCope,
-      },
-      {
-        path: "AskOnlineDetail",
-        name: "AskOnlineDetail",
-        component: AskOnlineDetail,
-              },
-      {
+                path: "HotelCope",
+                name: "HotelCope",
+                component: HotelCope,
+            },
+            {
+                path: "AskOnlineDetail",
+                name: "AskOnlineDetail",
+                component: AskOnlineDetail,
+            },
+            {
 
-        path: "fix-all-order",
-        name: "报修所有工单",
-        component: FixingOrderList,
-      },
-      {
-        path: "CrowdChart",
-        name: "CrowdChart",
-        component: CrowdChart,
-              },
-      {
+                path: "fix-all-order",
+                name: "报修所有工单",
+                component: FixingOrderList,
+            },
+            {
+                path: "CrowdChart",
+                name: "CrowdChart",
+                component: CrowdChart,
+            },
+            {
 
-        path: "fix-my-order",
-        name: "报修我的工单",
-        component: FixingMyOrderList,
-      },
-      {
-        path: "AppointmentDetail",
-        name: "AppointmentDetail",
-        component: AppointmentDetail,
-              },
-      {
+                path: "fix-my-order",
+                name: "报修我的工单",
+                component: FixingMyOrderList,
+            },
+            {
+                path: "AppointmentDetail",
+                name: "AppointmentDetail",
+                component: AppointmentDetail,
+            },
+            {
 
-        path: "post-election",
-        name: "选举发布界面",
-        component: PostElection,
-      },
-      {
-        path: "checkInf",
-        name: "checkInf",
-        component: checkInf,
-              },
-      {
+                path: "post-election",
+                name: "选举发布界面",
+                component: PostElection,
+            },
+            {
+                path: "checkInf",
+                name: "checkInf",
+                component: checkInf,
+            },
+            {
 
-        path: "election-list",
-        name: "选举信息概览",
-        component: ElectionList,
-      },
-      {
-        path: "CheckInformation",
-        name: "CheckInformation",
-        component: CheckInformation,
-      },
-      {
-        path: "HospitalCrowdedSituation",
-        name: "医院拥挤情况",
-        component: HospitalCrowdedSituation,
-      },
-      {
-        path: "HospitalCrowdedSituation2",
-        name: "医院拥挤情况管理人员",
-        component: HospitalCrowdedSituation2,
-      },
-      {
-        path: "add-address",
-        name: "增加地名",
-        component: addAddress,
-      },
-      {
-        path: "user",
-        name: "User Profile",
-        component: UserProfile,
-      },
-      {
-        path: "CopeMatter",
-        name: "处理网上问诊",
-        component: CopeMatter,
-      },
-      {
-        path: "buslinemapc",
-        name:"公交地图",
-        component: BusLineMapC,
-      },
-      {
-        path: "busstoplist",
-        name:"车站列表",
-        component: BusStopList,
-      },
-      {
-        path: "allstoplist",
-        name:"车站管理",
-        component: AllBusStopList,
-      },
-      {
-        path: "buslinelist",
-        name:"公交路线",
-        component: BusLineList,
-      },
+                path: "election-list",
+                name: "选举信息概览",
+                component: ElectionList,
+            },
+            {
+                path: "CheckInformation",
+                name: "CheckInformation",
+                component: CheckInformation,
+            },
+            {
+                path: "HospitalCrowdedSituation",
+                name: "医院拥挤情况",
+                component: HospitalCrowdedSituation,
+            },
+            {
+                path: "HospitalCrowdedSituation2",
+                name: "医院拥挤情况管理人员",
+                component: HospitalCrowdedSituation2,
+            },
+            {
+                path: "add-address",
+                name: "增加地名",
+                component: addAddress,
+            },
+            {
+                path: "user",
+                name: "User Profile",
+                component: UserProfile,
+            },
+            {
+                path: "CopeMatter",
+                name: "处理网上问诊",
+                component: CopeMatter,
+            },
+            {
+                path: "buslinemapc",
+                name: "公交地图",
+                component: BusLineMapC,
+            },
+            {
+                path: "busstoplist",
+                name: "车站列表",
+                component: BusStopList,
+            },
+            {
+                path: "allstoplist",
+                name: "车站管理",
+                component: AllBusStopList,
+            },
+            {
+                path: "buslinelist",
+                name: "公交路线",
+                component: BusLineList,
+            },
 
-    ],
-  },
+        ],
+    },
 
 ];
 
