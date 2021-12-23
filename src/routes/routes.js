@@ -105,6 +105,11 @@ const routes = [
         component: CourseTypeManage,
               },
       {
+        path: "courses",
+        name: "课程管理",
+        component: CoursesManage,
+              },
+      {
 
         path: "HotelAppointment",
         name: "HotelAppointment",

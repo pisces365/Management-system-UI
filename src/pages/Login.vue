@@ -19,7 +19,7 @@
 </template>
 <style>
 #poster {
-  background: url("../../../management-system-ui-master/src/assets/background1.jpg") no-repeat center;
+  background: url("../../../management-system-ui/src/assets/background.jpg") no-repeat center;
   height: 100%;
   width: 100%;
   background-size: cover;
@@ -51,6 +51,7 @@ body {
 
 <script>
 import globalVariable from "../globalVariable";
+
 export default {
   name: 'Login',
   emulateJSON: true,
@@ -65,23 +66,14 @@ export default {
   },
   methods: {
     login() {
-      // 测试阶段服务器绕开登录使用
-      // var path = this.$route.query.redirect
-      // this.$router.replace({path: path === '/' || path === undefined ? '/' : path})
-      //
-      // 运营阶段登录页面登录
       var params = new URLSearchParams();
-      params.append("uid",this.user.uid);
-      params.append("password",this.user.password);
+      params.append("uid", this.user.uid);
+      params.append("password", this.user.password);
       this.$axios
-          .post('/login/userlogin', params)
+          .post('http://112.124.35.32:8087/xiangliban/login/userlogin', params)
           .then(successResponse => {
             console.log('login success')
             if (successResponse.data.uid !== null) {
-              // console.log('loginForm: ' + JSON.stringify(this.loginForm))
-              // this.$store.commit('login', successResponse.data)
-              // var path = this.$route.query.redirect
-              // this.$router.replace({path: path === '/' || path === undefined ? '/' : path})
               globalVariable.setId(successResponse.data.uid);
               globalVariable.setAuthorization(successResponse.data.authorization);
               this.$router.push('dashboard');
@@ -92,25 +84,7 @@ export default {
             this.$message.error('登录失败')
             console.log('failed')
           })
-      // this.$axios
-      //     .post('/login/userlogin', {
-      //       uid: _this.user.uid,
-      //       password: _this.user.password
-      //     }, {emulateJSON: true})
-      //     .then(successResponse => {
-      //       console.log('ping success')
-      //       console.log(JSON.stringify(successResponse.data))
-      //       if (successResponse.data.uid !== null) {
-      //         // console.log('loginForm: ' + JSON.stringify(_this.loginForm))
-      //         _this.$store.commit('login', successResponse.data)
-      //         var path = this.$route.query.redirect
-      //         this.$router.replace({path: path === '/' || path === undefined ? '/' : path})
-      //       }
-      //     })
-      //     .catch(failResponse => {
-      //       this.$message.error('网络错误,请使用谷歌浏览器使用')
-      //       console.log('failed')
-      //     })
+
     }
 
   }
