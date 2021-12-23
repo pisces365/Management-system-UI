@@ -242,6 +242,48 @@
         @include shadow-big-color($brand-danger);
     }
 
+    [data-background-color="diagramBlue"],
+    .md-tabs.md-danger .md-tabs-navigation{
+        background: linear-gradient(60deg, $indigo-600, $indigo-300);
+        @include shadow-big-color($indigo-300);
+    }
+
+    [data-background-color="courseGreen"],
+    .md-tabs.md-danger .md-tabs-navigation{
+        background: linear-gradient(60deg, $green-600, $green-300);
+        @include shadow-big-color($green-600);
+    }
+
+    [data-background-color="deliveryOrange"],
+    .md-tabs.md-danger .md-tabs-navigation{
+        background: linear-gradient(60deg, $amber-800, $amber-500);
+        @include shadow-big-color($amber-800);
+    }
+
+    [data-background-color="deliveryBlue"],
+    .md-tabs.md-danger .md-tabs-navigation{
+        background: linear-gradient(60deg, $light-blue-600, $light-blue-300);
+        @include shadow-big-color($light-blue-600);
+    }
+
+    [data-background-color="deliveryGreen"],
+    .md-tabs.md-danger .md-tabs-navigation{
+        background: linear-gradient(60deg, $green-600, $green-500);
+        @include shadow-big-color($green-800);
+    }
+
+    [data-background-color="fixBlue"],
+    .md-tabs.md-danger .md-tabs-navigation{
+        background: linear-gradient(60deg, $blue-600, $blue-400);
+        @include shadow-big-color($teal-A700);
+    }
+
+    [data-background-color="cuisineGreen"],
+    .md-tabs.md-danger .md-tabs-navigation{
+        background: linear-gradient(60deg, $light-green-700, $light-green-400);
+        @include shadow-big-color($light-green-600);
+    }
+
     [data-background-color]{
         color: $white-color;
 

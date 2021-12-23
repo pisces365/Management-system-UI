@@ -12,7 +12,7 @@
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
-          <md-card-header data-background-color="green">
+          <md-card-header data-background-color="courseGreen">
             <h4 class="title">课程类别</h4>
             <p class="category">系统内的所有课程类别</p>
           </md-card-header>
@@ -29,37 +29,19 @@
             <section v-if="loading">
               <el-skeleton :rows="6" animated/>
             </section>
-            <md-table v-model="searched" md-sort="courseCategory_id" md-sort-order="asc" md-fixed-header
-                      v-if="errored === false && loading === false && list_empty === false">
-              <md-table-toolbar>
-                <div class="md-toolbar-section-start">
-                  <h1 class="md-title">课程类别列表</h1>
-                </div>
-                <md-field md-clearable class="md-toolbar-section-end">
-                  <md-input placeholder="查询课程类别编号" v-model="search" @input="searchOnTable"/>
-                </md-field>
-              </md-table-toolbar>
-              <md-table-empty-state
-                  v-show="searched_empty"
-                  md-label="无结果"
-                  :md-description="`搜素 '${search}' 的结果为空. 请尝试重新输入或添加新课程类别`">
-                <md-button class="md-primary md-raised" @click="addCourseCategory()">添加课程类别</md-button>
-              </md-table-empty-state>
-              <md-table-row slot="md-table-row" slot-scope="{ item }">
-                <md-table-cell md-label="课程类别编号" md-sort-by="courseCategoryId">{{
-                    item.courseCategoryId
-                  }}
-                </md-table-cell>
-                <md-table-cell md-label="课程类别名称" md-sort-by="courseCategoryName">{{
-                    item.courseCategoryName
-                  }}
-                </md-table-cell>
-                <md-table-cell md-label="可选操作">
-                  <el-button type="warning" @click="alterSelectedDetails(item)" icon="el-icon-edit"/>
-                  <el-button type="danger" @click="open(item)" icon="el-icon-delete"/>
-                </md-table-cell>
-              </md-table-row>
-            </md-table>
+            <div class="md-layout-item md-size-25" style="float: right" v-if="errored === false && loading === false && list_empty === false">
+              <el-input placeholder="查询课程类别编号" v-model="search" @input="searchOnTable"/>
+            </div>
+            <el-table :data="searched" style="width: 100%" max-height="600" v-if="errored === false && loading === false && list_empty === false">
+              <el-table-column property="courseCategoryId" label="课程类别编号" fixed sortable></el-table-column>
+              <el-table-column property="courseCategoryName" label="课程类别名称"></el-table-column>
+              <el-table-column label="可选操作">
+                <template slot-scope="scope">
+                  <el-button type="warning" @click="alterSelectedDetails(scope.row)" icon="el-icon-edit"/>
+                  <el-button type="danger" @click="open(scope.row)" icon="el-icon-delete"/>
+                </template>
+              </el-table-column>
+            </el-table>
             <br>
             <div class="md-layout-item md-size-100 text-right" v-if="errored === false && loading === false && list_empty === false">
               <el-button type="success" @click="addCourseCategory()">新增课程类别</el-button>

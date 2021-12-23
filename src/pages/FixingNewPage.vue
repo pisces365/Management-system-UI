@@ -8,7 +8,7 @@
 <template>
   <div class="content">
     <md-card>
-      <md-card-header data-background-color="green">
+      <md-card-header data-background-color="fixBlue">
         <h4 class="title">新工单列表</h4>
       </md-card-header>
       <md-card-content>
@@ -27,7 +27,7 @@
         <!-- 显示所有未处理的工单 -->
         <div v-for="order in fix_list" :key="order.fixId" id="myCard">
           <md-card class="md-layout-item md-medium-size-33 md-xsmall-size-33 md-size-33">
-            <md-card-header :data-background-color="dataBackgroundColor">
+            <md-card-header data-background-color="fixBlue">
               <h4 class="title">维修工单{{ order.fixOrderId }}详细信息</h4>
             </md-card-header>
             <md-card-content>
@@ -68,7 +68,9 @@
                     <md-textarea v-model="order.fixDetails" readonly></md-textarea>
                   </md-field>
                 </div>
-                <md-button class="md-raised md-primary" type="text" @click="open(order.fixOrderId)">接单</md-button>
+                <div class="md-layout-item md-size-100 text-right">
+                  <md-button class="md-raised md-primary" type="text" @click="open(order.fixOrderId)">接单</md-button>
+                </div>
               </div>
             </md-card-content>
           </md-card>
@@ -85,13 +87,6 @@ import globalVariable from "../globalVariable";
 export default {
   // 调入用于刷新界面的方法
   inject: ['reload'],
-  // 设定卡片头部的背景色
-  props: {
-    dataBackgroundColor: {
-      type: String,
-      default: "green",
-    },
-  },
   data() {
     return {
       errored: false, // 从后台获取数据是否出错
@@ -149,10 +144,6 @@ export default {
 };
 </script>
 <style>
-.md-tabs.md-theme-default.md-info .md-tabs-navigation {
-  background-color: #4fc3f7;
-}
-
 #myCard {
   display: inline !important;
 }

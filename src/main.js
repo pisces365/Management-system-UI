@@ -34,7 +34,7 @@ import MaterialDashboard from "./material-dashboard";
 import Chartist from "chartist";
 
 import axios from 'axios';
-import qs from 'qs';
+import * as echarts from 'echarts';
 
 // interface baseURL
 // local url
@@ -44,7 +44,7 @@ import qs from 'qs';
 axios.defaults.baseURL = 'http://112.124.35.32:8083/xiangliban';
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 Vue.prototype.$axios = axios;
-Vue.prototype.$qs = qs;
+Vue.prototype.$echarts = echarts;
 import myprojectmytheme from "./myprojectmytheme.scss";
 
 

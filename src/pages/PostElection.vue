@@ -12,7 +12,7 @@
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
-          <md-card-header data-background-color="green">
+          <md-card-header data-background-color="deliveryBlue">
             <h4 class="title">选举信息发布</h4>
             <p class="category">输入选举详细信息和选举人详细信息</p>
           </md-card-header>

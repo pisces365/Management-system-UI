@@ -12,7 +12,7 @@
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
-          <md-card-header data-background-color="blue">
+          <md-card-header data-background-color="deliveryBlue">
             <h4 class="title">管理本村选举类别</h4>
           </md-card-header>
           <md-card-content>
@@ -28,33 +28,26 @@
             <section v-if="loading">
               <el-skeleton :rows="6" animated/>
             </section>
-            <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="election_type"
-                      md-sort-order="asc" md-fixed-header>
-              <md-table-toolbar>
-                <div class="md-toolbar-section-start">
-                  <div>
-                    <h1 class="md-title">类别列表</h1>
-                  </div>
-                </div>
-                <md-field md-clearable class="md-toolbar-section-end">
-                  <md-input placeholder="查询选举类别" v-model="search" @input="searchOnTable"/>
-                </md-field>
-              </md-table-toolbar>
-              <md-table-empty-state
-                  v-show="searched_empty"
-                  md-label="无结果"
-                  :md-description="`搜素 '${search}' 的结果为空. 请尝试重新输入或添加新类型`">
-                <md-button class="md-primary md-raised" @click="addDialogVisible = true">添加新类型</md-button>
-              </md-table-empty-state>
-              <md-table-row slot="md-table-row" slot-scope="{ item }">
-                <md-table-cell md-label="选举类别编号" md-sort-by="id">{{ item.id }}</md-table-cell>
-                <md-table-cell md-label="选举类别" md-sort-by="name">{{ item.name }}</md-table-cell>
-                <md-table-cell md-label="可选操作">
-                  <el-button type="warning" icon="el-icon-edit" @click="updateTypeName(item)"/>
-                  <el-button type="danger" icon="el-icon-delete" @click="deleteCurrentType(item)"/>
-                </md-table-cell>
-              </md-table-row>
-            </md-table>
+            <div class="md-layout-item md-size-25" style="float: right" v-if="errored === false && loading === false && list_empty === false">
+              <el-input placeholder="查询选举类别" v-model="search" @input="searchOnTable"/>
+            </div>
+            <el-table :data="searched" style="width: 100%" max-height="600" v-if="errored === false && loading === false && list_empty === false">
+              <el-table-column property="id" label="选举类别编号" fixed sortable></el-table-column>
+              <el-table-column property="name" label="选举类别"></el-table-column>
+              <el-table-column label="可选操作">
+                <template slot-scope="scope">
+                  <el-button
+                      type="warning"
+                      icon="el-icon-edit"
+                      @click="updateTypeName(scope.row)"></el-button>
+                  <el-button
+                      type="danger"
+                      icon="el-icon-delete"
+                      @click="deleteCurrentType(scope.row)"></el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <br>
             <div class="md-layout-item md-size-100 text-right">
               <!-- 点击此按钮打开新增课程页 -->
               <el-button type="primary" @click="addDialogVisible = true">添加类别</el-button>

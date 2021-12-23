@@ -12,7 +12,7 @@
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
-          <md-card-header data-background-color="blue">
+          <md-card-header data-background-color="deliveryOrange">
             <h4 class="title">新订单</h4>
             <p class="category">所有用户的新订单</p>
           </md-card-header>
@@ -29,42 +29,32 @@
             <section v-if="loading">
               <el-skeleton :rows="6" animated/>
             </section>
-            <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="delivery_id"
-                      md-sort-order="asc" md-fixed-header v-if="errored === false && loading === false && list_empty === false">
-              <md-table-toolbar>
-                <div class="md-toolbar-section-start">
-                  <h1 class="md-title">订单列表</h1>
-                </div>
-                <md-field md-clearable class="md-toolbar-section-end">
-                  <md-input placeholder="查询订单编号" v-model="search" @input="searchOnTable"/>
-                </md-field>
-              </md-table-toolbar>
-              <md-table-empty-state
-                  v-if="searched_empty"
-                  md-label="无结果"
-                  :md-description="`搜素 '${search}' 的结果为空. 请尝试重新输入`">
-              </md-table-empty-state>
-              <md-table-row slot="md-table-row" slot-scope="{ item }">
-                <md-table-cell md-label="订单编号" md-sort-by="deliveryId">{{ item.deliveryId }}</md-table-cell>
-                <md-table-cell md-label="期望送达时间" md-sort-by="deliveryEta">{{ item.deliveryEta }}</md-table-cell>
-                <md-table-cell md-label="用户地址" md-sort-by="deliveryRecipientAddress">{{
-                    item.deliveryRecipientAddress
-                  }}
-                </md-table-cell>
-                <md-table-cell md-label="虚拟手机号" md-sort-by="deliveryPhonesProtected">
-                  {{ (item.deliveryPhonesProtected === 0) ? "不使用" : "使用" }}
-                </md-table-cell>
-                <md-table-cell md-label="无接触配送" md-sort-by="deliveryContactlessDistribution">
-                  {{ (item.deliveryContactlessDistribution === 0) ? "不使用" : "使用" }}
-                </md-table-cell>
-                <md-table-cell md-label="可选操作">
+            <div class="md-layout-item md-size-25 md-toolbar-section-end" style="float: right" v-if="errored === false && loading === false && list_empty === false">
+              <el-input placeholder="查询订单编号" v-model="search" @input="searchOnTable"/>
+            </div>
+            <el-table :data="searched" style="width: 100%" max-height="500" v-if="errored === false && loading === false && list_empty === false">
+              <el-table-column property="deliveryId" label="订单编号" fixed sortable></el-table-column>
+              <el-table-column property="deliveryEta" label="期望送达时间" sortable></el-table-column>
+              <el-table-column property="deliveryRecipientAddress" label="用户地址"></el-table-column>
+              <el-table-column property="deliveryPhonesProtected" label="虚拟手机号">
+                <template slot-scope="scope">
+                  {{ (scope.row.deliveryPhonesProtected === 0) ? "不使用" : "使用" }}
+                </template>
+              </el-table-column>
+              <el-table-column property="deliveryContactlessDistribution" label="无接触配送">
+                <template slot-scope="scope">
+                  {{ (scope.row.deliveryContactlessDistribution === 0) ? "不使用" : "使用" }}
+                </template>
+              </el-table-column>
+              <el-table-column label="可选操作">
+                <template slot-scope="scope">
                   <!-- 点击此按钮展示当前条目完整信息 -->
-                  <el-button type="primary" @click="getSelectedDetails(item)" icon="el-icon-info"/>
+                  <el-button type="primary" @click="getSelectedDetails(scope.row)" icon="el-icon-info"/>
                   <!-- 点击此按钮打开确认接单页 -->
-                  <el-button type="success" @click="open(item)" icon="el-icon-check"/>
-                </md-table-cell>
-              </md-table-row>
-            </md-table>
+                  <el-button type="success" @click="open(scope.row)" icon="el-icon-check"/>
+                </template>
+              </el-table-column>
+            </el-table>
           </md-card-content>
         </md-card>
         <div>

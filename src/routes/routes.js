@@ -2,38 +2,24 @@ import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
 
 import Dashboard from "@/pages/Dashboard.vue";
 import UserProfile from "@/pages/UserProfile.vue";
-import TableList from "@/pages/Hospital.vue";
-import Icons from "@/pages/Restaurant.vue";
-import Maps from "@/pages/Hotel.vue";
-import CopeMatter from "@/pages/CopeMatter.vue";
-import UpgradeToPRO from "@/pages/UpgradeToPRO.vue";
 import PostElection from "@/pages/PostElection.vue";
 import ElectionList from "@/pages/ElectionList.vue";
 import FixingNewPage from "@/pages/FixingNewPage.vue";
 import FixingOrderList from "@/pages/FixingOrderList.vue";
 import FixingMyOrderList from "@/pages/FixingMyOrderList.vue";
-import Amap from"@/pages/Amap.vue";
-import Order from "@/pages/Order.vue";
-import ShopProfile from "@/pages/ShopProfile.vue";
-import ShopDataStatistics from "@/pages/ShopDataStatistics.vue";
 import NewDelivery from "@/pages/NewDelivery.vue";
 import OngoingDelivery from "@/pages/OngoingDelivery.vue";
 import FinishedDelivery from "@/pages/FinishedDelivery.vue";
 import CoursesManage from "@/pages/CoursesManage.vue";
 import CourseTypeManage from "@/pages/CourseTypeManage.vue";
-import shop from "@/pages/Shop.vue";
-import HospitalCrowdedSituation from "../pages/HospitalCrowdedSituation.vue";
-import HospitalCrowdedSituation2 from "../pages/HospitalCrowdedSituation2.vue";
-import addAddress from "../components/Hospital/addAddress.vue";
-import checkInf from "../components/Hospital/checkInf.vue";
-import CheckInformation from "../components/Hospital/CheckInformation.vue";
-import AskOnlineDetail from "../components/Hospital/AskOnlineDetail.vue";
-import AppointmentDetail from "../components/Hospital/AppointmentDetail.vue";
-import CrowdChart from "../components/Hospital/CrowdChart.vue";
 import ElectionTypeManagement from "../pages/ElectionTypeManagement";
+import Cockpit from "../pages/Cockpit";
 
 const routes = [
   {
+    // path: "/",
+    // component: DashboardLayout,
+    // redirect: "/cockpit",
     path: "/",
     component: DashboardLayout,
     redirect: "/dashboard",
@@ -41,49 +27,14 @@ const routes = [
     children: [
       {
         path: "dashboard",
-        name: "Dashboard",
+        name: "驾驶舱",
         component: Dashboard,
       },
-      {
-        path: "AskOnlineDetail",
-        name: "AskOnlineDetail",
-        component: AskOnlineDetail,
-      },
-      {
-        path: "CrowdChart",
-        name: "CrowdChart",
-        component: CrowdChart,
-      },
-      {
-        path: "AppointmentDetail",
-        name: "AppointmentDetail",
-        component: AppointmentDetail,
-      },
-      {
-        path: "checkInf",
-        name: "checkInf",
-        component: checkInf,
-      },
-      {
-        path: "CheckInformation",
-        name: "CheckInformation",
-        component: CheckInformation,
-      },
-      {
-        path: "HospitalCrowdedSituation",
-        name: "医院拥挤情况",
-        component: HospitalCrowdedSituation,
-      },
-      {
-        path: "HospitalCrowdedSituation2",
-        name: "医院拥挤情况管理人员",
-        component: HospitalCrowdedSituation2,
-      },
-      {
-        path: "add-address",
-        name: "增加地名",
-        component: addAddress,
-      },
+      // {
+      //   path: "cockpit",
+      //   name: "Cockpit",
+      //   component: Cockpit,
+      // },
       {
         path: "new-deliverys",
         name: "快递新工单界面",
@@ -100,11 +51,6 @@ const routes = [
         component: FinishedDelivery,
       },
       {
-        path: "shop",
-        name: "shop",
-        component: shop,
-      },
-      {
         path: "courses",
         name: "课程管理",
         component: CoursesManage,
@@ -118,26 +64,6 @@ const routes = [
         path: "manage-election-type",
         name: "选举类别管理",
         component: ElectionTypeManagement,
-      },
-      {
-        path: "order",
-        name: "订单列表",
-        component: Order,
-      },
-      {
-        path: "shopprofile",
-        name: "商店简介",
-        component: ShopProfile,
-      },
-      {
-        path:"shopdatastatistics",
-        name:"商店数据统计",
-        component: ShopDataStatistics,
-      },
-      {
-        path:"Amap",
-        name:"Amap",
-        component: Amap,
       },
       {
         path: "fix-new-order",
@@ -168,36 +94,6 @@ const routes = [
         path: "user",
         name: "User Profile",
         component: UserProfile,
-      },
-      {
-        path: "table",
-        name: "医院后台" ,
-        component: TableList,
-
-      },
-      {
-        path: "icons",
-        name: "餐馆后台" ,
-        component: Icons,
-      },
-      {
-        path: "maps",
-        name: "民宿后台",
-        meta: {
-          hideFooter: true,
-        },
-        component: Maps,
-      },
-      {
-        path: "CopeMatter",
-        name: "处理网上问诊",
-        component: CopeMatter,
-      },
-
-      {
-        path: "upgrade",
-        name: "Upgrade to PRO",
-        component: UpgradeToPRO,
       },
     ],
   },

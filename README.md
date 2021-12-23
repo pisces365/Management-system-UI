@@ -1,4 +1,4 @@
-# [乡里办后台管理系统：前端部分](http://112.124.35.32:8091/)
+# [乡里办后台管理系统：前端部分](http://112.124.35.32:8094/)
 
 ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/GVjXYUrMxf)
 
@@ -15,6 +15,7 @@
 * [文件目录](#directories)
 * [版权信息](#license)
 * [有用的链接](#link)
+* [接口地址](#api)
 
 
 
@@ -112,6 +113,13 @@ vue-material-dashboard
 
 
 
+## <span id="api">接口地址</span>
+
+- [报修、老年大学与用户接口]([Swagger UI](http://112.124.35.32:8083/xiangliban/swagger-ui.html#))
+- [图片上传、快递、房屋出租和选举接口]([Swagger UI](http://112.124.35.32:8081/xiangliban/swagger-ui.html#))
+
+
+
 ## <span id="license">版权信息</span>
 
 - 乡里办工作小组
@@ -123,3 +131,6 @@ vue-material-dashboard
 ## <span id="link">有用的链接</span>
 
 - [我要提问]([Google](https://www.google.com/)) 
+
+
+

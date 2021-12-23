@@ -12,7 +12,7 @@
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
-          <md-card-header data-background-color="green">
+          <md-card-header data-background-color="courseGreen">
             <h4 class="title">课程管理</h4>
             <p class="category">系统内的所有课程</p>
           </md-card-header>
@@ -29,47 +29,31 @@
             <section v-if="loading">
               <el-skeleton :rows="6" animated/>
             </section>
-            <md-table v-model="searched" md-sort="course_id" md-sort-order="asc" md-fixed-header
-                      v-if="errored === false && loading === false && list_empty === false">
-              <md-table-toolbar>
-                <div class="md-toolbar-section-start">
-                  <h1 class="md-title">课程列表</h1>
-                </div>
-                <md-field md-clearable class="md-toolbar-section-end">
-                  <md-input placeholder="查询课程编号" v-model="search" @input="searchOnTable"/>
-                </md-field>
-              </md-table-toolbar>
-              <md-table-empty-state
-                  v-show="searched_empty"
-                  md-label="无结果"
-                  :md-description="`搜素 '${search}' 的结果为空. 请尝试重新输入或添加新课程`">
-                <md-button class="md-primary md-raised" @click="addCourse">添加课程</md-button>
-              </md-table-empty-state>
-              <md-table-row slot="md-table-row" slot-scope="{ item }">
-                <md-table-cell md-label="课程编号" md-sort-by="courseId">{{ item.courseId }}</md-table-cell>
-                <md-table-cell md-label="课程名称" md-sort-by="courseName">{{ item.courseName }}</md-table-cell>
-                <md-table-cell md-label="课程类别" md-sort-by="courseCategoryName">{{
-                    item.courseCategoryName
-                  }}
-                </md-table-cell>
-                <md-table-cell md-label="课程教师名称" md-sort-by="courseTeacherName">{{
-                    item.courseTeacherName
-                  }}
-                </md-table-cell>
-                <md-table-cell md-label="课程状态" md-sort-by="courseStatus">
-                  <el-tag :type="getLableColor(item.courseStatus)">{{ item.courseStatus }}</el-tag>
-                </md-table-cell>
-                <md-table-cell md-label="可选操作">
+            <div class="md-layout-item md-size-25 md-toolbar-section-end" style="float: right" v-if="errored === false && loading === false && list_empty === false">
+              <el-input placeholder="查询课程编号" v-model="search" @input="searchOnTable"/>
+            </div>
+            <el-table :data="searched" style="width: 100%" max-height="500" v-if="errored === false && loading === false && list_empty === false">
+              <el-table-column property="courseId" label="课程编号" fixed sortable></el-table-column>
+              <el-table-column property="courseName" label="课程名称" sortable></el-table-column>
+              <el-table-column property="courseCategoryName" label="课程类别" sortable></el-table-column>
+              <el-table-column property="courseTeacherName" label="课程教师名称" sortable></el-table-column>
+              <el-table-column property="courseStatus" label="课程状态" sortable>
+                <template slot-scope="scope">
+                  <el-tag :type="getLableColor(scope.row.courseStatus)">{{ scope.row.courseStatus }}</el-tag>
+                </template>
+              </el-table-column>
+              <el-table-column label="可选操作">
+                <template slot-scope="scope">
                   <!-- 点击此按钮展示当前条目完整信息 -->
-                  <el-button type="primary" @click="getSelectedDetails(item)" icon="el-icon-info"/>
+                  <el-button type="primary" @click="getSelectedDetails(scope.row)" icon="el-icon-info" size="mini"/>
                   <!-- 点击此按钮打开修改信息页 -->
-                  <el-button type="warning" @click="alterSelectedDetails(item); getAllCourseCategory()"
-                             icon="el-icon-edit"/>
+                  <el-button type="warning" @click="alterSelectedDetails(scope.row); getAllCourseCategory()"
+                             icon="el-icon-edit" size="mini"/>
                   <!-- 点击此按钮二次确认是否删除 -->
-                  <el-button type="danger" @click="open(item)" icon="el-icon-delete"/>
-                </md-table-cell>
-              </md-table-row>
-            </md-table>
+                  <el-button type="danger" @click="open(scope.row)" icon="el-icon-delete" size="mini"/>
+                </template>
+              </el-table-column>
+            </el-table>
             <br>
             <div class="md-layout-item md-size-100 text-right"
                  v-if="errored === false && loading === false && list_empty === false">

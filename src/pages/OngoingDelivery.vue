@@ -12,7 +12,7 @@
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
-          <md-card-header data-background-color="green">
+          <md-card-header data-background-color="deliveryBlue">
             <h4 class="title">我的订单（进行中）</h4>
             <p class="category">我接单的订单</p>
           </md-card-header>
@@ -29,47 +29,34 @@
             <section v-if="loading">
               <el-skeleton :rows="6" animated/>
             </section>
-            <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="delivery_id"
-                      md-sort-order="asc" md-fixed-header v-if="errored === false && loading === false && list_empty === false">
-              <md-table-toolbar>
-                <div class="md-toolbar-section-start">
-                  <h1 class="md-title">工单列表</h1>
-                </div>
-                <md-field md-clearable class="md-toolbar-section-end">
-                  <md-input placeholder="查询工单编号" v-model="search" @input="searchOnTable"/>
-                </md-field>
-              </md-table-toolbar>
-              <md-table-empty-state
-                  md-label="无结果"
-                  v-if="searched_empty"
-                  :md-description="`搜素 '${search}' 的结果为空. 请尝试重新输入`">
-              </md-table-empty-state>
-              <md-table-row slot="md-table-row" slot-scope="{ item }">
-                <md-table-cell md-label="工单编号" md-sort-by="orderId">{{ item.orderId }}</md-table-cell>
-                <md-table-cell md-label="订单编号" md-sort-by="deliveryId">{{ item.deliveryId }}</md-table-cell>
-                <md-table-cell md-label="工单状态" md-sort-by="orderStatus">{{
-                    (item.orderStatus === 1) ? "进行中" : "已完成"
-                  }}</md-table-cell>
-                <md-table-cell md-label="配送员状态" md-sort-by="orderCourierStatus">{{
-                    (item.orderCourierStatus === 1) ? "正在配送" : ((item.orderCourierStatus === 2) ? "已接单" : "已完成")
-                  }}
-                </md-table-cell>
-                <md-table-cell md-label="收件人姓名" md-sort-by="packageRecipientName">{{
-                    item.packageRecipientName
-                  }}
-                </md-table-cell>
-                <md-table-cell md-label="期望送达时间" md-sort-by="deliveryEta">{{ item.deliveryEta }}</md-table-cell>
-                <md-table-cell md-label="配送地址" md-sort-by="packageRecipientAddress">
-                  {{ item.packageRecipientAddress }}
-                </md-table-cell>
-                <md-table-cell md-label="可选操作">
+            <div class="md-layout-item md-size-25 md-toolbar-section-end" style="float: right" v-if="errored === false && loading === false && list_empty === false">
+              <el-input placeholder="查询工单编号" v-model="search" @input="searchOnTable"/>
+            </div>
+            <el-table :data="searched" style="width: 100%" max-height="500" v-if="errored === false && loading === false && list_empty === false">
+              <el-table-column property="orderId" label="工单编号" fixed sortable></el-table-column>
+              <el-table-column property="deliveryId" label="订单编号" sortable></el-table-column>
+              <el-table-column property="orderStatus" label="工单状态" sortable>
+                <template slot-scope="scope">
+                  {{ (scope.row.orderStatus === 1) ? "进行中" : "已完成" }}
+                </template>
+              </el-table-column>
+              <el-table-column property="orderCourierStatus" label="配送员状态" sortable>
+                <template slot-scope="scope">
+                  {{ (scope.row.orderCourierStatus === 1) ? "正在配送" : ((scope.row.orderCourierStatus === 2) ? "已接单" : "已完成") }}
+                </template>
+              </el-table-column>
+              <el-table-column property="packageRecipientName" label="收件人姓名"></el-table-column>
+              <el-table-column property="deliveryEta" label="期望送达时间" sortable></el-table-column>
+              <el-table-column property="packageRecipientAddress" label="配送地址"></el-table-column>
+              <el-table-column label="可选操作">
+                <template slot-scope="scope">
                   <!-- 点击此按钮展示当前条目完整信息 -->
-                  <el-button type="primary" @click="getSelectedDetails(item)" icon="el-icon-info"/>
-                  <!-- 点击此按钮打开修改工单页 -->
-                  <el-button type="success" icon="el-icon-edit" @click="processOrder(item)"/>
-                </md-table-cell>
-              </md-table-row>
-            </md-table>
+                  <el-button type="primary" @click="getSelectedDetails(scope.row)" icon="el-icon-info"/>
+                  <!-- 点击此按钮打开确认接单页 -->
+                  <el-button type="success" icon="el-icon-edit" @click="processOrder(scope.row)"/>
+                </template>
+              </el-table-column>
+            </el-table>
           </md-card-content>
         </md-card>
         <div>

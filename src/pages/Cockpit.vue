@@ -1062,6 +1062,7 @@ export default {
             console.log(error) // 记录出错信息
             this.cardErrored = true // 在前端提示用户出错
           })
+
     },
   },
 };

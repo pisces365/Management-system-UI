@@ -8,7 +8,7 @@
 <template>
   <div class="content">
     <md-card>
-      <md-card-header data-background-color="green">
+      <md-card-header data-background-color="fixBlue">
         <h4 class="title">报修工单管理</h4>
       </md-card-header>
       <md-card-content>
@@ -25,52 +25,88 @@
           <el-skeleton :rows="6" animated/>
         </section>
         <!-- 系统内全部报修工单的表格 -->
-        <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="fixOrderId" md-sort-order="asc"
-                  md-fixed-header v-if="errored === false && loading === false && list_empty === false">
-          <md-table-toolbar>
-            <div class="md-toolbar-section-start">
-              <h1 class="md-title">工单列表</h1>
-            </div>
-            <!-- 页内模糊查询工单编号 -->
-            <md-field md-clearable class="md-toolbar-section-end">
-              <md-input placeholder="查询工单编号" v-model="search" @input="searchOnTable"/>
-            </md-field>
-          </md-table-toolbar>
-          <!-- 空状态/查询结果为空 -->
-          <md-table-empty-state v-show="searched_empty" md-label="无结果"
-                                :md-description="`搜素 '${search}' 的结果为空. 请尝试重新输入`">
-          </md-table-empty-state>
-          <!-- 表单内容 -->
-          <md-table-row slot="md-table-row" slot-scope="{ item }">
-            <md-table-cell md-label="工单编号" md-sort-by="fixOrderId">{{ item.fixOrderId }}</md-table-cell>
-            <md-table-cell md-label="工单类别" md-sort-by="fixType">{{ item.fixType }}</md-table-cell>
-            <md-table-cell md-label="期望上门时间" md-sort-by="fixExpectTime">{{ item.fixExpectTime }}</md-table-cell>
-            <md-table-cell md-label="申报人地点" md-sort-by="fixUserAddress">{{ item.fixUserAddress }}</md-table-cell>
-            <md-table-cell md-label="具体问题" md-sort-by="fixDetails">{{ item.fixDetails }}</md-table-cell>
-            <md-table-cell md-label="状态" md-sort-by="fixStatus">
-              <!-- 自定义的标签,用于更直观的展示工单状态 -->
-              <el-tag :type="getLableColor(item.fixStatus)">
+<!--        <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="fixOrderId" md-sort-order="asc"-->
+<!--                  md-fixed-header v-if="errored === false && loading === false && list_empty === false">-->
+<!--          <md-table-toolbar>-->
+<!--            <div class="md-toolbar-section-start">-->
+<!--              <h1 class="md-title">工单列表</h1>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; 页内模糊查询工单编号 &ndash;&gt;-->
+<!--            <md-field md-clearable class="md-toolbar-section-end">-->
+<!--              <md-input placeholder="查询工单编号" v-model="search" @input="searchOnTable"/>-->
+<!--            </md-field>-->
+<!--          </md-table-toolbar>-->
+<!--          &lt;!&ndash; 空状态/查询结果为空 &ndash;&gt;-->
+<!--          <md-table-empty-state v-show="searched_empty" md-label="无结果"-->
+<!--                                :md-description="`搜素 '${search}' 的结果为空. 请尝试重新输入`">-->
+<!--          </md-table-empty-state>-->
+<!--          &lt;!&ndash; 表单内容 &ndash;&gt;-->
+<!--          <md-table-row slot="md-table-row" slot-scope="{ item }">-->
+<!--            <md-table-cell md-label="工单编号" md-sort-by="fixOrderId">{{ item.fixOrderId }}</md-table-cell>-->
+<!--            <md-table-cell md-label="工单类别" md-sort-by="fixType">{{ item.fixType }}</md-table-cell>-->
+<!--            <md-table-cell md-label="期望上门时间" md-sort-by="fixExpectTime">{{ item.fixExpectTime }}</md-table-cell>-->
+<!--            <md-table-cell md-label="申报人地点" md-sort-by="fixUserAddress">{{ item.fixUserAddress }}</md-table-cell>-->
+<!--            <md-table-cell md-label="具体问题" md-sort-by="fixDetails">{{ item.fixDetails }}</md-table-cell>-->
+<!--            <md-table-cell md-label="状态" md-sort-by="fixStatus">-->
+<!--              &lt;!&ndash; 自定义的标签,用于更直观的展示工单状态 &ndash;&gt;-->
+<!--              <el-tag :type="getLableColor(item.fixStatus)">-->
+<!--                {{-->
+<!--                  (item.fixStatus === 1) ? "未处理" : ((item.fixStatus === 2) ? "已派单" : ((item.fixStatus === 3) ? "进行中" : "已完成"))-->
+<!--                }}-->
+<!--              </el-tag>-->
+<!--            </md-table-cell>-->
+<!--            &lt;!&ndash; 按钮-点击展示工单的详细信息 &ndash;&gt;-->
+<!--            <md-table-cell md-label="工单详情">-->
+<!--              <el-button @click="getSelectedDetails(item); getSelectedPictures(item); getSelectedTimeline(item)"-->
+<!--                         icon="el-icon-info" type="primary" plain/>-->
+<!--            </md-table-cell>-->
+<!--            &lt;!&ndash; 根据当前工单状态不同展示不同的可用操作: 强制派单或无操作 &ndash;&gt;-->
+<!--            <md-table-cell md-label="可选操作">-->
+<!--              <el-button @click="getAllDepartments(); forceAssignOrder(item); getSelectedTimeline(item)"-->
+<!--                         v-if="item.fixStatus === 1" type="primary">-->
+<!--                {{-->
+<!--                  (item.fixStatus === 1) ? "强制派单" : ""-->
+<!--                }}-->
+<!--              </el-button>-->
+<!--            </md-table-cell>-->
+<!--          </md-table-row>-->
+<!--        </md-table>-->
+        <div class="md-layout-item md-size-25 md-toolbar-section-end" style="float: right" v-if="errored === false && loading === false && list_empty === false">
+          <el-input placeholder="查询工单编号" v-model="search" @input="searchOnTable"/>
+        </div>
+        <el-table :data="searched" style="width: 100%" max-height="500" v-if="errored === false && loading === false && list_empty === false">
+          <el-table-column property="fixOrderId" label="工单编号" fixed sortable></el-table-column>
+          <el-table-column property="fixType" label="工单类别" sortable></el-table-column>
+          <el-table-column property="fixExpectTime" label="期望上门时间" sortable></el-table-column>
+          <el-table-column property="fixUserAddress" label="申报人地点"></el-table-column>
+          <el-table-column property="fixDetails" label="具体问题"></el-table-column>
+          <el-table-column property="fixStatus" label="状态" sortable>
+            <template slot-scope="scope">
+              <el-tag :type="getLableColor(scope.row.fixStatus)">
                 {{
-                  (item.fixStatus === 1) ? "未处理" : ((item.fixStatus === 2) ? "已派单" : ((item.fixStatus === 3) ? "进行中" : "已完成"))
+                  (scope.row.fixStatus === 1) ? "未处理" : ((scope.row.fixStatus === 2) ? "已派单" : ((scope.row.fixStatus === 3) ? "进行中" : "已完成"))
                 }}
               </el-tag>
-            </md-table-cell>
-            <!-- 按钮-点击展示工单的详细信息 -->
-            <md-table-cell md-label="工单详情">
-              <el-button @click="getSelectedDetails(item); getSelectedPictures(item); getSelectedTimeline(item)"
-                         icon="el-icon-info" type="primary" plain/>
-            </md-table-cell>
-            <!-- 根据当前工单状态不同展示不同的可用操作: 强制派单或无操作 -->
-            <md-table-cell md-label="可选操作">
-              <el-button @click="getAllDepartments(); forceAssignOrder(item); getSelectedTimeline(item)"
-                         v-if="item.fixStatus === 1" type="primary">
+            </template>
+          </el-table-column>
+          <el-table-column label="工单详情">
+            <template slot-scope="scope">
+              <el-button
+                  @click="getSelectedDetails(scope.row); getSelectedPictures(scope.row); getSelectedTimeline(scope.row)"
+                  icon="el-icon-info" type="primary" plain/>
+            </template>
+          </el-table-column>
+          <el-table-column label="可选操作">
+            <template slot-scope="scope">
+              <el-button @click="getAllDepartments(); forceAssignOrder(scope.row); getSelectedTimeline(scope.row)"
+                         v-if="scope.row.fixStatus === 1" type="primary">
                 {{
-                  (item.fixStatus === 1) ? "强制派单" : ""
+                  (scope.row.fixStatus === 1) ? "强制派单" : ""
                 }}
               </el-button>
-            </md-table-cell>
-          </md-table-row>
-        </md-table>
+            </template>
+          </el-table-column>
+        </el-table>
       </md-card-content>
     </md-card>
     <div>

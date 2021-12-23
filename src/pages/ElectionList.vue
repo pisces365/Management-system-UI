@@ -12,7 +12,7 @@
           class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
-          <md-card-header data-background-color="blue">
+          <md-card-header data-background-color="deliveryBlue">
             <h4 class="title">选举信息概览</h4>
             <p class="category"> 在这可以看到选举信息的概览</p>
           </md-card-header>
@@ -29,45 +29,40 @@
             <section v-if="loading">
               <el-skeleton :rows="6" animated/>
             </section>
-            <md-table v-model="searched" :table-header-color="tableHeaderColor" md-sort="electionType"
-                      md-sort-order="asc" md-fixed-header>
-              <md-table-toolbar>
-                <div class="md-toolbar-section-start">
-                  <h1 class="md-title">选举列表</h1>
-                  <div class="md-layout-item">
-                    <el-select class="md-title" v-model="typeFilter" placeholder="请选择选举类别" @change="searchOnTable2()">
-                      <el-option :key="null">全部</el-option>
-                      <el-option
-                          v-for="item in type_list"
-                          :key="item.id"
-                          :label="item.name"
-                          :value="item.id">
-                      </el-option>
-                    </el-select>
-                  </div>
-                </div>
-                <md-field md-clearable class="md-toolbar-section-end">
-                  <md-input placeholder="查询选举时间" v-model="search" @input="searchOnTable"/>
-                </md-field>
-              </md-table-toolbar>
-              <md-table-empty-state
-                  v-if="searched_empty"
-                  md-label="无结果"
-                  :md-description="`搜素结果为空. 请尝试重新输入`">
-              </md-table-empty-state>
-              <md-table-row slot="md-table-row" slot-scope="{ item }">
-                <md-table-cell md-label="选举编号" md-sort-by="id">{{ item.id }}</md-table-cell>
-                <md-table-cell md-label="选举主题">{{ item.name }}</md-table-cell>
-                <md-table-cell md-label="发布单位">{{ item.department }}</md-table-cell>
-                <md-table-cell md-label="规则/简介/要求">{{ item.intro }}</md-table-cell>
-                <md-table-cell md-label="选举开始时间" md-sort-by="start">{{ item.start }}</md-table-cell>
-                <md-table-cell md-label="选举结束时间" md-sort-by="start">{{ item.start }}</md-table-cell>
-                <md-table-cell md-label="可选操作">
-                  <el-button type="primary" icon="el-icon-info" @click="getSelectedDetails(item)"/>
-                  <el-button type="danger" icon="el-icon-delete" @click="deleteCurrentElection(item)"/>
-                </md-table-cell>
-              </md-table-row>
-            </md-table>
+            <div class="md-layout-item md-size-25 md-toolbar-section-end" style="float: right" v-if="errored === false && loading === false && list_empty === false">
+              <el-input placeholder="查询选举开始时间" v-model="search" @input="searchOnTable"/>
+            </div>
+            <div class="md-layout-item md-toolbar-section-end" style="float: right" v-if="errored === false && loading === false && list_empty === false">
+              <el-select class="md-title" v-model="typeFilter" placeholder="请选择选举类别" @change="searchOnTable2()">
+                <el-option :key="null">全部</el-option>
+                <el-option
+                    v-for="item in type_list"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id">
+                </el-option>
+              </el-select>
+            </div>
+            <el-table :data="searched" style="width: 100%" max-height="600" v-if="errored === false && loading === false && list_empty === false">
+              <el-table-column property="id" label="选举编号" fixed sortable></el-table-column>
+              <el-table-column property="name" label="选举主题"></el-table-column>
+              <el-table-column property="department" label="发布单位"></el-table-column>
+              <el-table-column property="intro" label="规则/简介/要求"></el-table-column>
+              <el-table-column property="start" label="选举开始时间"></el-table-column>
+              <el-table-column property="end" label="选举结束时间"></el-table-column>
+              <el-table-column label="可选操作">
+                <template slot-scope="scope">
+                  <el-button
+                      type="primary"
+                      icon="el-icon-info"
+                      @click="getSelectedDetails(scope.row)"></el-button>
+                  <el-button
+                      type="danger"
+                      icon="el-icon-delete"
+                      @click="deleteCurrentElection(scope.row)"></el-button>
+                </template>
+              </el-table-column>
+            </el-table>
           </md-card-content>
         </md-card>
         <div>
@@ -148,7 +143,7 @@ const toLower = text => {
 }
 const searchById = (items, term) => {
   if (term) {
-    return items.filter(item => toLower(item.electionTime).includes(toLower(term)))
+    return items.filter(item => toLower(item.start).includes(toLower(term)))
   }
   return items
 }
@@ -158,7 +153,7 @@ export default {
   props: {
     tableHeaderColor: {
       type: String,
-      default: "blue",
+      default: "black",
     },
   },
   data() {
