@@ -3,26 +3,20 @@
     <div class="container">
       <nav>
         <ul>
-<!--          <li>-->
-<!--            <a href="https://www.creative-tim.com">Creative Tim</a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://creative-tim.com/presentation"> About Us </a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="http://blog.creative-tim.com"> Blog </a>-->
-<!--          </li>-->
-<!--          <li>-->
-<!--            <a href="https://www.creative-tim.com/license"> Licenses </a>-->
-<!--          </li>-->
+          <li>
+            <a href="https://gitee.com/yang-jiening/management-system-ui">乡里办项目组</a>
+          </li>
+          <li>
+            <a href="https://gitee.com/yang-jiening/management-system-ui"> 关于我们 </a>
+          </li>
         </ul>
       </nav>
-<!--      <div class="copyright text-center">-->
-<!--        &copy; {{ new Date().getFullYear() }}-->
-<!--        <a href="https://www.creative-tim.com/?ref=mdf-vuejs" target="_blank"-->
-<!--          >Creative Tim</a-->
-<!--        >, made with <i class="fa fa-heart heart"></i> for a better web-->
-<!--      </div>-->
+      <div class="copyright text-center">
+        &copy; {{ new Date().getFullYear() }}
+        <a href="https://gitee.com/yang-jiening/management-system-ui" target="_blank">
+          乡里办项目组
+        </a>, 用 <i class="fa fa-heart heart"></i> 制作
+      </div>
     </div>
   </footer>
 </template>

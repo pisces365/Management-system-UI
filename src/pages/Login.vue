@@ -1,10 +1,10 @@
 <template>
   <body id="poster">
   <el-form class="login-container" label-position="left"
-           label-width="0px">
+           label-width="0px" @keyup.enter.native="login">
     <h3 class="login_title">乡里办后台管理系统登录</h3>
     <el-form-item>
-      <el-input type="text" v-model="user.uid"
+      <el-input type="text" v-model="user.account"
                 auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
     <el-form-item>
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       user: {
-        uid: '',
+        account: '',
         password: ''
       },
       responseResult: []
@@ -67,15 +67,16 @@ export default {
   methods: {
     login() {
       var params = new URLSearchParams();
-      params.append("uid", this.user.uid);
+      params.append("account", this.user.account);
       params.append("password", this.user.password);
       this.$axios
           .post('http://112.124.35.32:8087/xiangliban/login/userlogin', params)
           .then(successResponse => {
             console.log('login success')
-            if (successResponse.data.uid !== null) {
-              globalVariable.setId(successResponse.data.uid);
+            if (successResponse.data.account !== null) {
+              globalVariable.setId(successResponse.data.account);
               globalVariable.setAuthorization(successResponse.data.authorization);
+              globalVariable.setCurrentUser(successResponse.data);
               this.$router.push('dashboard');
             }
           })

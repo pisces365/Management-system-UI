@@ -437,7 +437,6 @@ export default {
       rentUnprocessed: [],  // 租房工单
       rentUnprocessedNumber: 0,  // 未审核租房工单数量
       // -------------------------------------
-
     };
   },
   methods: {
@@ -627,7 +626,7 @@ export default {
     async drawFixPieDiagram() {
       // 基于准备好的dom，初始化echarts实例
       let fixPieDiagram = this.$echarts.init(document.getElementById('fixPieDiagram'))
-      // 从API获取课程选课数据
+      // 从API获取数据
       await this.$axios
           .get('http://112.124.35.32:8083/xiangliban/fix/getFixStatusNumber')
           .then(successResponse => {

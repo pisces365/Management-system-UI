@@ -245,7 +245,8 @@ export default {
     this.$axios
         .get('http://112.124.35.32:8081/xiangliban/express/selectMyOngoingOrders', {
           params: {
-            uid: globalVariable.currentUserId()
+            uid: globalVariable.getCurrentUser().uid
+            // uid: globalVariable.currentUserId()
           }
         })
         .then(successResponse => {

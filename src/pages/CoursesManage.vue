@@ -76,7 +76,8 @@
                 <el-table-column property="courseName" label="课程名称"></el-table-column>
                 <el-table-column property="courseCategoryId" label="课程类别编号"></el-table-column>
                 <el-table-column property="courseCategoryName" label="课程类别名称"></el-table-column>
-                <el-table-column property="courseLink" label="课程视频链接"></el-table-column>
+                <el-table-column property="courseLink" label="课程视频链接" :show-overflow-tooltip='true'>
+                </el-table-column>
                 <el-table-column property="courseStartTime" label="课程开始时间"></el-table-column>
                 <el-table-column property="courseEndTime" label="课程结束时间"></el-table-column>
               </el-table>

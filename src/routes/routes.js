@@ -1,5 +1,4 @@
 import DashboardLayout from "@/pages/Layout/DashboardLayout.vue";
-import UserProfile from "@/pages/UserProfile.vue";
 import PostElection from "@/pages/PostElection.vue";
 import ElectionList from "@/pages/ElectionList.vue";
 import FixingNewPage from "@/pages/FixingNewPage.vue";
@@ -34,6 +33,7 @@ import BusStopList from "../pages/BusStopList.vue";
 import BusLineList from "../pages/BusLineList.vue";
 import BusLineMapC from "../pages/BusLineMapC.vue";
 import AllBusStopList from "../pages/AllBusStopList.vue";
+import UserManage from "../pages/UserManage";
 
 
 const routes = [
@@ -67,6 +67,11 @@ const routes = [
                 component: NewDelivery,
             },
             {
+                path: "user-manage",
+                name: "用户管理界面",
+                component: UserManage,
+            },
+            {
                 path: "RentHouseInformation",
                 name: "RentHouseInformation",
                 component: RentHouseInformation,
@@ -88,7 +93,6 @@ const routes = [
                 component: RestDue,
             },
             {
-
                 path: "finished-deliverys",
                 name: "快递已完成工单界面",
                 component: FinishedDelivery,
@@ -200,11 +204,6 @@ const routes = [
                 path: "add-address",
                 name: "增加地名",
                 component: addAddress,
-            },
-            {
-                path: "user",
-                name: "User Profile",
-                component: UserProfile,
             },
             {
                 path: "CopeMatter",

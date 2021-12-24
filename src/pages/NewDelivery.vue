@@ -172,7 +172,8 @@ export default {
       }).then(() => {
         var params = new URLSearchParams();
         params.append("deliveryId", item.deliveryId);
-        params.append("puid", globalVariable.currentUserId());
+        params.append("puid", globalVariable.getCurrentUser().uid);
+        // params.append("puid", globalVariable.currentUserId());
         this.$axios
             .post('http://112.124.35.32:8081/xiangliban/express/takeOrder', params)
             .then(successResponse => {

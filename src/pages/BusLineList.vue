@@ -2,7 +2,7 @@
   <div class="content">
     <div class="md-layout">
       <div
-        class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
+          class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-100"
       >
         <md-card>
           <md-card-header data-background-color="blue">
@@ -37,25 +37,31 @@
                 >
                 </md-table-empty-state>
                 <md-table-row slot="md-table-row" slot-scope="{ item }">
-                  <md-table-cell md-label="公交车路线" md-sort-by="routeName" >{{
+                  <md-table-cell md-label="公交车路线" md-sort-by="routeName">{{
                       item.routeName
-                    }}</md-table-cell>
-                  <md-table-cell md-label="起始站" md-sort-by="startStop" md-numeric >{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="起始站" md-sort-by="startStop" md-numeric>{{
                       item.startStop
-                    }}</md-table-cell>
+                    }}
+                  </md-table-cell>
                   <md-table-cell md-label="终点站" md-sort-by="endStop" md-numeric>{{
                       item.endStop
-                    }}</md-table-cell>
+                    }}
+                  </md-table-cell>
                   <md-table-cell md-label="发车时间" md-sort-by="startTime" md-numeric>{{
                       item.startTime
-                    }}</md-table-cell>
+                    }}
+                  </md-table-cell>
                   <md-table-cell md-label="结束时间" md-sort-by="endTime" md-numeric>{{
                       item.endTime
-                    }}</md-table-cell>
-                  <md-table-cell md-label="发车间隔" md-sort-by="depature_interval"  md-numeric>{{
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="发车间隔" md-sort-by="depature_interval" md-numeric>{{
                       item.intervalTime
-                    }}</md-table-cell>
-                  <md-table-cell md-label="操作" md-numeric >
+                    }}
+                  </md-table-cell>
+                  <md-table-cell md-label="操作" md-numeric>
                     <!--   <md-button class="md-raised md-primary" data-background-color="blue" @click="getDetails1(item.routeName)">查看</md-button>
                        <md-button class="md-raised md-primary" data-background-color="blue" @click="getDetails1(item.routeName)">编辑</md-button>
                        <md-button class="md-raised md-primary" data-background-color="blue" @click="getDetails1(item.routeName)">修改路线</md-button>-->
@@ -68,18 +74,21 @@
                     <!--     <el-button type="primary" icon="el-icon-search">修改路线</el-button>-->
                   </md-table-cell>
                   <md-table-cell>
-                    <el-button type="primary" icon="el-icon-search" @click="getStopList(item.busId,item.routeName)">修改路线</el-button>
+                    <el-button type="primary" icon="el-icon-search" @click="getStopList(item.busId,item.routeName)">
+                      修改路线
+                    </el-button>
                   </md-table-cell>
                 </md-table-row>
               </md-table>
-              <br />
+              <br/>
               <div class="md-layout-item md-size-100 text-right">
                 <el-button
                     type="success"
                     @click="
           addBus();
         "
-                >新增路线</el-button
+                >新增路线
+                </el-button
                 >
               </div>
             </div>
@@ -94,7 +103,7 @@
                   <el-input v-model="alterBusData.busId" autocomplete="off" :disabled="true"/>
                 </el-form-item>
                 <el-form-item label="路线名" :label-width="formLabelWidth">
-                  <el-input v-model="alterBusData.routeName" autocomplete="off" />
+                  <el-input v-model="alterBusData.routeName" autocomplete="off"/>
                 </el-form-item>
                 <el-form-item label="公交类型" :label-width="formLabelWidth">
                   <el-select v-model="alterBusData.type" placeholder="请选择">
@@ -103,10 +112,10 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="发车时间" :label-width="formLabelWidth">
-                  <el-input v-model="alterBusData.startTime" autocomplete="off" />
+                  <el-input v-model="alterBusData.startTime" autocomplete="off"/>
                 </el-form-item>
                 <el-form-item label="结束时间" :label-width="formLabelWidth">
-                  <el-input v-model="alterBusData.endTime" autocomplete="off" />
+                  <el-input v-model="alterBusData.endTime" autocomplete="off"/>
                 </el-form-item>
                 <el-form-item label="发车间隔" :label-width="formLabelWidth">
                   <el-input
@@ -118,7 +127,8 @@
             </el-card>
             <div slot="footer" class="dialog-footer">
               <el-button type="primary" @click="executeUpdate('update')"
-              >确认修改</el-button
+              >确认修改
+              </el-button
               >
             </div>
           </el-dialog>
@@ -127,10 +137,10 @@
             <el-card class="box-card">
               <el-form>
                 <el-form-item label="公交车编号" :label-width="formLabelWidth">
-                  <el-input v-model="alterBusData.busId" autocomplete="off" />
+                  <el-input v-model="alterBusData.busId" autocomplete="off"/>
                 </el-form-item>
                 <el-form-item label="路线名" :label-width="formLabelWidth">
-                  <el-input v-model="alterBusData.routeName" autocomplete="off" />
+                  <el-input v-model="alterBusData.routeName" autocomplete="off"/>
                 </el-form-item>
                 <el-form-item label="公交类型" :label-width="formLabelWidth">
                   <el-select v-model="alterBusData.type" placeholder="请选择">
@@ -139,10 +149,10 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="发车时间" :label-width="formLabelWidth">
-                  <el-input v-model="alterBusData.startTime" autocomplete="off" />
+                  <el-input v-model="alterBusData.startTime" autocomplete="off"/>
                 </el-form-item>
                 <el-form-item label="结束时间" :label-width="formLabelWidth">
-                  <el-input v-model="alterBusData.endTime" autocomplete="off" />
+                  <el-input v-model="alterBusData.endTime" autocomplete="off"/>
                 </el-form-item>
                 <el-form-item label="发车间隔" :label-width="formLabelWidth">
                   <el-input
@@ -154,7 +164,8 @@
             </el-card>
             <div slot="footer" class="dialog-footer">
               <el-button type="primary" @click="executeUpdate('new')"
-              >确认新增</el-button
+              >确认新增
+              </el-button
               >
             </div>
           </el-dialog>
@@ -192,10 +203,10 @@ export default {
       errored: false, // 从后台获取数据是否出错
       loading: true, // 是否正在从后台获取数据
       addBusVisible: false, //增加弹窗是否可见
-      alterBusVisible:false, //更改详情弹窗是否可见
+      alterBusVisible: false, //更改详情弹窗是否可见
       formLabelWidth: "120px",
       alterBusData: [], //要更改的课程类别
-      empty_state_show:false,
+      empty_state_show: false,
     };
   },
   //初始化页面完成后，从后台获取全部的公交路线
@@ -225,12 +236,12 @@ export default {
         },
       });
     },
-    getStopList(id,bname){
+    getStopList(id, bname) {
       this.$router.push({
         path: "/busstoplist",
-        query:{
-          bid:id,
-          bname:bname,
+        query: {
+          bid: id,
+          bname: bname,
         }
       })
     },
@@ -242,11 +253,11 @@ export default {
     },
 
     //点击修改路线详情后，获取当前路线信息并设置对话框可见
-    alterSelectedDetails(item){
+    alterSelectedDetails(item) {
       this.selected.pop();
       this.selected.push(item);
-      this.alterBusData=item;  //当前条目放入变量中保存
-      this.alterBusVisible=true;
+      this.alterBusData = item;  //当前条目放入变量中保存
+      this.alterBusVisible = true;
     },
 
 
@@ -297,28 +308,28 @@ export default {
       }
     },
     //删除时二次确认
-    open(item){
-      this.$confirm('此操作将永久删除该路线，是否继续？','确认删除',{
+    open(item) {
+      this.$confirm('此操作将永久删除该路线，是否继续？', '确认删除', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(()=>{
-        this.$axios.get('http://112.124.35.32:8082/DeleteBus/'+item.routeName)
-            .then(successResponse=>{
+      }).then(() => {
+        this.$axios.get('http://112.124.35.32:8082/DeleteBus/' + item.routeName)
+            .then(successResponse => {
               console.log(successResponse.data);
               this.$message({
-                type:'success',
-                message:'路线已经删除'
+                type: 'success',
+                message: '路线已经删除'
               });
               this.reload();
-            }).catch(failResponse=>{
+            }).catch(failResponse => {
           this.$message.error('出错了，路线删除失败！');
           this.reload();
         })
-      }).catch(()=>{
+      }).catch(() => {
         this.$message({
-          type:'info',
-          message:'已取消删除'
+          type: 'info',
+          message: '已取消删除'
         });
         this.reload();
       })
@@ -334,6 +345,7 @@ export default {
 .md-field {
   max-width: 300px;
 }
+
 .md-tabs.md-theme-default.md-primary .md-tabs-navigation {
   background-color: #505050;
 }

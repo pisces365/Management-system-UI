@@ -114,7 +114,8 @@ export default {
     open(fixOrderId) {
       var params = new URLSearchParams();
       params.append("fixOrderId", fixOrderId);
-      params.append("fixWorkerId", globalVariable.currentUserId());
+      params.append("fixWorkerId", globalVariable.getCurrentUser().uid);
+      // params.append("fixWorkerId", globalVariable.currentUserId());
       this.$confirm('接单后不可取消, 是否确认接单?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

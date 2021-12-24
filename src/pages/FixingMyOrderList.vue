@@ -339,7 +339,8 @@ export default {
     this.$axios
         .get('http://112.124.35.32:8083/xiangliban/fix/allFixDetailsByWorkerId', {
           params: {
-            fixWorkerId: globalVariable.currentUserId()
+            fixWorkerId: globalVariable.getCurrentUser().uid
+            // fixWorkerId: globalVariable.currentUserId()
           }
         })
         .then(successResponse => {

@@ -20,13 +20,13 @@ import App from "./App";
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { Message } from "element-ui";
+import { Notification } from 'element-ui';
 // router setup
 import routes from "./routes/routes";
 
 // Plugins
 import GlobalComponents from "./globalComponents";
 import GlobalDirectives from "./globalDirectives";
-import Notifications from "./components/NotificationPlugin";
 
 // MaterialDashboard plugin
 import MaterialDashboard from "./material-dashboard";
@@ -59,8 +59,8 @@ Vue.use(VueRouter);
 Vue.use(MaterialDashboard);
 Vue.use(GlobalComponents);
 Vue.use(GlobalDirectives);
-Vue.use(Notifications);
 Vue.use(myprojectmytheme);
+Vue.prototype.Notification = Notification;
 Vue.prototype.$message = Message;
 /* eslint-disable no-new */
 new Vue({
@@ -101,4 +101,20 @@ VueAMap.initAMapApiLoader({
   key: '08dcec3b12f0c04c74fbaf8ed048a7df',
   plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType',],
   v: '1.4.4'
+});
+
+//刷新保存状态
+if (sessionStorage.getItem("store")) {
+  store.replaceState(
+      Object.assign({},
+          store.state,
+          JSON.parse(sessionStorage.getItem("store"))
+      )
+  );
+  sessionStorage.removeItem("store");
+}
+
+//监听，在页面刷新时将vuex里的信息保存到sessionStorage里
+window.addEventListener("beforeunload", () => {
+  sessionStorage.setItem("store", JSON.stringify(store.state));
 });
