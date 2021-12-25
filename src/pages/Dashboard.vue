@@ -1,6 +1,16 @@
 <template>
   <div class="content">
-    <div class="md-layout">
+    <div class="md-layout" v-if="currentUser.authorization !== 0">
+      <div
+          class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-100"
+      >
+        <el-card class="box-card">
+          <h3>欢迎您! {{currentUser.name}}</h3>
+          <h4>现在是{{date}}</h4>
+        </el-card>
+      </div>
+    </div>
+    <div class="md-layout" v-if="currentUser.authorization === 0">
       <div
           class="md-layout-item md-medium-size-50 md-xsmall-size-100 md-size-25"
       >
@@ -337,6 +347,7 @@
 </template>
 
 <script>
+import globalVariable from "../globalVariable";
 import {
   StatsCard,
 } from "@/components";
@@ -346,6 +357,11 @@ export default {
     StatsCard,
   },
   mounted() {
+    this.currentUser = globalVariable.getCurrentUser();
+    let _this = this; // 声明一个变量指向Vue实例this，保证作用域一致
+    this.timer = setInterval(() => {
+      _this.date = new Date(); // 修改数据date
+    }, 1000)
     this.drawCourseSelectDiagram(); // 绘制图表
     window.addEventListener('resize', this.drawCourseSelectDiagram); // 设置自适应
     this.drawCourseSelectPieDiagram(); // 绘制图表
@@ -376,6 +392,9 @@ export default {
     window.removeEventListener("resize", this.drawCuisineDiagram);  // 取消echarts自适应
     window.removeEventListener("resize", this.drawRestReserveDiagram);  // 取消echarts自适应
     window.removeEventListener("resize", this.drawHotelPieDiagram);  // 取消echarts自适应
+    if (this.timer) {
+      clearInterval(this.timer); // 在Vue实例销毁前，清除我们的定时器
+    }
   },
   data() {
     return {
@@ -437,6 +456,8 @@ export default {
       rentUnprocessed: [],  // 租房工单
       rentUnprocessedNumber: 0,  // 未审核租房工单数量
       // -------------------------------------
+      currentUser: globalVariable.getCurrentUser(), // 当前用户
+      date: new Date(),
     };
   },
   methods: {

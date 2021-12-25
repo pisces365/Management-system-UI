@@ -53,7 +53,7 @@ const routes = [
         children: [
             {
                 path: "dashboard",
-                name: "驾驶舱",
+                name: "主页",
                 component: Dashboard,
             },
             // {

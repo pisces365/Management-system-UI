@@ -1,9 +1,9 @@
-# [乡里办后台管理系统：前端部分](http://112.124.35.32:8094/)
+# 乡里办后台管理系统
 
-![license](https://img.shields.io/badge/license-MIT-blue.svg) [![Chat](https://img.shields.io/badge/chat-on%20discord-7289da.svg)](https://discord.gg/GVjXYUrMxf)
+![license](https://img.shields.io/badge/license-MIT-blue.svg)
 
 
-​	乡里办后台管理系统：前端部分是一个不简单的项目的一小部分。
+​	乡里办后台管理系统是一个不简单的项目的一小部分。
 
 
 
@@ -51,72 +51,14 @@
 在下载的源文件中，你会看到如下的文件目录：
 
 ```
-vue-material-dashboard
-├── README.md
-├── babel.config.js
-├── package.json
-├── postcss.config.js
-├── public
-│   └── index.html
-└── src
-    ├── App.vue
-    ├── assets
-    │   ├── img
-    │   └── scss
-    │       ├── material-dashboard.scss
-    │       └── md
-    ├── components
-    │   ├── Cards
-    │   │   ├── ChartCard.vue
-    │   │   ├── NavTabsCard.vue
-    │   │   └── StatsCard.vue
-    │   ├── Dropdown.vue
-    │   ├── NotificationPlugin
-    │   │   ├── Notification.vue
-    │   │   ├── Notifications.vue
-    │   │   └── index.js
-    │   ├── SidebarPlugin
-    │   │   ├── SideBar.vue
-    │   │   ├── SidebarLink.vue
-    │   │   └── index.js
-    │   ├── Tables
-    │   │   ├── NavTabsTable.vue
-    │   │   ├── OrderedTable.vue
-    │   │   └── SimpleTable.vue
-    │   └── index.js
-    ├── globalComponents.js
-    ├── globalDirectives.js
-    ├── main.js
-    ├── material-dashboard.js
-    ├── pages
-    │   ├── Dashboard.vue
-    │   ├── Icons.vue
-    │   ├── Layout
-    │   │   ├── Content.vue
-    │   │   ├── ContentFooter.vue
-    │   │   ├── DashboardLayout.vue
-    │   │   ├── MobileMenu.vue
-    │   │   └── TopNavbar.vue
-    │   ├── Maps.vue
-    │   ├── Notifications.vue
-    │   ├── TableList.vue
-    │   ├── Typography.vue
-    │   ├── UpgradeToPRO.vue
-    │   ├── UserProfile
-    │   │   ├── EditProfileForm.vue
-    │   │   └── UserCard.vue
-    │   ├── UserProfile.vue
-    │   └── index.js
-    └── routes
-        └── routes.js
+暂不提供
 ```
 
 
 
 ## <span id="api">接口地址</span>
 
-- [报修、老年大学与用户接口]([Swagger UI](http://112.124.35.32:8083/xiangliban/swagger-ui.html#))
-- [图片上传、快递、房屋出租和选举接口]([Swagger UI](http://112.124.35.32:8081/xiangliban/swagger-ui.html#))
+- 暂不提供
 
 
 
