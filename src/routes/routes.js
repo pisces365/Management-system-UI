@@ -32,6 +32,8 @@ import BusLineList from "../pages/BusLineList.vue";
 import BusLineMapC from "../pages/BusLineMapC.vue";
 import AllBusStopList from "../pages/AllBusStopList.vue";
 import UserManage from "../pages/UserManage";
+import AllStopMap from "../pages/AllStopMap";
+import OneStopMap from "../pages/OneStopMap";
 
 
 const routes = [
@@ -95,6 +97,11 @@ const routes = [
                 name: "快递已完成工单界面",
                 component: FinishedDelivery,
             },
+            {
+                path: "fix-my-order",
+                name: "报修我的工单界面",
+                component: FixingMyOrderList,
+            },
 
             {
                 path: "RestBusiness",
@@ -112,10 +119,14 @@ const routes = [
                 component: CoursesManage,
             },
             {
-
                 path: "HotelAppointment",
                 name: "HotelAppointment",
                 component: HotelAppointment,
+            },
+            {
+                path: "appointmentDetail",
+                name: "AppointmentDetail",
+                component: AppointmentDetail,
             },
             {
                 path: "HotelRoomManage",
@@ -151,17 +162,6 @@ const routes = [
                 component: FixingOrderList,
             },
             {
-                path: "CrowdChart",
-                name: "CrowdChart",
-                component: CrowdChart,
-            },
-            {
-
-        path: "fix-all-order",
-        name: "报修所有工单",
-        component: FixingOrderList,
-      },
-      {
 
                 path: "post-election",
                 name: "选举发布界面",
@@ -171,17 +171,6 @@ const routes = [
                 path: "checkInf",
                 name: "checkInf",
                 component: checkInf,
-            },
-            {
-
-                path: "election-list",
-                name: "选举信息概览",
-                component: ElectionList,
-            },
-            {
-                path: "CheckInformation",
-                name: "CheckInformation",
-                component: CheckInformation,
             },
             {
                 path: "HospitalCrowdedSituation",
@@ -194,11 +183,6 @@ const routes = [
                 component: HospitalCrowdedSituation2,
             },
             {
-                path: "add-address",
-                name: "增加地名",
-                component: addAddress,
-            },
-            {
                 path: "CopeMatter",
                 name: "处理网上问诊",
                 component: CopeMatter,
@@ -207,6 +191,21 @@ const routes = [
                 path: "buslinemapc",
                 name: "公交地图",
                 component: BusLineMapC,
+            },
+            {
+                path: "election-list",
+                name: "选举信息概览",
+                component: ElectionList,
+            },
+            {
+                path: "CheckInformation",
+                name: "CheckInformation",
+                component: CheckInformation,
+            },
+            {
+                path: "CopeMatter",
+                name: "医生业务处理",
+                component: CopeMatter,
             },
             {
                 path: "busstoplist",
@@ -223,53 +222,18 @@ const routes = [
                 name: "公交路线",
                 component: BusLineList,
             },
-
-        path: "election-list",
-        name: "选举信息概览",
-        component: ElectionList,
-      },
-      {
-        path: "CheckInformation",
-        name: "CheckInformation",
-        component: CheckInformation,
-      },
-      {
-        path: "HospitalCrowdedSituation",
-        name: "医院拥挤情况",
-        component: HospitalCrowdedSituation,
-      },
-      {
-        path: "HospitalCrowdedSituation2",
-        name: "医院拥挤情况管理人员",
-        component: HospitalCrowdedSituation2,
-      },
-
-      {
-        path: "CopeMatter",
-        name: "医生业务处理",
-        component: CopeMatter,
-      },
-      {
-        path: "buslinemapc",
-        name:"公交地图",
-        component: BusLineMapC,
-      },
-      {
-        path: "busstoplist",
-        name:"车站列表",
-        component: BusStopList,
-      },
-      {
-        path: "allstoplist",
-        name:"车站管理",
-        component: AllBusStopList,
-      },
-      {
-        path: "buslinelist",
-        name:"公交路线",
-        component: BusLineList,
-      },
-
+            {
+                path: "stopmap",
+                name:"车站地图",
+                component: AllStopMap,
+            },
+            {
+                path: "onestopmap",
+                name:"车站位置",
+                component: OneStopMap,
+            }
+        ],
+    },
 ];
 
 export default routes;

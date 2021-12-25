@@ -57,7 +57,7 @@
                     <!-- 点击此按钮展示当前条目完整信息 -->
                     <el-button
                       type="primary"
-                      @click="getRouteMap(item.routeName)"
+                      @click="getStopMap(item.location.lng,item.location.lat,item.id)"
                       icon="el-icon-info"
                     />
                     <!-- 点击此按钮打开修改信息页 -->
@@ -161,8 +161,6 @@
 </template>
 
 <script>
-
-
 const toLower = (text) => {
   return text.toString().toLowerCase();
 };
@@ -247,6 +245,17 @@ export default {
     };
   },
   methods: {
+    getStopMap(lng,lat,sid){
+      this.$router.push({
+        path:"/onestopmap",
+        query:{
+          lng:lng,
+          lat:lat,
+          sid:sid,
+        }
+      })
+    },
+
     submitForm(formName){
       this.$refs[formName].validate((valid)=>{
         if(valid){
@@ -320,6 +329,7 @@ export default {
     handleIconClick(ev) {
       console.log(ev);
     },
+
     //执行对路线的修改，或者在路线中新增车站
     executeUpdate(item){
       if(item==="update"){

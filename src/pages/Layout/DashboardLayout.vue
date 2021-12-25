@@ -10,7 +10,7 @@
         <p>驾驶舱</p>
       </sidebar-link>
 <!--      选举界面-->
-      <sidebar-link to="/user-manage">
+      <sidebar-link to="/user-manage" v-if="quanxian ===0">
         <md-icon>manage_accounts</md-icon>
         <p>用户管理界面</p>
       </sidebar-link>
@@ -71,50 +71,53 @@
         <md-icon>location_on</md-icon>
         <p>公交车站信息界面</p>
       </sidebar-link>
-
+      <sidebar-link to="/stopmap" v-if="quanxian === 6|| quanxian ===0">
+        <md-icon>location_on</md-icon>
+        <p>车站地图</p>
+      </sidebar-link>
       <!--      医院界面-->
-      <sidebar-link to="/HospitalCrowdedSituation" v-if="quanxian === 5|| quanxian ===0">
-        <md-icon>gesture</md-icon>
+<!--      <sidebar-link to="/HospitalCrowdedSituation" v-if="quanxian === 5|| quanxian ===0">-->
+<!--        <md-icon>local_hospital</md-icon>-->
+<!--        <p>医院拥挤情况</p>-->
+<!--      </sidebar-link>-->
+      <sidebar-link to="/HospitalCrowdedSituation2" v-if="quanxian === 5|| quanxian ===0">
+        <md-icon>local_hospital</md-icon>
         <p>医院拥挤情况</p>
       </sidebar-link>
-      <sidebar-link to="/HospitalCrowdedSituation2" v-if="quanxian === 5|| quanxian ===0">
-        <md-icon>gesture</md-icon>
-        <p>医院拥挤情况（管理人员）</p>
-      </sidebar-link>
       <sidebar-link to="/CopeMatter" v-if="quanxian === 5|| quanxian ===0">
-        <md-icon>gesture</md-icon>
+        <md-icon>local_hospital</md-icon>
         <p>医生业务处理</p>
       </sidebar-link>
 <!--      租房界面-->
       <sidebar-link to="/RentHouseInformation" v-if="quanxian === 2 ||  quanxian ===0">
-        <md-icon>grade</md-icon>
+        <md-icon>apartment</md-icon>
         <p>租房信息界面</p>
       </sidebar-link>
 
 <!--民宿界面-->
       <sidebar-link to="/HotelAppointment" v-if="quanxian === 3|| quanxian ===0">
-        <md-icon>content_paste</md-icon>
+        <md-icon>cottage</md-icon>
         <p>民宿预约处理</p>
       </sidebar-link>
       <sidebar-link to="/HotelRoomManage" v-if="quanxian === 3|| quanxian ===0">
-        <md-icon>content_paste</md-icon>
+        <md-icon>cottage</md-icon>
         <p>民宿房源管理</p>
       </sidebar-link>
       <sidebar-link to="/HotelCope"  v-if="quanxian === 3|| quanxian ===0">
-        <md-icon>content_paste</md-icon>
+        <md-icon>cottage</md-icon>
         <p>民宿订单处理</p>
       </sidebar-link>
 <!--    餐馆界面-->
       <sidebar-link to="/RestAppointment" v-if="quanxian === 4|| quanxian ===0">
-        <md-icon>flight_takeoff</md-icon>
+        <md-icon>restaurant</md-icon>
         <p>餐馆预约界面</p>
       </sidebar-link>
       <sidebar-link to="/RestDue" v-if="quanxian === 4|| quanxian ===0">
-        <md-icon>flight_takeoff</md-icon>
+        <md-icon>restaurant</md-icon>
         <p>餐馆结账</p>
       </sidebar-link>
       <sidebar-link to="/RestBusiness" v-if="quanxian === 4|| quanxian ===0">
-        <md-icon>flight_takeoff</md-icon>
+        <md-icon>restaurant</md-icon>
         <p>餐馆营业额</p>
       </sidebar-link>
 

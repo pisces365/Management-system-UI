@@ -5,6 +5,9 @@ var currentUserAuthorization = "77";
 var currentUserStatus = "";
 
 var currentUser = null; // 登录的用户
+var pickedLng = 0;
+var pickedLat = 0;
+
 
 export default {
     currentUserId: function (){
@@ -27,5 +30,17 @@ export default {
     },
     getCurrentUser() {
         return currentUser;
+    },
+    setPickedLng(item) {
+        pickedLng = item;
+    },
+    getPickedLng() {
+        return pickedLng;
+    },
+    setPickedLat(item) {
+        pickedLat = item;
+    },
+    getPickedLat() {
+        return pickedLat;
     },
 };

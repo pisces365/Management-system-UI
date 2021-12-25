@@ -98,23 +98,23 @@ import VueAMap from 'vue-amap';
 
 Vue.use(VueAMap);
 VueAMap.initAMapApiLoader({
-  key: '08dcec3b12f0c04c74fbaf8ed048a7df',
-  plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType',],
+  key: 'f8de874fe9efa2f01582fc10e2024cb2',
+  plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType','AMap.Geocoder'],
   v: '1.4.4'
 });
 
-//刷新保存状态
-if (sessionStorage.getItem("store")) {
-  store.replaceState(
-      Object.assign({},
-          store.state,
-          JSON.parse(sessionStorage.getItem("store"))
-      )
-  );
-  sessionStorage.removeItem("store");
-}
-
-//监听，在页面刷新时将vuex里的信息保存到sessionStorage里
-window.addEventListener("beforeunload", () => {
-  sessionStorage.setItem("store", JSON.stringify(store.state));
-});
+// //刷新保存状态
+// if (sessionStorage.getItem("store")) {
+//   store.replaceState(
+//       Object.assign({},
+//           store.state,
+//           JSON.parse(sessionStorage.getItem("store"))
+//       )
+//   );
+//   sessionStorage.removeItem("store");
+// }
+//
+// //监听，在页面刷新时将vuex里的信息保存到sessionStorage里
+// window.addEventListener("beforeunload", () => {
+//   sessionStorage.setItem("store", JSON.stringify(store.state));
+// });

@@ -2,6 +2,8 @@
   <div>
     <div id="map"></div>
     <div>name==={{name}}</div>
+    <div>lng==={{lng}}</div>
+    <div>lat==={{lat}}</div>
   </div>
 </template>
 
@@ -14,6 +16,9 @@ export default {
   data() {
     return {
       name: '1111',
+      lng:'120.050593',
+      lat:'30.231923',
+      center: [],
     };
   },
   created() {
@@ -26,6 +31,10 @@ export default {
       //将数据方在当前组件的数据内
       this.name = this.$route.query.name;
     },
+    setCenter(item){
+      this.lng=item.path[0].lng;
+      this.lat=item.path[0].lat;
+    }
   },
   watch: {
     //监测路由变化，只要变化了就调用获取路由参数方法将数据存储本组件即可
@@ -38,14 +47,13 @@ export default {
         pitch: 4.00000000000001,
         style: "light",
         rotation: 19.313180925794313,
-        center: [120.040928, 30.224315],
-        zoom: 13.210275860702593,
+        center: [this.lng, this.lat],
+        zoom: 14,
       }),
     });
     scene.addImage("road", "road.svg");
     scene.addImage("start", "startstop.svg");
     scene.addImage("end", "endstop.svg");
-
     scene.addImage("busStop", "busstop.svg");
 
     fetch("http://112.124.35.32:8082/SelectBusRoute/"+this.name,{
@@ -63,6 +71,7 @@ export default {
           lat: stop.location.lat,
           name: stop.name,
         }));
+
         const data1 = [
           {
             id: "1",
@@ -167,6 +176,7 @@ export default {
         scene.addLayer(busStopsName);
       });
   },
+
 };
 </script>
 <style></style>
