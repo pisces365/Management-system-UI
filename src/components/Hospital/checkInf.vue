@@ -85,6 +85,7 @@ export default {
              .catch(error => {
                console.log(error) // 记录出错信息
              })
+     this.$router.push({name:"AskOnlineDetail",params:{doctorValue:this.doctorValue,departmentValue:this.departmentValue}});
     },
     goBack(){
       this.$router.push({name:"AskOnlineDetail",params:{doctorValue:this.doctorValue,departmentValue:this.departmentValue}});

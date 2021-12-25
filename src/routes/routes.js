@@ -11,15 +11,13 @@ import CoursesManage from "@/pages/CoursesManage.vue";
 import CourseTypeManage from "@/pages/CourseTypeManage.vue";
 import ElectionTypeManagement from "../pages/ElectionTypeManagement";
 import Cockpit from "../pages/Cockpit";
-import CopeMatter from "@/pages/CopeMatter.vue";
+import CopeMatter from "../pages/HospitalPage/CopeMatter";
 import HospitalCrowdedSituation from "../pages/HospitalPage/HospitalCrowdedSituation";
 import HospitalCrowdedSituation2 from "../pages/HospitalPage/HospitalCrowdedSituation2.vue";
-import addAddress from "../components/Hospital/addAddress.vue";
 import checkInf from "../components/Hospital/checkInf.vue";
 import CheckInformation from "../components/Hospital/CheckInformation.vue";
 import AskOnlineDetail from "../components/Hospital/AskOnlineDetail.vue";
 import AppointmentDetail from "../components/Hospital/AppointmentDetail.vue";
-import CrowdChart from "../components/Hospital/CrowdChart.vue";
 import HotelAppointment from "../pages/HotelPage/HotelAppointment.vue";
 import HotelRoomManage from "../pages/HotelPage/HotelRoomManage.vue";
 import HotelCope from "../pages/HotelPage/HotelCope.vue";
@@ -159,16 +157,11 @@ const routes = [
             },
             {
 
-                path: "fix-my-order",
-                name: "报修我的工单",
-                component: FixingMyOrderList,
-            },
-            {
-                path: "AppointmentDetail",
-                name: "AppointmentDetail",
-                component: AppointmentDetail,
-            },
-            {
+        path: "fix-all-order",
+        name: "报修所有工单",
+        component: FixingOrderList,
+      },
+      {
 
                 path: "post-election",
                 name: "选举发布界面",
@@ -231,8 +224,51 @@ const routes = [
                 component: BusLineList,
             },
 
-        ],
-    },
+        path: "election-list",
+        name: "选举信息概览",
+        component: ElectionList,
+      },
+      {
+        path: "CheckInformation",
+        name: "CheckInformation",
+        component: CheckInformation,
+      },
+      {
+        path: "HospitalCrowdedSituation",
+        name: "医院拥挤情况",
+        component: HospitalCrowdedSituation,
+      },
+      {
+        path: "HospitalCrowdedSituation2",
+        name: "医院拥挤情况管理人员",
+        component: HospitalCrowdedSituation2,
+      },
+
+      {
+        path: "CopeMatter",
+        name: "医生业务处理",
+        component: CopeMatter,
+      },
+      {
+        path: "buslinemapc",
+        name:"公交地图",
+        component: BusLineMapC,
+      },
+      {
+        path: "busstoplist",
+        name:"车站列表",
+        component: BusStopList,
+      },
+      {
+        path: "allstoplist",
+        name:"车站管理",
+        component: AllBusStopList,
+      },
+      {
+        path: "buslinelist",
+        name:"公交路线",
+        component: BusLineList,
+      },
 
 ];
 

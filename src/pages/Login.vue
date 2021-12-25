@@ -74,7 +74,7 @@ export default {
           .then(successResponse => {
             console.log('login success')
             if (successResponse.data.account !== null) {
-              globalVariable.setId(successResponse.data.account);
+              globalVariable.setId(successResponse.data.uid);
               globalVariable.setAuthorization(successResponse.data.authorization);
               globalVariable.setCurrentUser(successResponse.data);
               this.$router.push('dashboard');

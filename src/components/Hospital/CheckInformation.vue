@@ -105,6 +105,7 @@ export default {
               .catch(error => {
                 console.log(error) // 记录出错信息
               })
+      this.$router.push({name:"AppointmentDetail",params:{doctorname:this.doctorname,department:this.department}});
     },
     goBack(){
       this.$router.push({name:"AppointmentDetail",params:{doctorname:this.doctorname,department:this.department}});

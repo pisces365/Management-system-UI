@@ -6,12 +6,11 @@
 
         <div class="alert alert-info" v-for="(item,index) in outList" :key="index">
           <span>{{index+1}}.{{item.villagers_name}}的申请出诊</span>
-          <md-button class="md-warning" @click="CheckInformation(item)">查看</md-button>
+          <el-button type="success" round @click="CheckInformation(item)">查看网上问诊</el-button>
         </div>
-
       </div>
     </div>
-    <md-button class="md-raised md-success" @click="goBack">返回</md-button>
+    <el-button type="danger" round @click="goBack">返回</el-button>
   </div>
 </template>
 

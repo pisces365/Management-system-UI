@@ -6,32 +6,16 @@
             <p class="category">在这可以看到医院各个不同地方的拥挤情况</p>
           </md-card-header>
           <md-card-content>
-            <md-table v-model="searched" md-sort="id" md-sort-order="asc" md-card md-fixed-header>
-              <md-table-toolbar>
-                <div class="md-toolbar-section-start">
-                  <h1 class="md-title"></h1>
-                </div>
+            <div class="md-layout-item md-size-25" style="float: right">
+              <el-input placeholder="查询地名" v-model="search" @input="searchOnTable"/>
+            </div>
+            <el-table :data="searched" style="width: 100%" max-height="400">
+              <el-table-column property="hospital_location_id" label="地名编号" fixed sortable></el-table-column>
+              <el-table-column property="hospital_location_name" label="地名" ></el-table-column>
+              <el-table-column property="wait_number" label="等待人数" ></el-table-column>
+              <el-table-column property="crowded_situation" label="拥挤情况"></el-table-column>
+            </el-table>
 
-                <md-field md-clearable class="md-toolbar-section-end">
-                  <md-input placeholder="按地名进行查找" v-model="search" @input="searchOnTable"/>
-                </md-field>
-              </md-table-toolbar>
-
-              <md-table-empty-state
-                  md-label="No users found"
-                  :md-description="`No user found for this '${search}' query. Try a different search term or create a new user.`"
-                  v-show="user_empty"
-              >
-                <md-button class="md-primary md-raised" @click="newUser">Create New User</md-button>
-              </md-table-empty-state>
-
-              <md-table-row slot="md-table-row" slot-scope="{ item }">
-                <md-table-cell md-label="ID" md-sort-by="id">{{ item.hospital_location_id }}</md-table-cell>
-                <md-table-cell md-label="Name（地名）" md-sort-by="name">{{ item.hospital_location_name }}</md-table-cell>
-                <md-table-cell md-label="Wait number（等待人数）">{{ item.wait_number }}</md-table-cell>
-                <md-table-cell md-label="CrowdedSituation（拥挤情况）">{{ item.crowded_station }}</md-table-cell>
-              </md-table-row>
-            </md-table>
           </md-card-content>
         </md-card>
 

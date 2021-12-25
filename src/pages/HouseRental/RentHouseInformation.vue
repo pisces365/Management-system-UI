@@ -89,11 +89,11 @@
 
 <!--dialog套娃-->
     <el-dialog title="房间数量信息表" :visible.sync="dialogFormVisible2">
-      <el-dialog width="30%" title="详细描述表" :visible.sync="dialogFormVisible3" append-to-body>
+      <el-dialog width="50%" title="详细描述表" :visible.sync="dialogFormVisible3" append-to-body>
         <el-card>
-          <el-descriptions title="" :column="2" border>
+          <el-descriptions title="" :column="1" border>
             <el-descriptions-item label="详细介绍">
-              <el-input v-model="selected_item.hr_introduce" autocomplete="off" readonly></el-input>
+              <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" v-model="selected_item.hr_introduce" autocomplete="off" readonly ></el-input>
             </el-descriptions-item>
           </el-descriptions>
         </el-card>

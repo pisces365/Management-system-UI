@@ -1,16 +1,14 @@
 <template>
   <div class="md-layout-item">
-    <div class="md-layout">
-      <div class="md-layout-item md-medium-size-100">
+      <div class="md-layout-item md-medium-size-50">
         <h5>{{doctorValue}}医生您好，下面是需要处理的网上问诊</h5>
         <div class="alert alert-info" v-for="(item,index) in questionList" :key="index">
           <span>{{index+1}}.{{item.villagers_name}}的提问</span>
-          <md-button class="md-warning" @click="checkInf(item)">查看</md-button>
+          <el-button type="success" round @click="checkInf(item)">查看网上问诊</el-button>
+
         </div>
       </div>
-
-    </div>
-    <md-button class="md-raised md-success" @click="goBack">返回</md-button>
+    <el-button type="danger" round @click="goBack">返回</el-button>
   </div>
 
 </template>
